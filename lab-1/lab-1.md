@@ -68,3 +68,42 @@ sudo nsenter --uts --target 7422 hostname api
 
 Снова пришлось смотреть по id ноды, потому что таблицы были пусты в обоих пространствах.
 
+### Часть 3. Лимиты
+Первично нужно создать cgroup. Поскольку наш контейнер запущен в rootless режиме, изоляция делается внутри user slice:
+```bash
+mkdir -p /sys/fs/cgroup/user.slice/user-$(id -u).slice/user@$(id -u).service/lab-api
+```
+
+Поместим процесс в cgroup:
+```bash
+echo 7422 | sudo tee /sys/fs/cgroup/lab-api/cgroup.procs
+```
+
+Зададим лимит памяти в 10 мегабайт:
+```bash
+echo "10M" | sudo tee /sys/fs/cgroup/lab-api/memory.max
+```
+*примерно здесь крашнулась виртуалка, поэтому PID дальше будет 13103*
+
+Поднимаем lo:
+```bash
+sudo nsenter --net --target $PID ip link set lo up
+```
+
+Теперь попробуем поймать OOM:
+```bash
+sudo nsenter --pid --mount --net --target 13103 bash -c 'exec 3<>/dev/tcp/127.0.0.1/8080; echo -e "GET /eat?mb=50 HTTP/1.0\r\n\r\n" >&3; cat <&3'
+```
+!(OOM)[screenshots/10.png]
+
+*После перезапуска PID=13934*
+
+Поставим ограничение в 0,3 ядра:
+```bash
+echo "30000 100000" | sudo tee /sys/fs/cgroup/lab-api/cpu.max
+```
+
+Снова поднимаем сеть и дергаем за burn:
+```bash
+sudo nsenter --pid --mount --net --target $PID bash -c 'exec 3<>/dev/tcp/127.0.0.1/8080; echo -e "GET /burn?threads=1 HTTP/1.0\r\n\r\n" >&3; cat <&3 &'
+```
