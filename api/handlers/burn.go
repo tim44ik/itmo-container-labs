@@ -32,7 +32,6 @@ func (cm *CPUManager) StartWorker() bool {
 	}
 
 	cm.activeJobs++
-
 	go func() {
 		defer func() {
 			cm.mu.Lock()
@@ -40,8 +39,13 @@ func (cm *CPUManager) StartWorker() bool {
 			cm.mu.Unlock()
 		}()
 
-		for range cm.ctx.Done() {
-			return
+		for {
+			select {
+			case <-cm.ctx.Done():
+				return
+			default:
+				_ = 1 + 1
+			}
 		}
 	}()
 
