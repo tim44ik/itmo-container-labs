@@ -1,7 +1,12 @@
+FROM golang:1.26-alpine AS builder
+WORKDIR /app
+
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -o /api .
+
 FROM scratch
 
-COPY api /api
+COPY --from=builder /api /api
 
 EXPOSE 8080
-
 CMD ["/api"]

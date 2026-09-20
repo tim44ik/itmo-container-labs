@@ -214,3 +214,181 @@ sudo docker run -d \
 ![curl](screenshots/17.png)
 
 И скрипт, и `docker run` используют одинаковые механизмы и параметры ограничений ядра Linux. Однако самодельный скрипт оставляет сеть полностью запертой внутри, из-за чего внешний `curl` падает с ошибкой. В то же время Docker автоматически настраивает виртуальный мост и правила iptables для проброса порта 8080, успешно отдавая ответ наружу. Кроме того, самодельному скрипту принципиально не хватало изолированной среды — полноценной и готовой файловой системы, которую из коробки даёт Docker-образ на базе OverlayFS. Docker полностью автоматизирует рутину, избавляя от ручной записи лимитов в файлы `/sys/fs/cgroup` и сброса прав через `capsh`, заменяя эти шаги чистым слоем ФС, безопасными профилями по умолчанию и удобным интерфейсом управления контейнером.
+
+### Часть 6. Образы
+___
+Так как в части 5 уже был написан и протестирован самый простой образ, предлагаю не тратить время на его повторную подготовку. Лучше отметить его главный недостаток: при малейшем изменении кода весь образ прийдется пересобирать заново. Для решения этой проблемы была придумана Multi-stage сборка.
+
+Для ее использования нужно разделить сборку на несколько этапов:
+```Dockerfile
+# ЭТАП 1: Сборка (Берем тяжелый образ с Go для компиляции)
+FROM golang:1.22-alpine AS builder
+WORKDIR /app
+
+# Копируем исходный код и зависимоти и компилируем бинарник прямо внутри Docker
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -o /api .
+
+# ЭТАП 2: Финальный запуск (чистый scratch)
+FROM scratch
+
+# Забираем готовый бинарник из первого этапа
+COPY --from=builder /api /api
+
+EXPOSE 8080
+CMD ["/api"]
+```
+Посмотрим на статистику первой сборки:
+```bash
+[+] Building 107.7s (10/10) FINISHED                                         docker:default
+ => [internal] load build definition from Dockerfile                                   0.0s
+ => => transferring dockerfile: 216B                                                   0.0s
+ => [internal] load metadata for docker.io/library/golang:1.26-alpine                 15.3s
+ => [internal] load .dockerignore                                                      0.0s
+ => => transferring context: 2B                                                        0.0s
+ => [builder 1/4] FROM docker.io/library/golang:1.26-alpine@sha256:51a7c389a5ddaf82f  83.8s
+ => => resolve docker.io/library/golang:1.26-alpine@sha256:51a7c389a5ddaf82f527191a1e  0.0s
+ => => sha256:1c522d23c63ba5abba715a4b79c16b23ad435a83db46c9e74756a214b44 126B / 126B  4.9s
+ => => sha256:51fb0b9b10a77a100f12ca35704e0bf2e54f625945c6087b1324 64.22MB / 64.22MB  78.0s
+ => => sha256:c0a950d26132f1fa89f86eab9e0be7f020b80281607d4bd2902 249.81kB / 249.81kB  7.0s
+ => => sha256:a9986cd6f37dbddae7862a6d4be71683472e7c2ea708e87db14f8a 4.19MB / 4.19MB  14.4s
+ => => extracting sha256:a9986cd6f37dbddae7862a6d4be71683472e7c2ea708e87db14f8a6393c0  0.1s
+ => => extracting sha256:c0a950d26132f1fa89f86eab9e0be7f020b80281607d4bd2902c7b0be586  0.0s
+ => => extracting sha256:51fb0b9b10a77a100f12ca35704e0bf2e54f625945c6087b132491dec45b  5.8s
+ => => extracting sha256:1c522d23c63ba5abba715a4b79c16b23ad435a83db46c9e74756a214b440  0.0s
+ => => extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8  0.0s
+ => [internal] load build context                                                      0.0s
+ => => transferring context: 430B                                                      0.0s
+ => [builder 2/4] WORKDIR /app                                                         0.7s
+ => [builder 3/4] COPY . .                                                             0.1s
+ => [builder 4/4] RUN CGO_ENABLED=0 GOOS=linux go build -o /api .                      7.0s
+ => [stage-1 1/1] COPY --from=builder /api /api                                        0.0s
+ => exporting to image                                                                 0.4s
+ => => exporting layers                                                                0.3s
+ => => exporting manifest sha256:8b3f5975394ea603b6917e4847a6d2cee1e09fc86660020b5e32  0.0s
+ => => exporting config sha256:6f30bdcc31983f773e4bc8330adcb8bcb210156aeb9ef1ec69c7aa  0.0s
+ => => exporting attestation manifest sha256:b7c7e1c7b49f92b8aab6f0b83aa3cf469fa4d334  0.0s
+ => => exporting manifest list sha256:8e3339747513858994301f19996ada9c43cc085657c02a9  0.0s
+ => => naming to docker.io/library/api-multi:latest                                    0.0s
+ => => unpacking to docker.io/library/api-multi:latest  
+```
+
+После первичной сборки, соберем еще раз и посмотрим, как Docker переиспользует уже закешированные слои:
+```bash
+[+] Building 5.5s (10/10) FINISHED                                           docker:default
+ => [internal] load build definition from Dockerfile                                   0.0s
+ => => transferring dockerfile: 216B                                                   0.0s
+ => [internal] load metadata for docker.io/library/golang:1.26-alpine                  5.4s
+ => [internal] load .dockerignore                                                      0.0s
+ => => transferring context: 2B                                                        0.0s
+ => [builder 1/4] FROM docker.io/library/golang:1.26-alpine@sha256:51a7c389a5ddaf82f5  0.0s
+ => => resolve docker.io/library/golang:1.26-alpine@sha256:51a7c389a5ddaf82f527191a1e  0.0s
+ => [internal] load build context                                                      0.0s
+ => => transferring context: 246B                                                      0.0s
+ => CACHED [builder 2/4] WORKDIR /app                                                  0.0s
+ => CACHED [builder 3/4] COPY . .                                                      0.0s
+ => CACHED [builder 4/4] RUN CGO_ENABLED=0 GOOS=linux go build -o /api .               0.0s
+ => CACHED [stage-1 1/1] COPY --from=builder /api /api                                 0.0s
+ => exporting to image                                                                 0.0s
+ => => exporting layers                                                                0.0s
+ => => exporting manifest sha256:8b3f5975394ea603b6917e4847a6d2cee1e09fc86660020b5e32  0.0s
+ => => exporting config sha256:6f30bdcc31983f773e4bc8330adcb8bcb210156aeb9ef1ec69c7aa  0.0s
+ => => exporting attestation manifest sha256:02696606fd96502348a2d9ce41fe6d30043e33fd  0.0s
+ => => exporting manifest list sha256:b43e1eb09b4152d5c6d6f1a316bf7ce5b32da3f8368b98e  0.0s
+ => => naming to docker.io/library/api-multi:latest                                    0.0s
+ => => unpacking to docker.io/library/api-multi:latest  
+```
+
+Как можно заметить по общей статистике вверху, с использование уже закешированных данных образ собрался в 20 раз быстрее.
+
+Сравним размеры образов:
+```sh
+sudo docker image list
+```
+![размеры образов](screenshots/18.png)
+
+Сравним количество слоев:
+```bash
+sudo docker history api-multi:latest
+
+IMAGE          CREATED          CREATED BY                  SIZE      COMMENT
+b43e1eb09b41   20 minutes ago   CMD ["/api"]                0B        buildkit.dockerfile.v0
+<missing>      20 minutes ago   EXPOSE [8080/tcp]           0B        buildkit.dockerfile.v0
+<missing>      20 minutes ago   COPY /api /api # buildkit   7.87MB    buildkit.dockerfile.v0
+sudo docker history api:latest
+
+IMAGE          CREATED       CREATED BY                 SIZE      COMMENT
+8eb5819bde4c   3 hours ago   CMD ["/api"]               0B        buildkit.dockerfile.v0
+<missing>      3 hours ago   EXPOSE [8080/tcp]          0B        buildkit.dockerfile.v0
+<missing>      3 hours ago   COPY api /api # buildkit   8.09MB    buildkit.dockerfile.v0
+```
+
+Как можно заметить по выводу docker history, физическое количество слоев у обоих образов идентично (всего 1 значимый слой с бинарником), однако размер слоя мульти-стейдж сборки оказался чуть меньше (7.87MB против 8.09MB у сингл-стейджа). Данная разница обусловлена условиями компиляции: при ручной сборке сингл-образа на хосте бинарник компилируется с флагами по умолчанию, включая в себя отладочные символы и динамические линки (CGO). В то же время, внутри изолированного этапа builder в Multi-stage сборке флаг CGO_ENABLED=0 и оптимизированная среда компилятора Go генерируют максимально чистый, чисто статический бинарник без лишних метаданных, что делает итоговый образ еще более легковесным.
+
+Теперь попробуем загрузить какой-нибудь файл внутрь контейнера.
+
+Для начала его необходимо запустить:
+```bash
+sudo docker run -d --name api-no-volume api-multi
+```
+
+Теперь попробуем переместить во внутрь какой-нибудь файл:
+```bash
+echo "данные без тома" > /tmp/test-file.txt
+sudo docker cp /tmp/test-file.txt api-no-volume:/file.txt
+Successfully copied 29B (transferred 2.05kB) to api-no-volume:/file.txt
+```
+
+Проверим, что данные действительно скопировались:
+```bash
+sudo docker cp api-no-volume:/file.txt /tmp/check-file.txt
+Successfully copied 29B (transferred 2.05kB) to /tmp/check-file.txt
+cat /tmp/check-file.txt 
+данные без тома
+```
+
+Теперь пересоздадим контейнер:
+```bash
+sudo docker rm -f api-no-volume
+sudo docker run -d api-multi
+```
+И попробуем вытащить оттуда перемещенный файл:
+```bash
+sudo docker cp api-multi:/file.txt /tmp/file2.txt
+Error response from daemon: Could not find the file /file.txt in container api-no-volume
+```
+
+Ожидаемо, файл на томе не сохранился. Теперь попробуем провернуть все тоже самое, но с томом.
+
+Первично создадим том:
+```bash
+sudo docker volume create api-volume
+```
+
+Теперь запустим контейнер с флагом -v, аргументом к которому укажем название нашего тома:
+```bash
+sudo docker run -d --name api-with-volume -v api-volume:/data api-multi:latest
+```
+
+Запишем данные:
+```sh
+echo "эти данные выживут" > /tmp/test-volume.txt
+sudo docker docker cp /tmp/test-volume.txt api-with-volume:/data/save.txt
+Successfully copied 35B (transferred 2.05kB) to api-with-volume:/data/save.txt
+```
+
+Пересоздадим контейнер:
+```sh
+sudo docker rm -f api-with-volume
+sudo docker run -d --name api-with-volume -v api-volume:/data api-multi
+```
+
+Вытащим файл из контейнера и прочтем:
+```sh
+sudo docker cp api-with-volume:/data/save.txt /tmp/result-file.txt
+cat /tmp/result-file.txt
+эти данные выживут
+```
+
+При полном уничтожении и повторном разворачивании контейнера подключенный том мгновенно смонтировал сохраненное состояние, и файл save.txt был успешно прочитан, что доказывает персистентность томов.
+
