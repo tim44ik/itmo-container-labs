@@ -392,3 +392,49 @@ cat /tmp/result-file.txt
 
 При полном уничтожении и повторном разворачивании контейнера подключенный том мгновенно смонтировал сохраненное состояние, и файл save.txt был успешно прочитан, что доказывает персистентность томов.
 
+### Часть 7. gVisor
+
+Далее сравним работу стандартного Docker контейнера с `--runtime=runsc`. Так как обычный Docker уже запускался с лимитами `cpu=0,3 mem=10M pids=15`, попробуем запустить с такимиже лимитами контейнер с `runsc`:
+```bash
+sudo docker run -d \
+  --runtime=runsc \
+  --memory="10m" \
+  --cpus="0.3" \
+  --pids-limit=15 \
+  api-multi
+``` 
+
+Закономерно получаем ошибку создания рантайма:
+![runtime creation error](screenshots/19.png)
+
+Теперь попробуем расширить лимиты и запустить Docker с изоляцией:
+```bash
+sudo docker run -d \
+  --runtime=runsc \
+  --memory="100m" \
+  --cpus="1" \
+  --pids-limit=100 \
+  api-multi
+```
+
+В этот раз контейнер запускается:
+![успешный запуск](screenshots/20.png)
+
+В случае запуска с `runsc`, в списке процессов невозможно найти процесс работы самого api, зато можно обнаружить runsc:
+```sh
+ps aux | grep api
+w           5934  0.0  0.0   6620  2320 pts/1    S+   00:59   0:00 grep api
+
+ps aux | grep runsc
+root        5617  0.0  0.4 1451836 27392 ?       Ssl  00:53   0:00 runsc-gofer --root=/var/run/docker/runtime-runc/moby --log=/run/containerd/io.containerd.runtime.v2.task/moby/229c5514a180369fff383593c02b37472da7b7a6e6dc0a3dad07dd6bf1fcaf97/log.json --log-format=json --systemd-cgroup=true --log-fd=3 gofer --bundle /run/containerd/io.containerd.runtime.v2.task/moby/229c5514a180369fff383593c02b37472da7b7a6e6dc0a3dad07dd6bf1fcaf97 --gofer-mount-confs=lisafs:self,lisafs:none,lisafs:none,lisafs:none --spec-fd=4 --mounts-fd=5 --rpc-fd=6 --io-fds=7 --io-fds=8 --io-fds=9 --io-fds=10 --sync-chroot-fd=11 229c5514a180369fff383593c02b37472da7b7a6e6dc0a3dad07dd6bf1fcaf97
+root        5622  0.0  0.7 3534812 46964 ?       Ssl  00:53   0:00 runsc-sandbox --root=/var/run/docker/runtime-runc/moby --log=/run/containerd/io.containerd.runtime.v2.task/moby/229c5514a180369fff383593c02b37472da7b7a6e6dc0a3dad07dd6bf1fcaf97/log.json --log-format=json --systemd-cgroup=true --log-fd=3 boot --bundle=/run/containerd/io.containerd.runtime.v2.task/moby/229c5514a180369fff383593c02b37472da7b7a6e6dc0a3dad07dd6bf1fcaf97 --gofer-mount-confs=lisafs:self,lisafs:none,lisafs:none,lisafs:none --apply-caps=true --setup-root --total-host-memory 6245212160 --cpu-num 2 --cpu-quota 100000 --cpu-period 100000 --total-memory 104857600 --io-fds=4 --io-fds=5 --io-fds=6 --io-fds=7 --dev-io-fd=-1 --gofer-filestore-fds=8 --mounts-fd=9 --start-sync-fd=10 --pin-ring-fd=11 --controller-fd=12 --spec-fd=13 --stdio-fds=14 --stdio-fds=15 --stdio-fds=16 229c5514a180369fff383593c02b37472da7b7a6e6dc0a3dad07dd6bf1fcaf97
+```
+
+При этом после запуска обычного Docker `/api` появляется:
+```sh
+ps aux | grep api
+root        5981  0.2  0.1 1264044 8920 ?        Ssl  00:59   0:00 /api
+w           6038  0.0  0.0   6620  2384 pts/1    S+   00:59   0:00 grep api
+```
+
+Сервис через gVisor (runsc) показывает цену глубокой изоляции. На старых жестких лимитах (10 МБ памяти, 0.3 процессора и 15 PIDs) контейнер сразу упал, а стабильно завелся только на 100 МБ и 100 PIDs. Этот оверхед ушел на работу встроенного микроядра и файловой системы, которое полностью перехватывает системные вызовы приложения и не пускает его к ядру хоста, изолируя систему. Обычный Docker, ровно как и скрипт, не имеют такого уровня изоляции, благодаря чему используют меньше ресурсов, в ответ жертвуя безопасностью. Они продолжают делить одно общее ядро с хост-машиной, лишь разграничивая видимость процессов. Получается компромисс: скрипт и Docker дают максимальную скорость и легкость за счет общего ядра, в то время как gVisor выстраивает вокруг контейнера полноценную автономную крепость, за безопасность которой приходится платить ресурсами.
