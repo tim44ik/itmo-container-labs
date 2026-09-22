@@ -7,12 +7,21 @@ import (
 	"net/http"
 	"os/signal"
 	"simpleapi/handlers"
+	"simpleapi/telemetry"
 	"syscall"
 	"time"
+
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func main() {
 	appCtx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+	tp, err := telemetry.InitTracer()
+	if err != nil {
+		log.Fatalf("Не удалось запусть трасер: %v", err)
+	}
+	defer func() { _ = tp.Shutdown(appCtx) }()
+
 	defer stop()
 
 	cpuManager := handlers.NewCPUManager(appCtx)
@@ -21,6 +30,11 @@ func main() {
 	mux.HandleFunc("/health", handlers.HealthHandler)
 	mux.HandleFunc("/eat", handlers.EatHandler)
 	mux.HandleFunc("/burn", handlers.BurnHandler(cpuManager))
+	mux.Handle("/metrics", promhttp.Handler())
+	mux.HandleFunc("/health", handlers.HealthHandler)
+	mux.HandleFunc("/fail", handlers.FailHandler)
+	mux.HandleFunc("/slow", handlers.SlowHandler)
+	mux.HandleFunc("/load", handlers.LoadHandler)
 
 	server := &http.Server{
 		Addr:    ":8080",
@@ -30,7 +44,7 @@ func main() {
 	serverErrors := make(chan error, 1)
 
 	go func() {
-		log.Println("Server started at http://localhost:8080")
+		telemetry.WriteLog("INFO", "Server started at http://localhost:8080", "", "")
 		if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			serverErrors <- err
 		}
@@ -47,7 +61,7 @@ func main() {
 		defer cancel()
 
 		if err := server.Shutdown(shutdownCtx); err != nil {
-			log.Printf("Critical error while shutting down server: %v", err)
+			log.Fatalf("Critical error while shutting down server: %v", err)
 			_ = server.Close()
 		}
 	}
