@@ -61,6 +61,7 @@ TEST SUITE: None
 ```
 
 ### Часть 1. Метрики
+___
 Зададим пространство имен для мониторинга:
 ```sh
 kubectl create namespace monitoring
@@ -110,5 +111,30 @@ kubectl port-forward svc/kube-prometheus-grafana -n monitoring 3000:80
 
 Создадим дашборды [RED-метрик](../api/api-chart/templates/red-dashboard.yaml), апгрейднимся и посмотрим, как они реагируют на использование ручек:
 ![графики](screenshots/21.png)
+
+### Часть 2. Логи
+___
+Установим Loki при помощи команды:
+```sh
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+helm install loki grafana/loki-stack -n monitoring \
+  --set loki.auth_enabled=false \
+  --set loki.commonConfig.replication_factor=1 \
+  --set loki.persistence.enabled=false \
+  --set promtail.enabled=true \
+  --set grafana.enabled=false \
+  --set prometheus.enabled=false \
+  --set filebeat.enabled=false \
+  --set logstash.enabled=false \
+  --set fluent-bit.enabled=false
+```
+
+Ставим старый loki-stack(loki+promtail), так как новый Loki при запуске падает и не удается его починить.
+
+Фиксируем наличие логов:
+![логи](screenshots/22.png)
+
+
 
 
