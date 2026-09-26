@@ -6,6 +6,7 @@ import (
 
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
 )
 
 func FailHandler(w http.ResponseWriter, req *http.Request) {
@@ -18,7 +19,7 @@ func FailHandler(w http.ResponseWriter, req *http.Request) {
 	defer span.End()
 	traceID := span.SpanContext().TraceID().String()
 
-	span.SetStatus(1, "Internal Server Error")
+	span.SetStatus(codes.Error, "Internal Server Error")
 	span.SetAttributes(attribute.String("error", "true"))
 
 	telemetry.HttpRequestsTotal.WithLabelValues("/fail", "500").Inc()
