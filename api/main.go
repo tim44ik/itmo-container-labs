@@ -31,7 +31,6 @@ func main() {
 	mux.HandleFunc("/eat", handlers.EatHandler)
 	mux.HandleFunc("/burn", handlers.BurnHandler(cpuManager))
 	mux.Handle("/metrics", promhttp.Handler())
-	mux.HandleFunc("/health", handlers.HealthHandler)
 	mux.HandleFunc("/fail", handlers.FailHandler)
 	mux.HandleFunc("/slow", handlers.SlowHandler)
 	mux.HandleFunc("/load", handlers.LoadHandler)
