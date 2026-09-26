@@ -1,0 +1,35 @@
+# api/prometheus/values.yaml
+
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    
+    # Прямой скрейпинг подов по меткам, как на твоем скриншоте
+    additionalScrapeConfigs:
+      - job_name: "api-service-scrape"
+        metrics_path: "/metrics"
+        scrape_interval: "5s"
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          # Ищем только поды нашего Go-приложения
+          - source_labels: [__meta_kubernetes_pod_label_app]
+            action: keep
+            regex: "api-service"
+          # Перенаправляем сбор строго на порт 8080 контейнера
+          - source_labels: [__address__, __meta_kubernetes_pod_container_port_number]
+            action: replace
+            regex: ([^:]+)(?::\d+)?;8080
+            replacement: $1:8080
+            target_label: __address__
+
+prometheusOperator:
+  admissionWebhooks:
+    enabled: false
+
+grafana:
+  sidecar:
+    dashboards:
+      enabled: true
+      searchNamespace: ALL

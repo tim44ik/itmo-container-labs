@@ -59,3 +59,56 @@ REVISION: 1
 DESCRIPTION: Install complete
 TEST SUITE: None
 ```
+
+### Часть 1. Метрики
+Зададим пространство имен для мониторинга:
+```sh
+kubectl create namespace monitoring
+```
+
+Добавим репозиторий стека мониторинга:
+```sh
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+```
+
+Создадим чарт для Prometheus, [содержимое](../api/prometheus/values.yaml)
+
+Теперь установим в наш кластер:
+```sh
+helm install kube-prometheus prometheus-community/kube-prometheus-stack   --namespace monitoring   -f api/prometheus/values.yaml
+```
+
+Получаем:
+```sh
+NAME: kube-prometheus
+LAST DEPLOYED: Sat Sep 26 01:57:09 2026
+NAMESPACE: monitoring
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+```
+
+Добавим в наш манифест параметры мониторинга:
+```yaml
+annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8080"
+    prometheus.io/path: "/metrics"
+```
+
+Применим его:
+```sh
+helm upgrade my-api ./api/api-chart
+```
+
+Финально, пробросим порты для сервиса и мониторинга:
+```sh
+kubectl port-forward svc/api-service 8080:8080
+kubectl port-forward svc/kube-prometheus-grafana -n monitoring 3000:80
+```
+
+Создадим дашборды [RED-метрик](../api/api-chart/templates/red-dashboard.yaml), апгрейднимся и посмотрим, как они реагируют на использование ручек:
+![графики](screenshots/21.png)
+
+
