@@ -118,17 +118,10 @@ ___
 ```sh
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
-helm install loki grafana/loki-stack -n monitoring \
-  --set loki.auth_enabled=false \
-  --set loki.commonConfig.replication_factor=1 \
-  --set loki.persistence.enabled=false \
-  --set promtail.enabled=true \
-  --set grafana.enabled=false \
-  --set prometheus.enabled=false \
-  --set filebeat.enabled=false \
-  --set logstash.enabled=false \
-  --set fluent-bit.enabled=false
+helm install loki grafana/loki-stack -n monitoring -f api/loki/values-loki.yaml
 ```
+
+Содержимое [values-loki.yaml](../api/loki/values-loki.yaml)
 
 Ставим старый loki-stack(loki+promtail), так как новый Loki при запуске падает и не удается его починить.
 

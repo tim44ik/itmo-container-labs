@@ -1,0 +1,24 @@
+loki:
+  auth_enabled: false
+  commonConfig:
+    replication_factor: 1
+  persistence:
+    enabled: false
+
+promtail:
+  enabled: true
+
+grafana:
+  enabled: false
+
+prometheus:
+  enabled: false
+
+filebeat:
+  enabled: false
+
+logstash:
+  enabled: false
+
+fluent-bit:
+  enabled: false
