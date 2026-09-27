@@ -1,0 +1,37 @@
+alertmanager:
+  config:
+    global:
+      resolve_timeout: 5m
+      smtp_smarthost: 'smtp.gmail.com:587'
+      smtp_from: 'email'
+      smtp_auth_username: 'email'
+      smtp_auth_password: 'password'
+      smtp_require_tls: true
+
+    route:
+      group_by: ['alertname', 'namespace']
+      group_wait: 10s
+      group_interval: 30s
+      repeat_interval: 1h
+      receiver: 'email-notifications'
+      routes:
+      - receiver: 'email-notifications'
+        matchers:
+        - severity =~ "critical|warning"
+
+    receivers:
+    - name: 'email-notifications'
+      email_configs:
+      - to: 'email'
+        send_resolved: true
+        headers:
+          Subject: '[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}'
+        html: |
+          {{ range .Alerts }}
+          <b>Статус:</b> {{ .Status | toUpper }}<br/>
+          <b>Алерт:</b> {{ .Labels.alertname }}<br/>
+          <b>Namespace:</b> {{ .Labels.namespace }}<br/>
+          <b>Summary:</b> {{ .Annotations.summary }}<br/>
+          <b>Description:</b> {{ .Annotations.description }}<br/>
+          <hr/>
+          {{ end }}

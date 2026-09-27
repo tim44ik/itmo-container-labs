@@ -128,6 +128,85 @@ helm install loki grafana/loki-stack -n monitoring -f api/loki/values-loki.yaml
 Фиксируем наличие логов:
 ![логи](screenshots/22.png)
 
+### Часть 3. Трейсинг
+___
 
+Напишем [манифест](../api/jaeger/values-jaeger.yaml) и установим Jaeger:
+```sh
+helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
+helm repo update
 
+helm install jaeger jaegertracing/jaeger -n monitoring -f api/jaeger/values-jaeger.yaml
+```
 
+Посмотрим, на каких портах открылись экспортеры:
+```sh
+kubectl logs -n monitoring -l app.kubernetes.io/name=jaeger --tail=50 | grep -i -E "otlp|4317|4318"
+
+2026-09-26T19:03:03.637Z	info	otlpreceiver@v0.160.0/otlp.go:120	Starting GRPC server	{"resource": {"service.instance.id": "9430dc39-e19d-47fc-bf49-531b29549bb6", "service.name": "jaeger", "service.version": "v2.21.0"}, "otelcol.component.id": "otlp", "otelcol.component.kind": "receiver", "endpoint": "[::]:4317"}
+2026-09-26T19:03:03.638Z	info	otlpreceiver@v0.160.0/otlp.go:175	Starting HTTP server	{"resource": {"service.instance.id": "9430dc39-e19d-47fc-bf49-531b29549bb6", "service.name": "jaeger", "service.version": "v2.21.0"}, "otelcol.component.id": "otlp", "otelcol.component.kind": "receiver", "endpoint": "[::]:4318"}
+```
+
+Теперь добавим env в Deployment-чарт приложения:
+```yaml
+env:
+  - name: OTEL_EXPORTER_OTLP_ENDPOINT
+    value: "http://jaeger.monitoring.svc.cluster.local:4318"
+  - name: OTEL_SERVICE_NAME
+    value: "api-service"
+```
+
+Теперь надо его протестировать, дернем /slow, посмотрим трассировку:
+![трассировка /slow](screenshots/23.png)
+
+Посмотрим также трассировку /fail:
+![трассировка /fail](screenshots/24.png)
+
+Возьмем traceId из лога Grafana:
+```json
+{
+  "timestamp": "2026-09-26T20:56:21Z",
+  "level": "ERROR",
+  "message": "Внутренняя ошибка на ручка /fail",
+  "path": "/fail",
+  "trace_id": "e598caa7357fc7cc5a4bdf0d4fe68b1f"
+}
+```
+
+Найдем тот же трейс в Jaeger:
+![трассировка /fail](screenshots/25.png)
+
+### Часть 4. Alertmanager
+___
+Установим Alertmanager:
+```sh
+helm upgrade kube-prometheus prometheus-community/kube-prometheus-stack -n monitoring -f alertmanager-values.yaml
+```
+
+Напишем [манифест](../api/alertmanager/values-alertmanager.yaml), алерты настроим на почту и [правила алертинга](../api/alertmanager/api-alerts.yaml) и применим их:
+```sh
+kubectl apply -f api-alerts.yaml
+```
+Выбрал три алерта, которые покрывают три уровня деградации сервиса. HighErrorRate фиксирует функциональный отказ: доля ответов 5xx выше 50% за 1 минуту означает, что больше половины пользователей не получают результат, что означало бы реальные потери для компании. HighLatency ловит производительную деградацию по p95 выше секунды - взял малый интервал, так как в среднем запрос летит намного быстрее. На повышение времени запроса нужно реагировать немедленно, так как это напрямую влияет на пользовательский опыт. HighCPUUsage с порогом 0.8 ядра даёт сигнал: под подходит к лимиту, начинается CFS throttling, растут очереди — и если не среагировать здесь, масштабированием или увеличением лимита, можно предотвратить переход сервиса в состояния, описываемые первыми двумя алертами.
+
+Пробросим порты, зайдем в панель Prometheus и увидим, что алерты подхватились:
+![алерты](screenshots/26.png)
+
+Напишем небольшой [манифест](../api/karma/values-karma.yaml) и установим Karma:
+```sh
+helm install karma wiremind/karma -n monitoring -f api/karma/values-karma.yaml
+```
+
+Подергаем ручку /fail, /slow и /burn, чтобы затриггерить алерты, и посмотрим на них в дашборде:
+![алерт по HighErrorRate](screenshots/27.png)
+
+![алерт по HighLatency](screenshot/28.png)
+
+![алерт по HighCPUUsage](screenshot/29.png)
+
+### Итог
+___
+
+Лабораторная дала мне представление о том, как поднимается и работает стек наблюдаемости и увидеть, как связываются метрики, алерты, логи и трейсы. По ходу дела столкнулся с кучей реальных граблей: несовместимость версий Grafana и Loki, неверное имя job в scrape-конфиге, периодически отлетающий Prometheus — каждая такая проблема сначала казалась тупиком, но в итоге помогала понять, как инструмент устроен изнутри и как поддерживать его работу.
+
+Лаба однозначно была полезной также и для разработчика: интересно было посмотреть, как телеметрия добавляется в код и в дальнейшем скрейпится Прометеем.

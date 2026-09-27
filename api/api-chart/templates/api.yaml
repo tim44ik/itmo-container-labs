@@ -25,6 +25,11 @@ spec:
         ports:
         - containerPort: 8080
           name: http
+        env:
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: "http://jaeger.monitoring.svc.cluster.local:4318"
+          - name: OTEL_SERVICE_NAME
+            value: "api-service"
 ---
 apiVersion: v1
 kind: Service
