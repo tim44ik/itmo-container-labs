@@ -1,0 +1,173 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: container-resources-dashboard
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  container-resources-dashboard.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": { "type": "grafana", "uid": "-- Grafana --" },
+            "enable": true,
+            "hide": true,
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": null,
+      "links": [],
+      "liveNow": true,
+      "panels": [
+        {
+          "title": "CPU Usage (cores)",
+          "type": "timeseries",
+          "id": 1,
+          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"default\", pod=~\"api-deployment.*\", container=\"api-container\"}[1m])) by (pod)",
+              "legendFormat": "{{pod}} — usage",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(container_spec_cpu_quota{namespace=\"default\", pod=~\"api-deployment.*\", container=\"api-container\"} / container_spec_cpu_period{namespace=\"default\", pod=~\"api-deployment.*\", container=\"api-container\"}) by (pod)",
+              "legendFormat": "{{pod}} — limit",
+              "refId": "B"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "custom": { "drawStyle": "line", "lineInterpolation": "smooth" },
+              "unit": "short"
+            }
+          }
+        },
+        {
+          "title": "CPU Throttling (periods, %)",
+          "type": "timeseries",
+          "id": 2,
+          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "100 * sum(rate(container_cpu_cfs_throttled_periods_total{namespace=\"default\", pod=~\"api-deployment.*\", container=\"api-container\"}[1m])) by (pod) / sum(rate(container_cpu_cfs_periods_total{namespace=\"default\", pod=~\"api-deployment.*\", container=\"api-container\"}[1m])) by (pod)",
+              "legendFormat": "{{pod}} — throttled",
+              "refId": "A"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "custom": { "drawStyle": "line", "lineInterpolation": "smooth" },
+              "unit": "percent",
+              "min": 0,
+              "max": 100,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  { "color": "green", "value": null },
+                  { "color": "yellow", "value": 10 },
+                  { "color": "red", "value": 30 }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "title": "Memory Working Set vs Limit",
+          "type": "timeseries",
+          "id": 3,
+          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "sum(container_memory_working_set_bytes{namespace=\"default\", pod=~\"api-deployment.*\", container=\"api-container\"}) by (pod)",
+              "legendFormat": "{{pod}} — working set",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(container_spec_memory_limit_bytes{namespace=\"default\", pod=~\"api-deployment.*\", container=\"api-container\"}) by (pod)",
+              "legendFormat": "{{pod}} — limit",
+              "refId": "B"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "custom": { "drawStyle": "line", "lineInterpolation": "smooth" },
+              "unit": "bytes"
+            }
+          }
+        },
+        {
+          "title": "Disk Write Rate (bytes/sec)",
+          "type": "timeseries",
+          "id": 5,
+          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "sum(rate(container_fs_writes_bytes_total{namespace=\"default\", pod=~\"api-deployment.*\", container=\"api-container\"}[1m])) by (pod)",
+              "legendFormat": "{{pod}} — write rate",
+              "refId": "A"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "custom": { "drawStyle": "line", "lineInterpolation": "smooth" },
+              "unit": "Bps",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  { "color": "green", "value": null },
+                  { "color": "yellow", "value": 1000000 },
+                  { "color": "red", "value": 10000000 }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "title": "Disk Writes (total since start)",
+          "type": "timeseries",
+          "id": 6,
+          "gridPos": { "h": 8, "w": 24, "x": 0, "y": 16 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "sum(container_fs_writes_bytes_total{namespace=\"default\", pod=~\"api-deployment.*\", container=\"api-container\"}) by (pod)",
+              "legendFormat": "{{pod}} — total",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(increase(container_fs_writes_bytes_total{namespace=\"default\", pod=~\"api-deployment.*\", container=\"api-container\"}[1h])) by (pod)",
+              "legendFormat": "{{pod}} — last 1h",
+              "refId": "B"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "custom": { "drawStyle": "line", "lineInterpolation": "smooth" },
+              "unit": "bytes"
+            }
+          }
+        }
+      ],
+      "refresh": "5s",
+      "schemaVersion": 38,
+      "style": "dark",
+      "tags": ["container", "resources", "cadvisor"],
+      "time": { "from": "now-30m", "to": "now" },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Container Resources — api-service",
+      "version": 3
+    }
