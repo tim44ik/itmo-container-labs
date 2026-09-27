@@ -200,9 +200,9 @@ helm install karma wiremind/karma -n monitoring -f api/karma/values-karma.yaml
 Подергаем ручку /fail, /slow и /burn, чтобы затриггерить алерты, и посмотрим на них в дашборде:
 ![алерт по HighErrorRate](screenshots/27.png)
 
-![алерт по HighLatency](screenshot/28.png)
+![алерт по HighLatency](screenshots/28.png)
 
-![алерт по HighCPUUsage](screenshot/29.png)
+![алерт по HighCPUUsage](screenshots/29.png)
 
 ### Итог
 ___
