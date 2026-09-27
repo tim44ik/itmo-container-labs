@@ -109,7 +109,7 @@ kubectl port-forward svc/api-service 8080:8080
 kubectl port-forward svc/kube-prometheus-grafana -n monitoring 3000:80
 ```
 
-Создадим дашборды [RED-метрик](../api/api-chart/templates/red-dashboard.yaml), апгрейднимся и посмотрим, как они реагируют на использование ручек:
+Создадим дашборды [RED-метрик](../api/grafana/red-dashboard.yaml), апгрейднимся и посмотрим, как они реагируют на использование ручек:
 ![графики](screenshots/21.png)
 
 ### Часть 2. Логи
