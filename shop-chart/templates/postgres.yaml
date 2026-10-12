@@ -19,6 +19,24 @@ spec:
     initdb:
       database: {{ .Values.postgres.database | quote }}
       owner: {{ .Values.postgres.owner | quote }}
+      postInitApplicationSQL:
+        - |
+          CREATE TABLE IF NOT EXISTS public.orders (
+            id BIGSERIAL PRIMARY KEY,
+            item TEXT NOT NULL CHECK (length(item) BETWEEN 1 AND 200),
+            quantity INTEGER NOT NULL CHECK (quantity BETWEEN 1 AND 1000),
+            status TEXT NOT NULL DEFAULT 'pending'
+              CHECK (status IN ('pending', 'processed')),
+            traceparent TEXT NOT NULL DEFAULT '',
+            created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+            processed_at TIMESTAMPTZ
+          );
+        - |
+          ALTER TABLE public.orders
+          OWNER TO "{{ .Values.postgres.owner | replace "\"" "\"\"" }}";
+        - |
+          CREATE INDEX IF NOT EXISTS orders_pending_idx
+          ON public.orders(id) WHERE status = 'pending';
   storage:
     size: {{ .Values.postgres.storage.size | quote }}
     storageClass: {{ .Values.postgres.storage.storageClass | quote }}
