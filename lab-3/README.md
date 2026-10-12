@@ -1,6 +1,6 @@
-## Лабораторная работа 3 — Платформа для shop
+## Лабораторная работа 3 – Платформа для shop
 
-Цель работы — развернуть приложение `shop` в Kubernetes, ограничить допустимые конфигурации политиками, проверить reconciliation, передать управление PostgreSQL оператору и исследовать поведение приложения при недоступности API-сервера.
+Цель работы – развернуть приложение `shop` в Kubernetes, ограничить допустимые конфигурации политиками, проверить reconciliation, передать управление PostgreSQL оператору и исследовать поведение приложения при недоступности API-сервера.
 
 Работа выполнена в WSL Ubuntu с Docker Desktop и локальным кластером kind `labs`. В кластере два узла: `labs-control-plane` и `labs-worker`. Для команд Kubernetes используется контекст `kind-labs`, приложение размещено в namespace `shop`. Мониторинг использует ранее настроенный стек из лабораторной 2.
 
@@ -87,7 +87,7 @@ kubectl --context kind-labs create --dry-run=server \
 
 ### Часть 2. Helm-чарт API и worker
 
-Созданы [Chart.yaml](../shop-chart/Chart.yaml), [values.yaml](../shop-chart/values.yaml) и [шаблоны](../shop-chart/templates/). Число реплик берётся из values: API — 3, worker — 2. Для обоих заданы readiness- и liveness-пробы на `/health`, resources, метки и securityContext, соответствующие политикам.
+Созданы [Chart.yaml](../shop-chart/Chart.yaml), [values.yaml](../shop-chart/values.yaml) и [шаблоны](../shop-chart/templates/). Число реплик берётся из values: API – 3, worker – 2. Для обоих заданы readiness- и liveness-пробы на `/health`, resources, метки и securityContext, соответствующие политикам.
 
 Сначала проверил чарт через `helm lint`, рендеринг и server dry-run. Дополнительно извлёк PodSpec из Deployment и проверил отдельные Pod через admission.
 
@@ -144,7 +144,7 @@ Helm создал ревизию 6 с описанием `Rollback to 4`; рев
 ![История Helm и восстановленные реплики](screenshots/44.png)
 ![Нагрузка во время неисправного обновления и rollback](screenshots/46.png)
 
-За интервал сломанного обновления и восстановления: **OK=3201, FAIL=0**. Поле `APP VERSION` в истории Helm — метаданные Chart.yaml; фактически работающий образ после rollback — `shop-api:v2`.
+За интервал сломанного обновления и восстановления: **OK=3201, FAIL=0**. Поле `APP VERSION` в истории Helm – метаданные Chart.yaml; фактически работающий образ после rollback – `shop-api:v2`.
 
 ### Часть 3. PostgreSQL через оператор
 
@@ -194,14 +194,14 @@ CRD расширяет API Kubernetes типом `Cluster`, а объект эт
 
 Для проверки использовал `docker exec labs-worker curl` и ClusterIP сервисов. Такой запрос не проходит через `kubectl port-forward` и не требует API-сервера для каждой операции.
 
-API-сервер — static Pod. В эксперименте его манифест временно переносился из `/etc/kubernetes/manifests/` в `/etc/kubernetes/lab4-disabled/`. Восстановление выполнялось возвращением файла. Сам Docker-контейнер узла, kubelet и etcd не останавливались.
+API-сервер – static Pod. В эксперименте его манифест временно переносился из `/etc/kubernetes/manifests/` в `/etc/kubernetes/lab4-disabled/`. Восстановление выполнялось возвращением файла. Сам Docker-контейнер узла, kubelet и etcd не останавливались.
 
 Проверки доступности приложения:
 
 ![Чтение заказов через узел kind](screenshots/58.png)
 ![API и worker отвечают HTTP 200](screenshots/59.png)
 
-После возврата API-сервера оба узла были Ready, создание тестового ConfigMap прошло успешно. API имел 3/3 реплики, worker — 2/2, PostgreSQL находился в healthy state. Тестовый ConfigMap удалён.
+После возврата API-сервера оба узла были Ready, создание тестового ConfigMap прошло успешно. API имел 3/3 реплики, worker – 2/2, PostgreSQL находился в healthy state. Тестовый ConfigMap удалён.
 
 ![Восстановление управления кластером](screenshots/60.png)
 
