@@ -20,6 +20,8 @@ spec:
     spec:
       containers:
       - name: api-container
+        securityContext:
+          readOnlyRootFilesystem: true
         image: api-multi:latest
         imagePullPolicy: Never
         ports:

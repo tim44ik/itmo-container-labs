@@ -1,0 +1,73 @@
+# Part 2: these values are starting points, not measured recommendations for lab 4.
+api:
+  replicas: 3
+  image:
+    repository: docker.io/library/shop-api
+    tag: v2
+    pullPolicy: IfNotPresent
+  healthFail: false
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 500m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    port: 8080
+
+worker:
+  replicas: 2
+  image:
+    repository: docker.io/library/shop-worker
+    tag: v1
+    pullPolicy: IfNotPresent
+  healthFail: false
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    port: 8080
+
+# Must already exist in the release namespace. Not created by this chart.
+# The uri key contains the complete PostgreSQL connection URL.
+database:
+  existingSecret: shop-postgres-app
+  secretKey: uri
+
+telemetry:
+  otlpEndpoint: http://jaeger.monitoring.svc.cluster.local:4318
+
+probes:
+  readiness:
+    initialDelaySeconds: 3
+    periodSeconds: 5
+    timeoutSeconds: 2
+    failureThreshold: 2
+  liveness:
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 2
+    failureThreshold: 3
+
+postgres:
+  enabled: true
+  instances: 1
+  database: shop
+  owner: shop
+  storage:
+    size: 2Gi
+    storageClass: standard
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: "1"
+      memory: 512Mi

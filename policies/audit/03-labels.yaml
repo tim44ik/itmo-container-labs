@@ -1,0 +1,29 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: lab3-require-labels
+spec:
+  validationFailureAction: Audit
+  background: true
+  rules:
+    - name: require-labels
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "At least one identifying label is required: app, app.kubernetes.io/name, k8s-app or component."
+        anyPattern:
+          - metadata:
+              labels:
+                app: "?*"
+          - metadata:
+              labels:
+                app.kubernetes.io/name: "?*"
+          - metadata:
+              labels:
+                k8s-app: "?*"
+          - metadata:
+              labels:
+                component: "?*"

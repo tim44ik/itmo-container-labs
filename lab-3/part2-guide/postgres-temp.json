@@ -1,0 +1,180 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "name": "shop-postgres-temp",
+        "namespace": "shop",
+        "labels": {
+          "app": "shop-postgres-temp",
+          "app.kubernetes.io/name": "shop-postgres-temp"
+        }
+      },
+      "spec": {
+        "replicas": 1,
+        "strategy": {
+          "type": "Recreate"
+        },
+        "selector": {
+          "matchLabels": {
+            "app": "shop-postgres-temp",
+            "app.kubernetes.io/name": "shop-postgres-temp"
+          }
+        },
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "shop-postgres-temp",
+              "app.kubernetes.io/name": "shop-postgres-temp"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "securityContext": {
+              "runAsNonRoot": true,
+              "runAsUser": 999,
+              "runAsGroup": 999,
+              "fsGroup": 999,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "containers": [
+              {
+                "name": "postgres",
+                "image": "docker.io/library/postgres:16-bookworm",
+                "securityContext": {
+                  "readOnlyRootFilesystem": true,
+                  "privileged": false,
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "env": [
+                  {
+                    "name": "POSTGRES_USER",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "shop-db",
+                        "key": "username"
+                      }
+                    }
+                  },
+                  {
+                    "name": "POSTGRES_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "shop-db",
+                        "key": "password"
+                      }
+                    }
+                  },
+                  {
+                    "name": "POSTGRES_DB",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "shop-db",
+                        "key": "dbname"
+                      }
+                    }
+                  },
+                  {
+                    "name": "PGDATA",
+                    "value": "/var/lib/postgresql/data/pgdata"
+                  }
+                ],
+                "ports": [
+                  {
+                    "name": "postgres",
+                    "containerPort": 5432
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "128Mi"
+                  },
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "512Mi"
+                  }
+                },
+                "readinessProbe": {
+                  "exec": {
+                    "command": [
+                      "pg_isready",
+                      "-U",
+                      "shop",
+                      "-d",
+                      "shop"
+                    ]
+                  },
+                  "initialDelaySeconds": 5,
+                  "periodSeconds": 3
+                },
+                "volumeMounts": [
+                  {
+                    "name": "data",
+                    "mountPath": "/var/lib/postgresql/data"
+                  },
+                  {
+                    "name": "run",
+                    "mountPath": "/var/run/postgresql"
+                  },
+                  {
+                    "name": "tmp",
+                    "mountPath": "/tmp"
+                  }
+                ]
+              }
+            ],
+            "volumes": [
+              {
+                "name": "data",
+                "emptyDir": {}
+              },
+              {
+                "name": "run",
+                "emptyDir": {}
+              },
+              {
+                "name": "tmp",
+                "emptyDir": {}
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "name": "shop-postgres-temp",
+        "namespace": "shop",
+        "labels": {
+          "app": "shop-postgres-temp",
+          "app.kubernetes.io/name": "shop-postgres-temp"
+        }
+      },
+      "spec": {
+        "selector": {
+          "app": "shop-postgres-temp",
+          "app.kubernetes.io/name": "shop-postgres-temp"
+        },
+        "ports": [
+          {
+            "port": 5432,
+            "targetPort": "postgres"
+          }
+        ]
+      }
+    }
+  ]
+}

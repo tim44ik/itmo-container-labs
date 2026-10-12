@@ -1,0 +1,27 @@
+{{- if .Values.postgres.enabled }}
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ .Release.Name }}-postgres
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}-postgres
+    app.kubernetes.io/name: postgres
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  instances: {{ .Values.postgres.instances }}
+  inheritedMetadata:
+    labels:
+      app: {{ .Release.Name }}-postgres
+      app.kubernetes.io/name: postgres
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  bootstrap:
+    initdb:
+      database: {{ .Values.postgres.database | quote }}
+      owner: {{ .Values.postgres.owner | quote }}
+  storage:
+    size: {{ .Values.postgres.storage.size | quote }}
+    storageClass: {{ .Values.postgres.storage.storageClass | quote }}
+  resources:
+    {{- toYaml .Values.postgres.resources | nindent 4 }}
+{{- end }}

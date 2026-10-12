@@ -1,0 +1,5 @@
+{
+  "data": {
+    "helperPod.yaml": "apiVersion: v1\nkind: Pod\nmetadata:\n  name: helper-pod\n  labels:\n    app: local-path-helper\n    app.kubernetes.io/name: local-path-helper\nspec:\n  priorityClassName: system-node-critical\n  tolerations:\n    - operator: Exists\n      effect: NoSchedule\n    - operator: Exists\n      effect: NoExecute\n  containers:\n    - name: helper-pod\n      image: docker.io/kindest/local-path-helper:v20260131-7181c60a\n      imagePullPolicy: IfNotPresent\n      resources:\n        requests:\n          cpu: 25m\n          memory: 32Mi\n        limits:\n          cpu: 200m\n          memory: 128Mi\n"
+  }
+}

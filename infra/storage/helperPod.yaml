@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: helper-pod
+  labels:
+    app: local-path-helper
+    app.kubernetes.io/name: local-path-helper
+spec:
+  priorityClassName: system-node-critical
+  tolerations:
+    - operator: Exists
+      effect: NoSchedule
+    - operator: Exists
+      effect: NoExecute
+  containers:
+    - name: helper-pod
+      image: docker.io/kindest/local-path-helper:v20260131-7181c60a
+      imagePullPolicy: IfNotPresent
+      resources:
+        requests:
+          cpu: 25m
+          memory: 32Mi
+        limits:
+          cpu: 200m
+          memory: 128Mi
