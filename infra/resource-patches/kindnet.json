@@ -1,0 +1,14 @@
+{
+  "spec": {
+    "template": {
+      "spec": {
+        "containers": [{
+          "name": "kindnet-cni",
+          "resources": {
+            "limits": {"cpu": "500m", "memory": "256Mi"}
+          }
+        }]
+      }
+    }
+  }
+}

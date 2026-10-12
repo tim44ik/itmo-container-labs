@@ -1,0 +1,24 @@
+{
+  "spec": {
+    "template": {
+      "spec": {
+        "containers": [{
+          "name": "local-path-provisioner",
+          "securityContext": {
+            "readOnlyRootFilesystem": true
+          },
+          "volumeMounts": [{
+            "name": "provisioner-tmp",
+            "mountPath": "/tmp"
+          }]
+        }],
+        "volumes": [{
+          "name": "provisioner-tmp",
+          "emptyDir": {
+            "sizeLimit": "64Mi"
+          }
+        }]
+      }
+    }
+  }
+}

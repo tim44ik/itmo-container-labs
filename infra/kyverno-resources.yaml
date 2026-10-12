@@ -1,0 +1,20 @@
+admissionController:
+  container:
+    resources:
+      limits:
+        cpu: "1"
+
+backgroundController:
+  resources:
+    limits:
+      cpu: 500m
+
+cleanupController:
+  resources:
+    limits:
+      cpu: 500m
+
+reportsController:
+  resources:
+    limits:
+      cpu: 500m

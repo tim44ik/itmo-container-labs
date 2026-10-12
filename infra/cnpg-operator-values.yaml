@@ -1,0 +1,27 @@
+fullnameOverride: cnpg
+
+replicaCount: 1
+
+podLabels:
+  app: cnpg-operator
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+containerSecurityContext:
+  privileged: false
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
+  capabilities:
+    drop:
+      - ALL
+  seccompProfile:
+    type: RuntimeDefault

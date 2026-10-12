@@ -1,0 +1,77 @@
+{
+  "apiVersion": "batch/v1",
+  "kind": "Job",
+  "metadata": {
+    "name": "shop-migrate-v1",
+    "namespace": "shop",
+    "labels": {
+      "app": "shop-migrate",
+      "app.kubernetes.io/name": "shop-migrate"
+    }
+  },
+  "spec": {
+    "backoffLimit": 2,
+    "activeDeadlineSeconds": 180,
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "shop-migrate",
+          "app.kubernetes.io/name": "shop-migrate"
+        }
+      },
+      "spec": {
+        "restartPolicy": "Never",
+        "automountServiceAccountToken": false,
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 65532,
+          "runAsGroup": 65532,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          }
+        },
+        "containers": [
+          {
+            "name": "migrate",
+            "image": "docker.io/library/shop-api:v1",
+            "imagePullPolicy": "IfNotPresent",
+            "args": [
+              "migrate"
+            ],
+            "env": [
+              {
+                "name": "DATABASE_URL",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "shop-db",
+                    "key": "uri"
+                  }
+                }
+              }
+            ],
+            "securityContext": {
+              "readOnlyRootFilesystem": true,
+              "privileged": false,
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "resources": {
+              "requests": {
+                "cpu": "50m",
+                "memory": "64Mi"
+              },
+              "limits": {
+                "cpu": "300m",
+                "memory": "128Mi"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

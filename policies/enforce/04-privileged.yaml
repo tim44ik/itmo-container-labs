@@ -1,0 +1,36 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: lab3-deny-privileged
+  annotations:
+    pod-policies.kyverno.io/autogen-controllers: none
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: deny-privileged
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - kube-system
+              names:
+                - "kube-proxy-*"
+      validate:
+        message: "Privileged containers are forbidden except kube-proxy in kube-system."
+        pattern:
+          spec:
+            containers:
+              - "=(securityContext)":
+                  "=(privileged)": false
+            "=(initContainers)":
+              - "=(securityContext)":
+                  "=(privileged)": false
+            "=(ephemeralContainers)":
+              - "=(securityContext)":
+                  "=(privileged)": false

@@ -1,0 +1,53 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ .Release.Name }}-alerts
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: kube-prometheus
+    app.kubernetes.io/name: shop
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+spec:
+  groups:
+    - name: {{ .Release.Name }}.alerts
+      interval: 15s
+      rules:
+        - alert: ShopTargetDown
+          expr: |
+            up{namespace="{{ .Release.Namespace }}",service=~"{{ .Release.Name }}-api|{{ .Release.Name }}-worker"} == 0
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Не удаётся собрать метрики экземпляра shop"
+            description: "Prometheus не может опросить /metrics одной из целей API или worker более минуты."
+
+        - alert: ShopApiHighErrorRatio
+          expr: |
+            (
+              sum(rate(http_requests_total{namespace="{{ .Release.Namespace }}",service="{{ .Release.Name }}-api",status=~"5.."}[2m]))
+              /
+              sum(rate(http_requests_total{namespace="{{ .Release.Namespace }}",service="{{ .Release.Name }}-api"}[2m]))
+            ) > 0.05
+            and
+            sum(rate(http_requests_total{namespace="{{ .Release.Namespace }}",service="{{ .Release.Name }}-api"}[2m])) > 0.1
+          for: 1m
+          labels:
+            severity: critical
+            namespace: {{ .Release.Namespace | quote }}
+            service: {{ .Release.Name }}-api
+          annotations:
+            summary: "Высокая доля HTTP 5xx у shop-api"
+            description: "Доля 5xx превышает 5% в течение минуты при трафике более 0.1 запроса/с."
+
+        - alert: ShopWorkerErrors
+          expr: |
+            sum(increase(worker_errors_total{namespace="{{ .Release.Namespace }}",service="{{ .Release.Name }}-worker"}[5m])) > 0
+          for: 1m
+          labels:
+            severity: warning
+            namespace: {{ .Release.Namespace | quote }}
+            service: {{ .Release.Name }}-worker
+          annotations:
+            summary: "Worker фиксирует ошибки"
+            description: "За последние 5 минут зарегистрированы ошибки опроса базы или транзакций worker."

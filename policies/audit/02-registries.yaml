@@ -1,0 +1,24 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: lab3-trusted-registries
+spec:
+  validationFailureAction: Audit
+  background: true
+  rules:
+    - name: trusted-registries
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "Use an approved registry or an explicitly allowed legacy image."
+        pattern:
+          spec:
+            containers:
+              - image: "docker.io/* | ghcr.io/* | quay.io/* | registry.k8s.io/* | reg.kyverno.io/kyverno/* | api-multi:latest | jaegertracing/jaeger:2.21.0"
+            "=(initContainers)":
+              - image: "docker.io/* | ghcr.io/* | quay.io/* | registry.k8s.io/* | reg.kyverno.io/kyverno/* | api-multi:latest | jaegertracing/jaeger:2.21.0"
+            "=(ephemeralContainers)":
+              - image: "docker.io/* | ghcr.io/* | quay.io/* | registry.k8s.io/* | reg.kyverno.io/kyverno/* | api-multi:latest | jaegertracing/jaeger:2.21.0"

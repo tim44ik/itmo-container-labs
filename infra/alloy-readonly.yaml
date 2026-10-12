@@ -1,0 +1,15 @@
+alloy:
+  storagePath: /tmp/alloy
+  securityContext:
+    readOnlyRootFilesystem: true
+  mounts:
+    extra:
+      - name: alloy-tmp
+        mountPath: /tmp
+
+controller:
+  volumes:
+    extra:
+      - name: alloy-tmp
+        emptyDir:
+          sizeLimit: 256Mi

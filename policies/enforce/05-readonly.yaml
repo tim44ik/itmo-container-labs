@@ -1,0 +1,45 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: lab3-readonly-rootfs
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: readonly-rootfs
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - kube-system
+              names:
+                - etcd-labs-control-plane
+                - kube-apiserver-labs-control-plane
+                - kube-controller-manager-labs-control-plane
+                - kube-scheduler-labs-control-plane
+                - "kindnet-*"
+                - "kube-proxy-*"
+          - resources:
+              namespaces:
+                - local-path-storage
+              names:
+                - "helper-pod-create-pvc-*"
+                - "helper-pod-delete-pvc-*"
+      validate:
+        message: "Container root filesystems must be read-only."
+        pattern:
+          spec:
+            containers:
+              - securityContext:
+                  readOnlyRootFilesystem: true
+            "=(initContainers)":
+              - securityContext:
+                  readOnlyRootFilesystem: true
+            "=(ephemeralContainers)":
+              - securityContext:
+                  readOnlyRootFilesystem: true
