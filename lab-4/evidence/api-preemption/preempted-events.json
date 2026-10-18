@@ -1,0 +1,71 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-15T21:30:07Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "shop-batch-7d45758578-dzvj7",
+                "namespace": "shop",
+                "resourceVersion": "858739",
+                "uid": "d23d6e61-1cdc-4da3-96c7-108f938a2214"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-15T21:30:07Z",
+            "message": "Preempted by pod a5f63309-13de-4606-baf4-f0c5ebdcd2da on node labs-control-plane",
+            "metadata": {
+                "creationTimestamp": "2026-10-15T21:30:07Z",
+                "name": "shop-batch-7d45758578-dzvj7.18ded14797cc01e5",
+                "namespace": "shop",
+                "resourceVersion": "859530",
+                "uid": "aa9237e8-96b9-4562-b76e-5e9585c6d6ae"
+            },
+            "reason": "Preempted",
+            "reportingComponent": "default-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "default-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-15T21:29:55Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "shop-batch-7d45758578-j4j6g",
+                "namespace": "shop",
+                "resourceVersion": "858792",
+                "uid": "800a729e-5199-45b7-9e3a-efb3e0151013"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-15T21:29:55Z",
+            "message": "Preempted by pod 0238a17d-a1d8-40a2-bf47-1c4bc4af9169 on node labs-worker",
+            "metadata": {
+                "creationTimestamp": "2026-10-15T21:29:55Z",
+                "name": "shop-batch-7d45758578-j4j6g.18ded144ced30a03",
+                "namespace": "shop",
+                "resourceVersion": "859406",
+                "uid": "a818b579-0a3e-4be4-91c8-a5d6f9f9eef5"
+            },
+            "reason": "Preempted",
+            "reportingComponent": "default-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "default-scheduler"
+            },
+            "type": "Normal"
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

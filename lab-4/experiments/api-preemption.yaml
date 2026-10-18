@@ -1,0 +1,8 @@
+api:
+  resources:
+    requests:
+      cpu: "2"
+      memory: 100Mi
+    limits:
+      cpu: "2"
+      memory: 100Mi

@@ -1,0 +1,2 @@
+NAME            AGE    INSTANCES   READY   STATUS                     PRIMARY
+shop-postgres   3d7h   1           1       Cluster in healthy state   shop-postgres-1

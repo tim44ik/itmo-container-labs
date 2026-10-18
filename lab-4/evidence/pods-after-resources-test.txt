@@ -1,0 +1,13 @@
+NAME                           READY   STATUS      RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+shop-api-65bcc7944f-6jn9x      1/1     Running     0          30m   10.244.1.57   labs-worker          <none>           <none>
+shop-api-65bcc7944f-w6qrs      1/1     Running     0          30m   10.244.1.59   labs-worker          <none>           <none>
+shop-api-65bcc7944f-zt7ql      1/1     Running     0          30m   10.244.0.41   labs-control-plane   <none>           <none>
+shop-batch-7b46b8f8b9-vs599    1/1     Running     0          15h   10.244.1.51   labs-worker          <none>           <none>
+shop-migrate-v1-9msr5          0/1     Completed   0          26h   10.244.1.30   labs-worker          <none>           <none>
+shop-postgres-1                1/1     Running     0          29m   10.244.0.44   labs-control-plane   <none>           <none>
+shop-worker-55564fcdfc-22427   1/1     Running     0          30m   10.244.0.40   labs-control-plane   <none>           <none>
+shop-worker-55564fcdfc-89cgr   1/1     Running     0          29m   10.244.0.42   labs-control-plane   <none>           <none>
+shop-worker-55564fcdfc-8lmfv   1/1     Running     0          30m   10.244.1.58   labs-worker          <none>           <none>
+shop-worker-55564fcdfc-9tzdh   1/1     Running     0          29m   10.244.0.43   labs-control-plane   <none>           <none>
+shop-worker-55564fcdfc-gml7n   1/1     Running     0          29m   10.244.1.60   labs-worker          <none>           <none>
+shop-worker-55564fcdfc-tkwbm   1/1     Running     0          30m   10.244.1.56   labs-worker          <none>           <none>

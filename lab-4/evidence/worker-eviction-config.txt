@@ -1,0 +1,5 @@
+evictionHard: {"imagefs.available": "0%", "nodefs.available": "0%", "nodefs.inodesFree": "0%"}
+evictionSoft: null
+evictionSoftGracePeriod: null
+evictionPressureTransitionPeriod: "5m0s"
+evictionMaxPodGracePeriod: null

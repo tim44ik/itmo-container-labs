@@ -9,6 +9,9 @@ metadata:
     app.kubernetes.io/name: postgres
     app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
+  {{- if (.Values.priority | default dict).enabled }}
+  priorityClassName: {{ printf "%s-%s-critical" .Release.Namespace .Release.Name | quote }}
+  {{- end }}
   instances: {{ .Values.postgres.instances }}
   inheritedMetadata:
     labels:

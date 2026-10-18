@@ -1,0 +1,31 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2026-10-15T19:49:34Z"
+  involvedObject:
+    apiVersion: v1
+    kind: Pod
+    name: shop-batch-7d45758578-2lc4h
+    namespace: shop
+    resourceVersion: "830124"
+    uid: f40bdb65-3154-4788-816a-9db721030ab3
+  kind: Event
+  lastTimestamp: "2026-10-15T19:49:34Z"
+  message: Preempted by pod 0070be0a-3884-44d3-8f13-7580b8fbb8b7 on node labs-control-plane
+  metadata:
+    creationTimestamp: "2026-10-15T19:49:34Z"
+    name: shop-batch-7d45758578-2lc4h.18decbcb101ef445
+    namespace: shop
+    resourceVersion: "830371"
+    uid: b8e1dda4-8d4a-445d-8f8a-e9a5a29c4a35
+  reason: Preempted
+  reportingComponent: default-scheduler
+  reportingInstance: ""
+  source:
+    component: default-scheduler
+  type: Normal
+kind: List
+metadata:
+  resourceVersion: ""

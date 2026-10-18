@@ -1,0 +1,7 @@
+Pod: shop-batch-oom
+Phase: Failed
+QoS: Burstable
+Resources: {"limits": {"cpu": "250m", "memory": "128Mi"}, "requests": {"cpu": "50m", "memory": "64Mi"}}
+Container: batch
+Reason: OOMKilled
+Exit code: 137

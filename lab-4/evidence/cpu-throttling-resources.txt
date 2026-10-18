@@ -1,0 +1,11 @@
+Доля CPU-периодов с throttling, %
+shop-api-65bcc7944f-6jn9x api p95=4.61% max=4.81%
+shop-api-65bcc7944f-w6qrs api p95=2.34% max=3.19%
+shop-api-65bcc7944f-zt7ql api p95=5.25% max=6.50%
+shop-postgres-1 postgres p95=85.28% max=99.79%
+shop-worker-55564fcdfc-22427 worker p95=0.30% max=0.31%
+shop-worker-55564fcdfc-89cgr worker p95=0.00% max=0.00%
+shop-worker-55564fcdfc-8lmfv worker p95=0.32% max=0.33%
+shop-worker-55564fcdfc-9tzdh worker p95=0.00% max=0.00%
+shop-worker-55564fcdfc-gml7n worker p95=0.00% max=0.00%
+shop-worker-55564fcdfc-tkwbm worker p95=0.00% max=0.00%

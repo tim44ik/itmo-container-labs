@@ -1,0 +1,364 @@
+Name:                 shop-batch-7d45758578-6bg89
+Namespace:            shop
+Priority:             -1000
+Priority Class Name:  shop-shop-batch
+Service Account:      default
+Node:                 labs-control-plane/172.18.0.3
+Start Time:           Tue, 13 Oct 2026 21:34:31 +0300
+Labels:               app=shop-batch
+                      app.kubernetes.io/component=batch
+                      app.kubernetes.io/instance=shop
+                      app.kubernetes.io/name=shop
+                      pod-template-hash=7d45758578
+Annotations:          <none>
+Status:               Running
+SeccompProfile:       RuntimeDefault
+IP:                   10.244.0.52
+IPs:
+  IP:           10.244.0.52
+Controlled By:  ReplicaSet/shop-batch-7d45758578
+Containers:
+  batch:
+    Container ID:   containerd://1738c15d34c338f349492c194b02091a7516c467415034e28604d04ba2198d15
+    Image:          docker.io/library/shop-batch:v1
+    Image ID:       docker.io/library/import-2026-10-12@sha256:2923506aa8d244408584d7bb99e8bdcfaa28886da5871e991fb7bb2b709a22a7
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 21:34:35 +0300
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     3
+      memory:  64Mi
+    Requests:
+      cpu:     3
+      memory:  32Mi
+    Environment:
+      CPU_WORKERS:  0
+      MEMORY_MIB:   16
+    Mounts:         <none>
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:                      <none>
+QoS Class:                    Burstable
+Node-Selectors:               <none>
+Tolerations:                  node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:                 shop-batch-7d45758578-8fztf
+Namespace:            shop
+Priority:             -1000
+Priority Class Name:  shop-shop-batch
+Service Account:      default
+Node:                 labs-worker/172.18.0.2
+Start Time:           Tue, 13 Oct 2026 21:34:31 +0300
+Labels:               app=shop-batch
+                      app.kubernetes.io/component=batch
+                      app.kubernetes.io/instance=shop
+                      app.kubernetes.io/name=shop
+                      pod-template-hash=7d45758578
+Annotations:          <none>
+Status:               Running
+SeccompProfile:       RuntimeDefault
+IP:                   10.244.1.69
+IPs:
+  IP:           10.244.1.69
+Controlled By:  ReplicaSet/shop-batch-7d45758578
+Containers:
+  batch:
+    Container ID:   containerd://d30f71c1e3f94b1fe61bab13616077af1840e7406e723caee7e4333e39b33a05
+    Image:          docker.io/library/shop-batch:v1
+    Image ID:       docker.io/library/import-2026-10-12@sha256:2923506aa8d244408584d7bb99e8bdcfaa28886da5871e991fb7bb2b709a22a7
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 21:34:35 +0300
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     3
+      memory:  64Mi
+    Requests:
+      cpu:     3
+      memory:  32Mi
+    Environment:
+      CPU_WORKERS:  0
+      MEMORY_MIB:   16
+    Mounts:         <none>
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:                      <none>
+QoS Class:                    Burstable
+Node-Selectors:               <none>
+Tolerations:                  node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:                 shop-batch-7d45758578-f9kjn
+Namespace:            shop
+Priority:             -1000
+Priority Class Name:  shop-shop-batch
+Service Account:      default
+Node:                 labs-control-plane/172.18.0.3
+Start Time:           Tue, 13 Oct 2026 21:34:32 +0300
+Labels:               app=shop-batch
+                      app.kubernetes.io/component=batch
+                      app.kubernetes.io/instance=shop
+                      app.kubernetes.io/name=shop
+                      pod-template-hash=7d45758578
+Annotations:          <none>
+Status:               Running
+SeccompProfile:       RuntimeDefault
+IP:                   10.244.0.53
+IPs:
+  IP:           10.244.0.53
+Controlled By:  ReplicaSet/shop-batch-7d45758578
+Containers:
+  batch:
+    Container ID:   containerd://e20106ef30aba8f4d755066f07ee654aa54bc75c4262eb88722af582aa2758eb
+    Image:          docker.io/library/shop-batch:v1
+    Image ID:       docker.io/library/import-2026-10-12@sha256:2923506aa8d244408584d7bb99e8bdcfaa28886da5871e991fb7bb2b709a22a7
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 21:34:36 +0300
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     3
+      memory:  64Mi
+    Requests:
+      cpu:     3
+      memory:  32Mi
+    Environment:
+      CPU_WORKERS:  0
+      MEMORY_MIB:   16
+    Mounts:         <none>
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:                      <none>
+QoS Class:                    Burstable
+Node-Selectors:               <none>
+Tolerations:                  node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:                 shop-batch-7d45758578-hm8bw
+Namespace:            shop
+Priority:             -1000
+Priority Class Name:  shop-shop-batch
+Service Account:      default
+Node:                 <none>
+Labels:               app=shop-batch
+                      app.kubernetes.io/component=batch
+                      app.kubernetes.io/instance=shop
+                      app.kubernetes.io/name=shop
+                      pod-template-hash=7d45758578
+Annotations:          <none>
+Status:               Pending
+SeccompProfile:       RuntimeDefault
+IP:                   
+IPs:                  <none>
+Controlled By:        ReplicaSet/shop-batch-7d45758578
+Containers:
+  batch:
+    Image:      docker.io/library/shop-batch:v1
+    Port:       <none>
+    Host Port:  <none>
+    Limits:
+      cpu:     3
+      memory:  64Mi
+    Requests:
+      cpu:     3
+      memory:  32Mi
+    Environment:
+      CPU_WORKERS:  0
+      MEMORY_MIB:   16
+    Mounts:         <none>
+Conditions:
+  Type           Status
+  PodScheduled   False 
+Volumes:         <none>
+QoS Class:       Burstable
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:                 shop-batch-7d45758578-nmmtt
+Namespace:            shop
+Priority:             -1000
+Priority Class Name:  shop-shop-batch
+Service Account:      default
+Node:                 labs-worker/172.18.0.2
+Start Time:           Tue, 13 Oct 2026 21:34:28 +0300
+Labels:               app=shop-batch
+                      app.kubernetes.io/component=batch
+                      app.kubernetes.io/instance=shop
+                      app.kubernetes.io/name=shop
+                      pod-template-hash=7d45758578
+Annotations:          <none>
+Status:               Running
+SeccompProfile:       RuntimeDefault
+IP:                   10.244.1.64
+IPs:
+  IP:           10.244.1.64
+Controlled By:  ReplicaSet/shop-batch-7d45758578
+Containers:
+  batch:
+    Container ID:   containerd://7fcc230b99cec755ccdc020c436877019df9b2836bc11867591571b426472564
+    Image:          docker.io/library/shop-batch:v1
+    Image ID:       docker.io/library/import-2026-10-12@sha256:2923506aa8d244408584d7bb99e8bdcfaa28886da5871e991fb7bb2b709a22a7
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 21:34:31 +0300
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     3
+      memory:  64Mi
+    Requests:
+      cpu:     3
+      memory:  32Mi
+    Environment:
+      CPU_WORKERS:  0
+      MEMORY_MIB:   16
+    Mounts:         <none>
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:                      <none>
+QoS Class:                    Burstable
+Node-Selectors:               <none>
+Tolerations:                  node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:                 shop-batch-7d45758578-xlvl9
+Namespace:            shop
+Priority:             -1000
+Priority Class Name:  shop-shop-batch
+Service Account:      default
+Node:                 labs-worker/172.18.0.2
+Start Time:           Tue, 13 Oct 2026 21:34:29 +0300
+Labels:               app=shop-batch
+                      app.kubernetes.io/component=batch
+                      app.kubernetes.io/instance=shop
+                      app.kubernetes.io/name=shop
+                      pod-template-hash=7d45758578
+Annotations:          <none>
+Status:               Running
+SeccompProfile:       RuntimeDefault
+IP:                   10.244.1.68
+IPs:
+  IP:           10.244.1.68
+Controlled By:  ReplicaSet/shop-batch-7d45758578
+Containers:
+  batch:
+    Container ID:   containerd://19a11465d8a339eb594842140b3f02d81d71357603bd4f73be602904bb0dddd4
+    Image:          docker.io/library/shop-batch:v1
+    Image ID:       docker.io/library/import-2026-10-12@sha256:2923506aa8d244408584d7bb99e8bdcfaa28886da5871e991fb7bb2b709a22a7
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 21:34:31 +0300
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     3
+      memory:  64Mi
+    Requests:
+      cpu:     3
+      memory:  32Mi
+    Environment:
+      CPU_WORKERS:  0
+      MEMORY_MIB:   16
+    Mounts:         <none>
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:                      <none>
+QoS Class:                    Burstable
+Node-Selectors:               <none>
+Tolerations:                  node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:                 shop-batch-7d45758578-xtw4r
+Namespace:            shop
+Priority:             -1000
+Priority Class Name:  shop-shop-batch
+Service Account:      default
+Node:                 labs-control-plane/172.18.0.3
+Start Time:           Tue, 13 Oct 2026 21:34:28 +0300
+Labels:               app=shop-batch
+                      app.kubernetes.io/component=batch
+                      app.kubernetes.io/instance=shop
+                      app.kubernetes.io/name=shop
+                      pod-template-hash=7d45758578
+Annotations:          <none>
+Status:               Running
+SeccompProfile:       RuntimeDefault
+IP:                   10.244.0.50
+IPs:
+  IP:           10.244.0.50
+Controlled By:  ReplicaSet/shop-batch-7d45758578
+Containers:
+  batch:
+    Container ID:   containerd://64e1ed1a6a9299906907614df063c8e795e257d739fdd0079b70d4584c9cd53d
+    Image:          docker.io/library/shop-batch:v1
+    Image ID:       docker.io/library/import-2026-10-12@sha256:2923506aa8d244408584d7bb99e8bdcfaa28886da5871e991fb7bb2b709a22a7
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 21:34:31 +0300
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     3
+      memory:  64Mi
+    Requests:
+      cpu:     3
+      memory:  32Mi
+    Environment:
+      CPU_WORKERS:  0
+      MEMORY_MIB:   16
+    Mounts:         <none>
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:                      <none>
+QoS Class:                    Burstable
+Node-Selectors:               <none>
+Tolerations:                  node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s

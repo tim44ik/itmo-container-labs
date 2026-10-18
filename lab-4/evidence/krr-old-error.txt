@@ -1,0 +1,46 @@
+
+ _____       _               _          _  _______  _____
+|  __ \     | |             | |        | |/ /  __ \|  __ \
+| |__) |___ | |__  _   _ ___| |_ __ _  | ' /| |__) | |__) |
+|  _  // _ \| '_ \| | | / __| __/ _` | |  < |  _  /|  _  /
+| | \ \ (_) | |_) | |_| \__ \ || (_| | | . \| | \ \| | \ \
+|_|  \_\___/|_.__/ \__,_|___/\__\__,_| |_|\_\_|  \_\_|  \_\
+
+
+Thanks for using Robusta KRR. If you have any questions or feedback, please feel free to reach out to us at
+https://github.com/robusta-dev/krr/issues
+
+Watch our latest video to optimize your workloads and save costs: https://www.youtube.com/watch?v=TYRA2QcDIuI
+
+
+
+Running Robusta's KRR (Kubernetes Resource Recommender) 1.8.2-dev
+Using strategy: Simple
+Using formatter: table
+A newer version of KRR is available: v1.30.0
+
+[14:17:00] INFO     Using clusters: ['kind-labs']                                                                                                  runner.py:270
+           INFO     Prometheus URL is specified, will not auto-detect a metrics service                                                             loader.py:55
+           INFO     Trying to connect to Prometheus for kind-labs cluster                                                       prometheus_metrics_service.py:66
+           INFO     Using Prometheus at http://10.244.0.15:9090 for cluster kind-labs                                           prometheus_metrics_service.py:93
+           INFO     Prometheus found                                                                                                                loader.py:74
+           INFO     Prometheus connected successfully for kind-labs cluster                                                                         loader.py:47
+           WARNING  Not enough history available for cluster kind-labs.                                                                            runner.py:225
+           WARNING  If the cluster is freshly installed, it might take some time for the enough data to be available.                              runner.py:228
+           WARNING  Enough data is estimated to be available after 2026-10-13 13:17:01, but will try to calculate recommendations anyway.          runner.py:231
+           INFO     Listing scannable objects in kind-labs                                                                                        __init__.py:58
+           ERROR    An unexpected error occurred                                                                                                   runner.py:332
+                    Traceback (most recent call last):                                                                                                          
+                      File "/app/robusta_krr/core/runner.py", line 325, in run                                                                                  
+                        result = await self._collect_result()                                                                                                   
+                      File "/app/robusta_krr/core/runner.py", line 278, in _collect_result                                                                      
+                        workloads = await self._k8s_loader.list_scannable_objects(clusters)                                                                     
+                      File "/app/robusta_krr/core/integrations/kubernetes/__init__.py", line 531, in list_scannable_objects                                     
+                        return [                                                                                                                                
+                      File "/app/robusta_krr/core/integrations/kubernetes/__init__.py", line 534, in <listcomp>                                                 
+                        for object in await cluster_loader.list_scannable_objects()                                                                             
+                      File "/app/robusta_krr/core/integrations/kubernetes/__init__.py", line 73, in list_scannable_objects                                      
+                        return [                                                                                                                                
+                      File "/app/robusta_krr/core/integrations/kubernetes/__init__.py", line 76, in <listcomp>                                                  
+                        for object in workload_objects                                                                                                          
+                    TypeError: 'NoneType' object is not iterable                                                                                                

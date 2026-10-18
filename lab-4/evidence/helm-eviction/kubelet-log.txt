@@ -1,0 +1,281 @@
+Oct 16 22:43:47 labs-worker systemd[1]: Stopping kubelet.service - kubelet: The Kubernetes Node Agent...
+Oct 16 22:43:47 labs-worker kubelet[343108]: I1016 22:43:47.241381  343108 eviction_manager.go:224] "Eviction manager: monitoring loop exiting" err="context canceled"
+Oct 16 22:43:47 labs-worker kubelet[343108]: I1016 22:43:47.241822  343108 tlsconfig.go:258] "Shutting down DynamicServingCertificateController"
+Oct 16 22:43:47 labs-worker kubelet[343108]: I1016 22:43:47.242664  343108 volume_manager.go:341] "Shutting down Kubelet Volume Manager"
+Oct 16 22:43:47 labs-worker kubelet[343108]: I1016 22:43:47.242713  343108 dynamic_cafile_content.go:175] "Shutting down controller" name="client-ca-bundle::/etc/kubernetes/pki/ca.crt"
+Oct 16 22:43:47 labs-worker systemd[1]: kubelet.service: Deactivated successfully.
+Oct 16 22:43:47 labs-worker systemd[1]: Stopped kubelet.service - kubelet: The Kubernetes Node Agent.
+Oct 16 22:43:47 labs-worker systemd[1]: kubelet.service: Consumed 1h 15min 25.481s CPU time, 92.9M memory peak, 2.3M memory swap peak.
+Oct 16 22:43:47 labs-worker systemd[1]: Starting kubelet.service - kubelet: The Kubernetes Node Agent...
+Oct 16 22:43:47 labs-worker systemd[1]: Started kubelet.service - kubelet: The Kubernetes Node Agent.
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.095176  363401 server.go:257] "Effective KubeletConfiguration" config=<
+Oct 16 22:43:48 labs-worker kubelet[363401]:         address: 0.0.0.0
+Oct 16 22:43:48 labs-worker kubelet[363401]:         apiVersion: kubelet.config.k8s.io/v1beta1
+Oct 16 22:43:48 labs-worker kubelet[363401]:         authentication:
+Oct 16 22:43:48 labs-worker kubelet[363401]:           anonymous:
+Oct 16 22:43:48 labs-worker kubelet[363401]:             enabled: false
+Oct 16 22:43:48 labs-worker kubelet[363401]:           webhook:
+Oct 16 22:43:48 labs-worker kubelet[363401]:             cacheTTL: 2m0s
+Oct 16 22:43:48 labs-worker kubelet[363401]:             enabled: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:           x509:
+Oct 16 22:43:48 labs-worker kubelet[363401]:             clientCAFile: /etc/kubernetes/pki/ca.crt
+Oct 16 22:43:48 labs-worker kubelet[363401]:         authorization:
+Oct 16 22:43:48 labs-worker kubelet[363401]:           mode: Webhook
+Oct 16 22:43:48 labs-worker kubelet[363401]:           webhook:
+Oct 16 22:43:48 labs-worker kubelet[363401]:             cacheAuthorizedTTL: 5m0s
+Oct 16 22:43:48 labs-worker kubelet[363401]:             cacheUnauthorizedTTL: 30s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         cgroupDriver: systemd
+Oct 16 22:43:48 labs-worker kubelet[363401]:         cgroupRoot: /kubelet
+Oct 16 22:43:48 labs-worker kubelet[363401]:         cgroupsPerQOS: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         clusterDNS:
+Oct 16 22:43:48 labs-worker kubelet[363401]:         - 10.96.0.10
+Oct 16 22:43:48 labs-worker kubelet[363401]:         clusterDomain: cluster.local
+Oct 16 22:43:48 labs-worker kubelet[363401]:         configMapAndSecretChangeDetectionStrategy: Watch
+Oct 16 22:43:48 labs-worker kubelet[363401]:         containerLogMaxFiles: 5
+Oct 16 22:43:48 labs-worker kubelet[363401]:         containerLogMaxSize: 10Mi
+Oct 16 22:43:48 labs-worker kubelet[363401]:         containerLogMaxWorkers: 1
+Oct 16 22:43:48 labs-worker kubelet[363401]:         containerLogMonitorInterval: 10s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         containerRuntimeEndpoint: unix:///run/containerd/containerd.sock
+Oct 16 22:43:48 labs-worker kubelet[363401]:         contentType: application/vnd.kubernetes.protobuf
+Oct 16 22:43:48 labs-worker kubelet[363401]:         cpuCFSQuota: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         cpuCFSQuotaPeriod: 100ms
+Oct 16 22:43:48 labs-worker kubelet[363401]:         cpuManagerPolicy: none
+Oct 16 22:43:48 labs-worker kubelet[363401]:         cpuManagerReconcilePeriod: 10s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         crashLoopBackOff:
+Oct 16 22:43:48 labs-worker kubelet[363401]:           maxContainerRestartPeriod: 5m0s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         enableControllerAttachDetach: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         enableDebugFlagsHandler: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         enableDebuggingHandlers: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         enableProfilingHandler: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         enableServer: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         enableSystemLogHandler: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         enableSystemLogQuery: false
+Oct 16 22:43:48 labs-worker kubelet[363401]:         enforceNodeAllocatable:
+Oct 16 22:43:48 labs-worker kubelet[363401]:         - pods
+Oct 16 22:43:48 labs-worker kubelet[363401]:         eventBurst: 100
+Oct 16 22:43:48 labs-worker kubelet[363401]:         eventRecordQPS: 50
+Oct 16 22:43:48 labs-worker kubelet[363401]:         evictionHard:
+Oct 16 22:43:48 labs-worker kubelet[363401]:           imagefs.available: 0%
+Oct 16 22:43:48 labs-worker kubelet[363401]:           nodefs.available: 0%
+Oct 16 22:43:48 labs-worker kubelet[363401]:           nodefs.inodesFree: 0%
+Oct 16 22:43:48 labs-worker kubelet[363401]:         evictionMaxPodGracePeriod: 5
+Oct 16 22:43:48 labs-worker kubelet[363401]:         evictionPressureTransitionPeriod: 30s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         evictionSoft:
+Oct 16 22:43:48 labs-worker kubelet[363401]:           memory.available: 5900Mi
+Oct 16 22:43:48 labs-worker kubelet[363401]:         evictionSoftGracePeriod:
+Oct 16 22:43:48 labs-worker kubelet[363401]:           memory.available: 30s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         failCgroupV1: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         failSwapOn: false
+Oct 16 22:43:48 labs-worker kubelet[363401]:         fileCheckFrequency: 20s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         hairpinMode: promiscuous-bridge
+Oct 16 22:43:48 labs-worker kubelet[363401]:         healthzBindAddress: 127.0.0.1
+Oct 16 22:43:48 labs-worker kubelet[363401]:         healthzPort: 10248
+Oct 16 22:43:48 labs-worker kubelet[363401]:         httpCheckFrequency: 20s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         imageGCHighThresholdPercent: 100
+Oct 16 22:43:48 labs-worker kubelet[363401]:         imageGCLowThresholdPercent: 80
+Oct 16 22:43:48 labs-worker kubelet[363401]:         imageMaximumGCAge: 0s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         imageMinimumGCAge: 2m0s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         imagePullCredentialsVerificationPolicy: NeverVerifyPreloadedImages
+Oct 16 22:43:48 labs-worker kubelet[363401]:         iptablesDropBit: 15
+Oct 16 22:43:48 labs-worker kubelet[363401]:         iptablesMasqueradeBit: 14
+Oct 16 22:43:48 labs-worker kubelet[363401]:         kind: KubeletConfiguration
+Oct 16 22:43:48 labs-worker kubelet[363401]:         kubeAPIBurst: 100
+Oct 16 22:43:48 labs-worker kubelet[363401]:         kubeAPIQPS: 50
+Oct 16 22:43:48 labs-worker kubelet[363401]:         localStorageCapacityIsolation: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         logging:
+Oct 16 22:43:48 labs-worker kubelet[363401]:           flushFrequency: 5s
+Oct 16 22:43:48 labs-worker kubelet[363401]:           format: text
+Oct 16 22:43:48 labs-worker kubelet[363401]:           options:
+Oct 16 22:43:48 labs-worker kubelet[363401]:             json:
+Oct 16 22:43:48 labs-worker kubelet[363401]:               infoBufferSize: "0"
+Oct 16 22:43:48 labs-worker kubelet[363401]:             text:
+Oct 16 22:43:48 labs-worker kubelet[363401]:               infoBufferSize: "0"
+Oct 16 22:43:48 labs-worker kubelet[363401]:           verbosity: 0
+Oct 16 22:43:48 labs-worker kubelet[363401]:         makeIPTablesUtilChains: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         maxOpenFiles: 1000000
+Oct 16 22:43:48 labs-worker kubelet[363401]:         maxPods: 110
+Oct 16 22:43:48 labs-worker kubelet[363401]:         memoryManagerPolicy: None
+Oct 16 22:43:48 labs-worker kubelet[363401]:         memoryReservationPolicy: None
+Oct 16 22:43:48 labs-worker kubelet[363401]:         memorySwap: {}
+Oct 16 22:43:48 labs-worker kubelet[363401]:         mergeDefaultEvictionSettings: false
+Oct 16 22:43:48 labs-worker kubelet[363401]:         nodeLeaseDurationSeconds: 40
+Oct 16 22:43:48 labs-worker kubelet[363401]:         nodeStatusMaxImages: 50
+Oct 16 22:43:48 labs-worker kubelet[363401]:         nodeStatusReportFrequency: 5m0s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         nodeStatusUpdateFrequency: 10s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         oomScoreAdj: -999
+Oct 16 22:43:48 labs-worker kubelet[363401]:         podLogsDir: /var/log/pods
+Oct 16 22:43:48 labs-worker kubelet[363401]:         podPidsLimit: -1
+Oct 16 22:43:48 labs-worker kubelet[363401]:         port: 10250
+Oct 16 22:43:48 labs-worker kubelet[363401]:         providerID: kind://docker/labs/labs-worker
+Oct 16 22:43:48 labs-worker kubelet[363401]:         registerNode: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         registryBurst: 10
+Oct 16 22:43:48 labs-worker kubelet[363401]:         registryPullQPS: 5
+Oct 16 22:43:48 labs-worker kubelet[363401]:         resolvConf: /etc/resolv.conf
+Oct 16 22:43:48 labs-worker kubelet[363401]:         rotateCertificates: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         runtimeRequestTimeout: 2m0s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         seccompDefault: false
+Oct 16 22:43:48 labs-worker kubelet[363401]:         serializeImagePulls: true
+Oct 16 22:43:48 labs-worker kubelet[363401]:         shutdownGracePeriod: 0s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         shutdownGracePeriodCriticalPods: 0s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         staticPodPath: /etc/kubernetes/manifests
+Oct 16 22:43:48 labs-worker kubelet[363401]:         streamingConnectionIdleTimeout: 4h0m0s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         syncFrequency: 1m0s
+Oct 16 22:43:48 labs-worker kubelet[363401]:         tlsCertFile: /var/lib/kubelet/pki/kubelet.crt
+Oct 16 22:43:48 labs-worker kubelet[363401]:         tlsPrivateKeyFile: /var/lib/kubelet/pki/kubelet.key
+Oct 16 22:43:48 labs-worker kubelet[363401]:         topologyManagerPolicy: none
+Oct 16 22:43:48 labs-worker kubelet[363401]:         topologyManagerScope: container
+Oct 16 22:43:48 labs-worker kubelet[363401]:         volumePluginDir: /usr/libexec/kubernetes/kubelet-plugins/volume/exec/
+Oct 16 22:43:48 labs-worker kubelet[363401]:         volumeStatsAggPeriod: 1m0s
+Oct 16 22:43:48 labs-worker kubelet[363401]:  >
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.116267  363401 server.go:545] "Kubelet version" kubeletVersion="v1.37.0"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.116325  363401 server.go:547] "Golang settings" GOGC="" GOMAXPROCS="" GOTRACEBACK=""
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.116380  363401 watchdog_linux.go:94] "Systemd watchdog is not enabled"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.116397  363401 watchdog_linux.go:137] "Systemd watchdog is not enabled or the interval is invalid, so health checking will not be started."
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.117406  363401 server.go:1036] "Client rotation is on, will bootstrap in background"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.125184  363401 certificate_store.go:147] "Loading cert/key pair from a file" filePath="/var/lib/kubelet/pki/kubelet-client-current.pem"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.134905  363401 dynamic_cafile_content.go:161] "Starting controller" name="client-ca-bundle::/etc/kubernetes/pki/ca.crt"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.154046  363401 server.go:1502] "Using cgroup driver setting received from the CRI runtime" cgroupDriver="systemd"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.190281  363401 server.go:919] "NoSwap is set due to memorySwapBehavior not specified" memorySwapBehavior="" FailSwapOn=false
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.192895  363401 swap_util.go:119] "Swap is on" /proc/swaps contents=<
+Oct 16 22:43:48 labs-worker kubelet[363401]:         Filename                                Type                Size                Used                Priority
+Oct 16 22:43:48 labs-worker kubelet[363401]:         /dev/sdc                                partition        2097152                205216                -2
+Oct 16 22:43:48 labs-worker kubelet[363401]:  >
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.193851  363401 container_manager_linux.go:273] "Container manager verified user specified cgroup-root exists" cgroupRoot=["kubelet"]
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.193968  363401 container_manager_linux.go:278] "Creating Container Manager object based on Node Config" nodeConfig={"NodeName":"labs-worker","RuntimeCgroupsName":"/system.slice/containerd.service","SystemCgroupsName":"","KubeletCgroupsName":"","KubeletOOMScoreAdj":-999,"ContainerRuntime":"","CgroupsPerQOS":true,"CgroupRoot":"/kubelet","CgroupDriver":"systemd","KubeletRootDir":"/var/lib/kubelet","ProtectKernelDefaults":false,"KubeReservedCgroupName":"","SystemReservedCgroupName":"","ReservedSystemCPUs":{},"EnforceNodeAllocatable":{"pods":{}},"KubeReserved":null,"SystemReserved":null,"HardEvictionThresholds":[],"QOSReserved":{},"CPUManagerPolicy":"none","CPUManagerPolicyOptions":null,"TopologyManagerScope":"container","CPUManagerReconcilePeriod":10000000000,"MemoryManagerPolicy":"None","MemoryManagerReservedMemory":null,"MemoryReservationPolicy":"None","MemoryThrottlingFactor":null,"PodPidsLimit":-1,"EnforceCPULimits":true,"CPUCFSQuotaPeriod":100000000,"TopologyManagerPolicy":"none","TopologyManagerPolicyOptions":null,"CgroupVersion":2}
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.195336  363401 topology_manager.go:183] "Creating topology manager with none policy"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.195380  363401 container_manager_linux.go:310] "Creating device plugin manager"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.196230  363401 container_manager_linux.go:319] "Creating Dynamic Resource Allocation (DRA) manager"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.199473  363401 state_mem.go:45] "Initialized" logger="CPUManager state memory"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.202845  363401 kubelet.go:512] "Attempting to sync node with API server"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.202912  363401 kubelet.go:389] "Adding static pod path" path="/etc/kubernetes/manifests"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.203348  363401 kubelet.go:400] "Adding apiserver pod source"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.203482  363401 apiserver.go:41] "Waiting for node sync before watching apiserver pods"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.207853  363401 kuberuntime_manager.go:315] "Container runtime initialized" containerRuntime="containerd" version="v2.3.4" apiVersion="v1"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.236032  363401 kubelet.go:1011] "ClusterTrustBundle informer will be started eventually once a trust bundle is requested"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.237432  363401 podcertificatemanager.go:340] "podcertificate.IssuingManager starting up"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.255000  363401 server.go:1336] "Started kubelet"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.255664  363401 server.go:196] "Starting to listen" address="0.0.0.0" port=10250
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.257486  363401 ratelimit.go:56] "Setting rate limiting for endpoint" service="podresources" qps=100 burstTokens=10
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.278617  363401 server_v1.go:49] "podresources" method="list" useActivePods=true
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.279148  363401 server.go:293] "Starting to serve the pods API" endpoint="unix:/var/lib/kubelet/pods-api/pods-api.sock"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.279567  363401 server.go:267] "Starting to serve the podresources API" endpoint="unix:/var/lib/kubelet/pod-resources/kubelet.sock"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.289926  363401 server.go:365] "Adding debug handlers to kubelet server"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.294238  363401 fs_resource_analyzer.go:69] "Starting FS ResourceAnalyzer"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.294901  363401 tlsconfig.go:243] "Starting DynamicServingCertificateController"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.294426  363401 dynamic_serving_content.go:135] "Starting controller" name="kubelet-server-cert-files::/var/lib/kubelet/pki/kubelet.crt::/var/lib/kubelet/pki/kubelet.key"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.297652  363401 volume_manager.go:331] "Starting Kubelet Volume Manager"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.298160  363401 desired_state_of_world_populator.go:146] "Desired state populator starts to run"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.303695  363401 factory.go:222] Registration of the systemd container factory successfully
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.304127  363401 reconciler.go:29] "Reconciler: start to sync state"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.304644  363401 factory.go:220] Registration of the crio container factory failed: Get "http://%2Fvar%2Frun%2Fcrio%2Fcrio.sock/info": dial unix /var/run/crio/crio.sock: connect: no such file or directory
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.310318  363401 factory.go:222] Registration of the containerd container factory successfully
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.347705  363401 kubelet_network_linux.go:53] "Initialized iptables rules." protocol="IPv4"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.353108  363401 kubelet_network_linux.go:53] "Initialized iptables rules." protocol="IPv6"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.353265  363401 status_manager.go:283] "Starting to sync pod status with apiserver"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.353389  363401 kubelet.go:2673] "Starting kubelet main sync loop"
+Oct 16 22:43:48 labs-worker kubelet[363401]: E1016 22:43:48.353529  363401 kubelet.go:2697] "Skipping pod synchronization" err="[container runtime status check may not have completed yet, PLEG is not healthy: pleg has yet to be successful]"
+Oct 16 22:43:48 labs-worker kubelet[363401]: E1016 22:43:48.453912  363401 kubelet.go:2697] "Skipping pod synchronization" err="container runtime status check may not have completed yet"
+Oct 16 22:43:48 labs-worker kubelet[363401]: E1016 22:43:48.654111  363401 kubelet.go:2697] "Skipping pod synchronization" err="container runtime status check may not have completed yet"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.786716  363401 cpu_manager.go:239] "Starting" policy="none"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.786809  363401 cpu_manager.go:240] "Reconciling" reconcilePeriod="10s"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.787745  363401 state_mem.go:45] "Initialized" logger="CPUManager state checkpoint.CPUManager state memory"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.787905  363401 state_checkpoint.go:191] "trying to load v4 CPU manager checkpoint" logger="CPUManager state checkpoint"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.788815  363401 state_mem.go:142] "Updated default CPUSet" logger="CPUManager state checkpoint.CPUManager state memory" cpuSet=""
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.788906  363401 state_mem.go:160] "Updated CPUSet assignments" logger="CPUManager state checkpoint.CPUManager state memory" assignments="{}"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.788944  363401 policy_none.go:51] "Start"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.789059  363401 memory_manager.go:209] "Starting memorymanager" policy="None"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.789159  363401 state_mem.go:39] "Initializing new in-memory state store" logger="Memory Manager state checkpoint"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.790366  363401 state_mem.go:109] "Updated machine memory state" logger="Memory Manager state checkpoint"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.790429  363401 policy_none.go:47] "Start"
+Oct 16 22:43:48 labs-worker kubelet[363401]: E1016 22:43:48.814709  363401 manager.go:550] "Failed to read data from checkpoint" err="checkpoint is not found" checkpoint="kubelet_internal_checkpoint"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.816640  363401 eviction_manager.go:193] "Eviction manager: starting control loop"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.816729  363401 container_log_manager.go:146] "Initializing container log rotate workers" workers=1 monitorPeriod="10s"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.817314  363401 plugin_manager.go:121] "Starting Kubelet Plugin Manager"
+Oct 16 22:43:48 labs-worker kubelet[363401]: E1016 22:43:48.819968  363401 eviction_manager.go:280] "eviction manager: failed to check if we have separate container filesystem. Ignoring." err="no imagefs label for configured runtime"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.919886  363401 kubelet_node_status.go:75] "Attempting to register node" node="labs-worker"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.947878  363401 kubelet_node_status.go:125] "Node was previously registered" node="labs-worker"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.948057  363401 kubelet_node_status.go:78] "Successfully registered node" node="labs-worker"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.948124  363401 kuberuntime_manager.go:2315] "Updating runtime config through cri with podcidr" CIDR="10.244.1.0/24"
+Oct 16 22:43:48 labs-worker kubelet[363401]: I1016 22:43:48.950042  363401 kubelet_network.go:48] "Updating Pod CIDR" originalPodCIDR="" newPodCIDR="10.244.1.0/24"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.055705  363401 pod_container_deletor.go:83] "Container not found in pod's containers" containerID="e8faa8f15c2a1b1e88b1b75eb07630629b6bf05c7b1263bc1d31c52c2a1eaebf"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.055854  363401 pod_container_deletor.go:83] "Container not found in pod's containers" containerID="69e3f0ad9c19c604df2bf696111c539cecdf796579114f3034336b132e0b7de2"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.205740  363401 apiserver.go:51] "Watching apiserver"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.227333  363401 server.go:177] "Pod update broadcasted" podUID="8d9ddeac-520e-4195-b42c-15fe0330c960" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.229152  363401 server.go:177] "Pod update broadcasted" podUID="cd88d3ac-891f-4b1c-a845-81ce2e733184" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.229257  363401 server.go:177] "Pod update broadcasted" podUID="f7ab8be9-18ae-4f7a-a6e8-cb3d6f73a141" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.229602  363401 server.go:177] "Pod update broadcasted" podUID="a7f7d28b-c560-4447-8f52-3fb00cb4b5fc" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.232141  363401 server.go:177] "Pod update broadcasted" podUID="5bf27f30-8d8c-4df3-a4e7-97f80da74b60" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.232444  363401 server.go:177] "Pod update broadcasted" podUID="ea790b3d-2f57-474a-b793-ec385ab85be5" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.232688  363401 server.go:177] "Pod update broadcasted" podUID="6b501e07-2908-41b6-9804-5c523d15e8fb" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.233209  363401 server.go:177] "Pod update broadcasted" podUID="01ea1124-e6b1-4f01-9eb0-591b010c1a9d" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.240601  363401 server.go:177] "Pod update broadcasted" podUID="978c075a-a3a8-4a45-aa63-e8e0752df3d9" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.242074  363401 server.go:190] "Pod removed broadcasted" podUID="5bf27f30-8d8c-4df3-a4e7-97f80da74b60"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.242158  363401 server.go:177] "Pod update broadcasted" podUID="afc8eae8-0c46-4d3f-abc0-d4b97b4a7e1a" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.243391  363401 server.go:177] "Pod update broadcasted" podUID="055f4b4c-eca1-4c3a-b80c-dee219291ba4" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.246201  363401 server.go:177] "Pod update broadcasted" podUID="9072de35-1119-4c53-916b-b6e053a48d27" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.247499  363401 server.go:177] "Pod update broadcasted" podUID="fb4a5af8-9d55-4f7d-84cb-a26e9cf8b0c9" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.248548  363401 server.go:177] "Pod update broadcasted" podUID="79730a8f-3e1c-46c6-b71d-17f58e138afb" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.250081  363401 server.go:177] "Pod update broadcasted" podUID="386d98e8-59e2-448c-b10e-80079334f92a" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.250299  363401 server.go:177] "Pod update broadcasted" podUID="90014e98-156d-441c-86e3-a68008b71181" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.251805  363401 server.go:177] "Pod update broadcasted" podUID="bb921c9a-b5dc-49a2-b203-87213ae61452" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.252664  363401 server.go:177] "Pod update broadcasted" podUID="25efdf22-7f31-4f0f-9dc6-39dba7e80382" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.253958  363401 server.go:177] "Pod update broadcasted" podUID="56bb8617-8077-4140-b538-b2265d333964" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.256305  363401 server.go:177] "Pod update broadcasted" podUID="6319b5f3-9111-4d90-851b-cc1040b4e14f" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.259618  363401 server.go:190] "Pod removed broadcasted" podUID="90014e98-156d-441c-86e3-a68008b71181"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.260233  363401 server.go:177] "Pod update broadcasted" podUID="5cefd41b-480c-4762-abb6-41936b1662a6" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.262812  363401 server.go:177] "Pod update broadcasted" podUID="a1143261-d42a-4029-99d6-8e27b0f26f55" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.264252  363401 server.go:177] "Pod update broadcasted" podUID="cf730114-15fd-4de1-ada7-5843a3dde111" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.265670  363401 server.go:177] "Pod update broadcasted" podUID="6bbf1a43-1f60-45ca-ab3c-cd69ee871ec3" type="ADDED"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.309836  363401 desired_state_of_world_populator.go:154] "Finished populating initial desired state of world"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.317400  363401 reconciler_common.go:251] "operationExecutor.VerifyControllerAttachedVolume started for volume \"root\" (UniqueName: \"kubernetes.io/host-path/cd88d3ac-891f-4b1c-a845-81ce2e733184-root\") pod \"kube-prometheus-prometheus-node-exporter-ccphm\" (UID: \"cd88d3ac-891f-4b1c-a845-81ce2e733184\") " pod="monitoring/kube-prometheus-prometheus-node-exporter-ccphm"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.317544  363401 reconciler_common.go:251] "operationExecutor.VerifyControllerAttachedVolume started for volume \"nri-plugin\" (UniqueName: \"kubernetes.io/host-path/978c075a-a3a8-4a45-aa63-e8e0752df3d9-nri-plugin\") pod \"kindnet-qvtt8\" (UID: \"978c075a-a3a8-4a45-aa63-e8e0752df3d9\") " pod="kube-system/kindnet-qvtt8"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.317610  363401 reconciler_common.go:251] "operationExecutor.VerifyControllerAttachedVolume started for volume \"xtables-lock\" (UniqueName: \"kubernetes.io/host-path/055f4b4c-eca1-4c3a-b80c-dee219291ba4-xtables-lock\") pod \"kube-proxy-5n2nt\" (UID: \"055f4b4c-eca1-4c3a-b80c-dee219291ba4\") " pod="kube-system/kube-proxy-5n2nt"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.321963  363401 reconciler_common.go:251] "operationExecutor.VerifyControllerAttachedVolume started for volume \"pvc-1bb4e1c6-4b34-4247-a7a4-39c4bea2cc18\" (UniqueName: \"kubernetes.io/host-path/a7f7d28b-c560-4447-8f52-3fb00cb4b5fc-pvc-1bb4e1c6-4b34-4247-a7a4-39c4bea2cc18\") pod \"loki-0\" (UID: \"a7f7d28b-c560-4447-8f52-3fb00cb4b5fc\") " pod="monitoring/loki-0"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.322053  363401 reconciler_common.go:251] "operationExecutor.VerifyControllerAttachedVolume started for volume \"lib-modules\" (UniqueName: \"kubernetes.io/host-path/055f4b4c-eca1-4c3a-b80c-dee219291ba4-lib-modules\") pod \"kube-proxy-5n2nt\" (UID: \"055f4b4c-eca1-4c3a-b80c-dee219291ba4\") " pod="kube-system/kube-proxy-5n2nt"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.322216  363401 reconciler_common.go:251] "operationExecutor.VerifyControllerAttachedVolume started for volume \"cni-cfg\" (UniqueName: \"kubernetes.io/host-path/978c075a-a3a8-4a45-aa63-e8e0752df3d9-cni-cfg\") pod \"kindnet-qvtt8\" (UID: \"978c075a-a3a8-4a45-aa63-e8e0752df3d9\") " pod="kube-system/kindnet-qvtt8"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.322408  363401 reconciler_common.go:251] "operationExecutor.VerifyControllerAttachedVolume started for volume \"proc\" (UniqueName: \"kubernetes.io/host-path/cd88d3ac-891f-4b1c-a845-81ce2e733184-proc\") pod \"kube-prometheus-prometheus-node-exporter-ccphm\" (UID: \"cd88d3ac-891f-4b1c-a845-81ce2e733184\") " pod="monitoring/kube-prometheus-prometheus-node-exporter-ccphm"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.322490  363401 reconciler_common.go:251] "operationExecutor.VerifyControllerAttachedVolume started for volume \"xtables-lock\" (UniqueName: \"kubernetes.io/host-path/978c075a-a3a8-4a45-aa63-e8e0752df3d9-xtables-lock\") pod \"kindnet-qvtt8\" (UID: \"978c075a-a3a8-4a45-aa63-e8e0752df3d9\") " pod="kube-system/kindnet-qvtt8"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.322531  363401 reconciler_common.go:251] "operationExecutor.VerifyControllerAttachedVolume started for volume \"lib-modules\" (UniqueName: \"kubernetes.io/host-path/978c075a-a3a8-4a45-aa63-e8e0752df3d9-lib-modules\") pod \"kindnet-qvtt8\" (UID: \"978c075a-a3a8-4a45-aa63-e8e0752df3d9\") " pod="kube-system/kindnet-qvtt8"
+Oct 16 22:43:49 labs-worker kubelet[363401]: I1016 22:43:49.322677  363401 reconciler_common.go:251] "operationExecutor.VerifyControllerAttachedVolume started for volume \"sys\" (UniqueName: \"kubernetes.io/host-path/cd88d3ac-891f-4b1c-a845-81ce2e733184-sys\") pod \"kube-prometheus-prometheus-node-exporter-ccphm\" (UID: \"cd88d3ac-891f-4b1c-a845-81ce2e733184\") " pod="monitoring/kube-prometheus-prometheus-node-exporter-ccphm"
+Oct 16 22:44:19 labs-worker kubelet[363401]: I1016 22:44:19.379965  363401 eviction_manager.go:389] "Eviction manager: attempting to reclaim" resourceName="memory"
+Oct 16 22:44:19 labs-worker kubelet[363401]: I1016 22:44:19.380106  363401 eviction_manager.go:400] "Eviction manager: must evict pod(s) to reclaim" resourceName="memory"
+Oct 16 22:44:19 labs-worker kubelet[363401]: I1016 22:44:19.380824  363401 eviction_manager.go:418] "Eviction manager: pods ranked for eviction" pods=["shop/shop-batch-b58d49df4-5pvt2","monitoring/kube-prometheus-grafana-dc7b5947b-xzw5k","kyverno/kyverno-reports-controller-747bf75f-b485q","monitoring/kube-prometheus-prometheus-node-exporter-ccphm","default/api-deployment-6d7775d978-x8psr","monitoring/karma-74bc9c8d54-ldr8z","local-path-storage/local-path-provisioner-7f69ddb59d-96tp9","kyverno/kyverno-admission-controller-64797677d-xhp5b","shop/shop-worker-55564fcdfc-tkwbm","shop/shop-worker-55564fcdfc-gml7n","shop/shop-worker-55564fcdfc-8lmfv","cnpg-system/cnpg-776959dd78-m6jzn","monitoring/jaeger-6c6cb87794-5phbn","monitoring/alloy-94mfx","monitoring/loki-0","monitoring/alertmanager-kube-prometheus-kube-prome-alertmanager-0","shop/shop-api-7bd4bd66f6-67q2g","shop/shop-api-7bd4bd66f6-q9hlb","kube-system/coredns-646558986c-rkgq5","kube-system/coredns-646558986c-v9xnt","kube-system/kindnet-qvtt8","kube-system/kube-proxy-5n2nt"]
+Oct 16 22:44:19 labs-worker kubelet[363401]: I1016 22:44:19.381605  363401 server.go:177] "Pod update broadcasted" podUID="6bbf1a43-1f60-45ca-ab3c-cd69ee871ec3" type="MODIFIED"
+Oct 16 22:44:20 labs-worker kubelet[363401]: I1016 22:44:20.641986  363401 scope.go:118] "RemoveContainer" containerID="97ee4f6b235190161a2bc524b9cbe1d196c91077b0859ab97f466c54ab04faaf"
+Oct 16 22:44:20 labs-worker kubelet[363401]: I1016 22:44:20.663770  363401 scope.go:118] "RemoveContainer" containerID="97ee4f6b235190161a2bc524b9cbe1d196c91077b0859ab97f466c54ab04faaf"
+Oct 16 22:44:20 labs-worker kubelet[363401]: E1016 22:44:20.664988  363401 remote_runtime.go:657] "ContainerStatus from runtime service failed" err="rpc error: code = NotFound desc = an error occurred when try to find container \"97ee4f6b235190161a2bc524b9cbe1d196c91077b0859ab97f466c54ab04faaf\": not found" containerID="97ee4f6b235190161a2bc524b9cbe1d196c91077b0859ab97f466c54ab04faaf"
+Oct 16 22:44:20 labs-worker kubelet[363401]: I1016 22:44:20.665173  363401 pod_container_deletor.go:56] "DeleteContainer returned error" containerID={"Type":"containerd","ID":"97ee4f6b235190161a2bc524b9cbe1d196c91077b0859ab97f466c54ab04faaf"} err="failed to get container status \"97ee4f6b235190161a2bc524b9cbe1d196c91077b0859ab97f466c54ab04faaf\": rpc error: code = NotFound desc = an error occurred when try to find container \"97ee4f6b235190161a2bc524b9cbe1d196c91077b0859ab97f466c54ab04faaf\": not found"
+Oct 16 22:44:20 labs-worker kubelet[363401]: I1016 22:44:20.686259  363401 ???:1] "http: superfluous response.WriteHeader call from github.com/emicklei/go-restful/v3.(*Response).WriteHeader (response.go:224)"
+Oct 16 22:44:20 labs-worker kubelet[363401]: I1016 22:44:20.758276  363401 server.go:177] "Pod update broadcasted" podUID="6bbf1a43-1f60-45ca-ab3c-cd69ee871ec3" type="MODIFIED"
+Oct 16 22:44:20 labs-worker kubelet[363401]: I1016 22:44:20.758407  363401 eviction_manager.go:658] "Eviction manager: pod is evicted successfully" pod="shop/shop-batch-b58d49df4-5pvt2"
+Oct 16 22:44:20 labs-worker kubelet[363401]: I1016 22:44:20.758442  363401 eviction_manager.go:216] "Eviction manager: pods evicted, waiting for pod to be cleaned up" pods=["shop/shop-batch-b58d49df4-5pvt2"]
+Oct 16 22:44:20 labs-worker kubelet[363401]: I1016 22:44:20.782189  363401 scope.go:118] "RemoveContainer" containerID="97ee4f6b235190161a2bc524b9cbe1d196c91077b0859ab97f466c54ab04faaf"
+Oct 16 22:44:20 labs-worker kubelet[363401]: I1016 22:44:20.783834  363401 pod_container_deletor.go:56] "DeleteContainer returned error" containerID={"Type":"containerd","ID":"97ee4f6b235190161a2bc524b9cbe1d196c91077b0859ab97f466c54ab04faaf"} err="failed to get container status \"97ee4f6b235190161a2bc524b9cbe1d196c91077b0859ab97f466c54ab04faaf\": rpc error: code = NotFound desc = an error occurred when try to find container \"97ee4f6b235190161a2bc524b9cbe1d196c91077b0859ab97f466c54ab04faaf\": not found"
+Oct 16 22:44:21 labs-worker kubelet[363401]: I1016 22:44:21.665682  363401 server.go:190] "Pod removed broadcasted" podUID="6bbf1a43-1f60-45ca-ab3c-cd69ee871ec3"
+Oct 16 22:44:21 labs-worker kubelet[363401]: I1016 22:44:21.758717  363401 eviction_manager.go:472] "Eviction manager: pods successfully cleaned up" pods=["shop/shop-batch-b58d49df4-5pvt2"]
+Oct 16 22:45:00 labs-worker kubelet[363401]: I1016 22:45:00.132989  363401 server.go:177] "Pod update broadcasted" podUID="ebf06e85-4136-4a22-966c-1d7c436f546f" type="ADDED"
+Oct 16 22:45:00 labs-worker kubelet[363401]: I1016 22:45:00.829032  363401 server.go:177] "Pod update broadcasted" podUID="ebf06e85-4136-4a22-966c-1d7c436f546f" type="MODIFIED"
+Oct 16 22:45:01 labs-worker kubelet[363401]: I1016 22:45:01.440250  363401 server.go:177] "Pod update broadcasted" podUID="ebf06e85-4136-4a22-966c-1d7c436f546f" type="MODIFIED"
+Oct 16 22:45:01 labs-worker kubelet[363401]: I1016 22:45:01.464794  363401 pod_startup_latency_tracker.go:144] "Observed pod startup duration" pod="shop/shop-batch-b58d49df4-z8dhg" podStartSLOduration=41.464672205 podStartE2EDuration="41.464672205s" totalImagesPullingTime="0s" totalInitContainerRuntime="0s" isStatefulPod=false podCreationTimestamp="2026-10-16 22:44:20 +0000 UTC" imagePullSessionsCount=0 imagePullSessionsStartsCount=0 observedRunningTime="2026-10-16 22:45:01.464433696 +0000 UTC m=+73.696304662" watchObservedRunningTime="2026-10-16 22:45:01.464672205 +0000 UTC m=+73.696543171"
+Oct 16 22:45:43 labs-worker kubelet[363401]: I1016 22:45:43.266762  363401 eviction_manager.go:389] "Eviction manager: attempting to reclaim" resourceName="memory"
+Oct 16 22:45:43 labs-worker kubelet[363401]: I1016 22:45:43.266883  363401 eviction_manager.go:400] "Eviction manager: must evict pod(s) to reclaim" resourceName="memory"
+Oct 16 22:45:43 labs-worker kubelet[363401]: I1016 22:45:43.267717  363401 eviction_manager.go:418] "Eviction manager: pods ranked for eviction" pods=["shop/shop-batch-b58d49df4-z8dhg","monitoring/kube-prometheus-grafana-dc7b5947b-xzw5k","kyverno/kyverno-reports-controller-747bf75f-b485q","monitoring/kube-prometheus-prometheus-node-exporter-ccphm","default/api-deployment-6d7775d978-x8psr","local-path-storage/local-path-provisioner-7f69ddb59d-96tp9","monitoring/karma-74bc9c8d54-ldr8z","kyverno/kyverno-admission-controller-64797677d-xhp5b","shop/shop-worker-55564fcdfc-tkwbm","shop/shop-worker-55564fcdfc-8lmfv","shop/shop-worker-55564fcdfc-gml7n","cnpg-system/cnpg-776959dd78-m6jzn","monitoring/jaeger-6c6cb87794-5phbn","monitoring/alloy-94mfx","monitoring/loki-0","monitoring/alertmanager-kube-prometheus-kube-prome-alertmanager-0","shop/shop-api-7bd4bd66f6-67q2g","shop/shop-api-7bd4bd66f6-q9hlb","kube-system/coredns-646558986c-rkgq5","kube-system/coredns-646558986c-v9xnt","kube-system/kindnet-qvtt8","kube-system/kube-proxy-5n2nt"]
+Oct 16 22:45:43 labs-worker kubelet[363401]: I1016 22:45:43.268351  363401 server.go:177] "Pod update broadcasted" podUID="ebf06e85-4136-4a22-966c-1d7c436f546f" type="MODIFIED"
+Oct 16 22:45:44 labs-worker kubelet[363401]: I1016 22:45:44.536140  363401 server.go:177] "Pod update broadcasted" podUID="ebf06e85-4136-4a22-966c-1d7c436f546f" type="MODIFIED"
+Oct 16 22:45:44 labs-worker kubelet[363401]: I1016 22:45:44.536248  363401 eviction_manager.go:658] "Eviction manager: pod is evicted successfully" pod="shop/shop-batch-b58d49df4-z8dhg"
+Oct 16 22:45:44 labs-worker kubelet[363401]: I1016 22:45:44.536268  363401 eviction_manager.go:216] "Eviction manager: pods evicted, waiting for pod to be cleaned up" pods=["shop/shop-batch-b58d49df4-z8dhg"]
+Oct 16 22:45:45 labs-worker kubelet[363401]: I1016 22:45:45.151841  363401 scope.go:118] "RemoveContainer" containerID="3d491002c28d71d140d15be0800a9443ba4be60eed33c147fe0f2e4f5adee22e"
+Oct 16 22:45:45 labs-worker kubelet[363401]: I1016 22:45:45.169695  363401 server.go:190] "Pod removed broadcasted" podUID="ebf06e85-4136-4a22-966c-1d7c436f546f"
+Oct 16 22:45:45 labs-worker kubelet[363401]: I1016 22:45:45.172123  363401 scope.go:118] "RemoveContainer" containerID="3d491002c28d71d140d15be0800a9443ba4be60eed33c147fe0f2e4f5adee22e"
+Oct 16 22:45:45 labs-worker kubelet[363401]: E1016 22:45:45.173032  363401 remote_runtime.go:657] "ContainerStatus from runtime service failed" err="rpc error: code = NotFound desc = an error occurred when try to find container \"3d491002c28d71d140d15be0800a9443ba4be60eed33c147fe0f2e4f5adee22e\": not found" containerID="3d491002c28d71d140d15be0800a9443ba4be60eed33c147fe0f2e4f5adee22e"
+Oct 16 22:45:45 labs-worker kubelet[363401]: I1016 22:45:45.173112  363401 pod_container_deletor.go:56] "DeleteContainer returned error" containerID={"Type":"containerd","ID":"3d491002c28d71d140d15be0800a9443ba4be60eed33c147fe0f2e4f5adee22e"} err="failed to get container status \"3d491002c28d71d140d15be0800a9443ba4be60eed33c147fe0f2e4f5adee22e\": rpc error: code = NotFound desc = an error occurred when try to find container \"3d491002c28d71d140d15be0800a9443ba4be60eed33c147fe0f2e4f5adee22e\": not found"
+Oct 16 22:45:45 labs-worker kubelet[363401]: I1016 22:45:45.524835  363401 ???:1] "http: superfluous response.WriteHeader call from github.com/emicklei/go-restful/v3.(*Response).WriteHeader (response.go:224)"
+Oct 16 22:45:45 labs-worker kubelet[363401]: I1016 22:45:45.536444  363401 eviction_manager.go:472] "Eviction manager: pods successfully cleaned up" pods=["shop/shop-batch-b58d49df4-z8dhg"]
+Oct 16 22:45:45 labs-worker kubelet[363401]: I1016 22:45:45.926317  363401 ???:1] "http: superfluous response.WriteHeader call from github.com/emicklei/go-restful/v3.(*Response).WriteHeader (response.go:224)"
+Oct 16 22:45:46 labs-worker kubelet[363401]: I1016 22:45:46.326720  363401 ???:1] "http: superfluous response.WriteHeader call from github.com/emicklei/go-restful/v3.(*Response).WriteHeader (response.go:224)"
+Oct 16 22:45:46 labs-worker kubelet[363401]: I1016 22:45:46.728559  363401 ???:1] "http: superfluous response.WriteHeader call from github.com/emicklei/go-restful/v3.(*Response).WriteHeader (response.go:224)"
+Oct 16 22:45:47 labs-worker kubelet[363401]: I1016 22:45:47.125721  363401 ???:1] "http: superfluous response.WriteHeader call from github.com/emicklei/go-restful/v3.(*Response).WriteHeader (response.go:224)"
+Oct 16 22:45:47 labs-worker kubelet[363401]: I1016 22:45:47.525997  363401 ???:1] "http: superfluous response.WriteHeader call from github.com/emicklei/go-restful/v3.(*Response).WriteHeader (response.go:224)"
+Oct 16 22:45:47 labs-worker kubelet[363401]: I1016 22:45:47.927481  363401 ???:1] "http: superfluous response.WriteHeader call from github.com/emicklei/go-restful/v3.(*Response).WriteHeader (response.go:224)"
+Oct 16 22:45:48 labs-worker kubelet[363401]: I1016 22:45:48.327034  363401 ???:1] "http: superfluous response.WriteHeader call from github.com/emicklei/go-restful/v3.(*Response).WriteHeader (response.go:224)"
+Oct 16 22:45:48 labs-worker kubelet[363401]: I1016 22:45:48.725818  363401 ???:1] "http: superfluous response.WriteHeader call from github.com/emicklei/go-restful/v3.(*Response).WriteHeader (response.go:224)"

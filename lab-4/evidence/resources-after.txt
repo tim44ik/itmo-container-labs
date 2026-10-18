@@ -1,0 +1,13 @@
+NAME                           READY   QOS          CPU_REQ   CPU_LIM   MEM_REQ   MEM_LIM
+shop-api-65bcc7944f-6jn9x      true    Guaranteed   100m      100m      100Mi     100Mi
+shop-api-65bcc7944f-w6qrs      true    Guaranteed   100m      100m      100Mi     100Mi
+shop-api-65bcc7944f-zt7ql      true    Guaranteed   100m      100m      100Mi     100Mi
+shop-batch-7b46b8f8b9-vs599    true    Burstable    50m       250m      96Mi      128Mi
+shop-migrate-v1-9msr5          false   Burstable    50m       300m      64Mi      128Mi
+shop-postgres-1                true    Guaranteed   100m      100m      256Mi     256Mi
+shop-worker-55564fcdfc-22427   true    Burstable    10m       250m      100Mi     100Mi
+shop-worker-55564fcdfc-89cgr   true    Burstable    10m       250m      100Mi     100Mi
+shop-worker-55564fcdfc-8lmfv   true    Burstable    10m       250m      100Mi     100Mi
+shop-worker-55564fcdfc-9tzdh   true    Burstable    10m       250m      100Mi     100Mi
+shop-worker-55564fcdfc-gml7n   true    Burstable    10m       250m      100Mi     100Mi
+shop-worker-55564fcdfc-tkwbm   true    Burstable    10m       250m      100Mi     100Mi

@@ -1,0 +1,14 @@
+{{- $pdb := .Values.api.pdb | default dict }}
+{{- if $pdb.enabled }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ .Release.Name }}-api
+spec:
+  minAvailable: {{ $pdb.minAvailable }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: shop
+      app.kubernetes.io/component: api
+      app.kubernetes.io/instance: {{ .Release.Name | quote }}
+{{- end }}

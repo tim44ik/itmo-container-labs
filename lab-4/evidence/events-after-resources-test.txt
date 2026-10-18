@@ -1,0 +1,40 @@
+29m         Normal    SuccessfulCreate    replicaset/shop-worker-55564fcdfc           Created pod: shop-worker-55564fcdfc-89cgr
+29m         Normal    ScalingReplicaSet   deployment/shop-worker                      Scaled up replica set shop-worker-55564fcdfc from 3 to 4
+29m         Normal    ScalingReplicaSet   deployment/shop-worker                      Scaled down replica set shop-worker-6cf7dd6444 from 4 to 3
+29m         Normal    Pulled              pod/shop-worker-55564fcdfc-89cgr            Container image "docker.io/library/shop-worker:v1" already present on machine and can be accessed by the pod
+29m         Normal    Created             pod/shop-worker-55564fcdfc-89cgr            Container created
+29m         Normal    Started             pod/shop-worker-55564fcdfc-89cgr            Container started
+29m         Normal    Killing             pod/shop-api-7b57446f68-npf4g               Stopping container api
+29m         Normal    ScalingReplicaSet   deployment/shop-api                         Scaled down replica set shop-api-7b57446f68 from 1 to 0
+29m         Normal    SuccessfulDelete    replicaset/shop-api-7b57446f68              Deleted pod: shop-api-7b57446f68-npf4g
+29m         Normal    Scheduled           pod/shop-worker-55564fcdfc-gml7n            Successfully assigned shop/shop-worker-55564fcdfc-gml7n to labs-worker
+29m         Normal    Pulled              pod/shop-worker-55564fcdfc-gml7n            Container image "docker.io/library/shop-worker:v1" already present on machine and can be accessed by the pod
+29m         Normal    SuccessfulDelete    replicaset/shop-worker-6cf7dd6444           Deleted pod: shop-worker-6cf7dd6444-5l5n8
+29m         Normal    ScalingReplicaSet   deployment/shop-worker                      Scaled down replica set shop-worker-6cf7dd6444 from 3 to 2
+29m         Normal    SuccessfulCreate    replicaset/shop-worker-55564fcdfc           Created pod: shop-worker-55564fcdfc-gml7n
+29m         Normal    ScalingReplicaSet   deployment/shop-worker                      Scaled up replica set shop-worker-55564fcdfc from 4 to 5
+29m         Normal    Killing             pod/shop-worker-6cf7dd6444-5l5n8            Stopping container worker
+29m         Normal    Created             pod/shop-worker-55564fcdfc-gml7n            Container created
+29m         Normal    Started             pod/shop-worker-55564fcdfc-gml7n            Container started
+29m         Normal    Killing             pod/shop-worker-6cf7dd6444-bv7j9            Stopping container worker
+29m         Normal    SuccessfulDelete    replicaset/shop-worker-6cf7dd6444           Deleted pod: shop-worker-6cf7dd6444-bv7j9
+29m         Normal    ScalingReplicaSet   deployment/shop-worker                      (combined from similar events): Scaled down replica set shop-worker-6cf7dd6444 from 1 to 0
+29m         Normal    Scheduled           pod/shop-worker-55564fcdfc-9tzdh            Successfully assigned shop/shop-worker-55564fcdfc-9tzdh to labs-control-plane
+29m         Normal    SuccessfulCreate    replicaset/shop-worker-55564fcdfc           Created pod: shop-worker-55564fcdfc-9tzdh
+29m         Normal    Pulled              pod/shop-worker-55564fcdfc-9tzdh            Container image "docker.io/library/shop-worker:v1" already present on machine and can be accessed by the pod
+29m         Normal    Created             pod/shop-worker-55564fcdfc-9tzdh            Container created
+29m         Normal    Started             pod/shop-worker-55564fcdfc-9tzdh            Container started
+29m         Normal    Killing             pod/shop-worker-6cf7dd6444-xn47l            Stopping container worker
+29m         Normal    SuccessfulDelete    replicaset/shop-worker-6cf7dd6444           Deleted pod: shop-worker-6cf7dd6444-xn47l
+29m         Normal    NoPods              poddisruptionbudget/shop-postgres-primary   No matching pods found
+29m         Normal    Scheduled           pod/shop-postgres-1                         Successfully assigned shop/shop-postgres-1 to labs-control-plane
+29m         Normal    Pulled              pod/shop-postgres-1                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.30.1" already present on machine and can be accessed by the pod
+29m         Normal    Created             pod/shop-postgres-1                         Container created
+29m         Normal    Started             pod/shop-postgres-1                         Container started
+28m         Normal    Pulled              pod/shop-postgres-1                         Container image "ghcr.io/cloudnative-pg/postgresql:18.6-system-trixie" already present on machine and can be accessed by the pod
+28m         Normal    Created             pod/shop-postgres-1                         Container created
+28m         Normal    Started             pod/shop-postgres-1                         Container started
+28m         Warning   Unhealthy           pod/shop-postgres-1                         Startup probe failed: HTTP probe failed with statuscode: 500
+13m         Warning   Unhealthy           pod/shop-postgres-1                         Readiness probe failed: Get "https://10.244.0.44:8000/readyz": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+7m31s       Warning   Unhealthy           pod/shop-postgres-1                         Readiness probe failed: Get "https://10.244.0.44:8000/readyz": net/http: request canceled (Client.Timeout exceeded while awaiting headers)
+7m51s       Warning   Unhealthy           pod/shop-postgres-1                         Readiness probe failed: Get "https://10.244.0.44:8000/readyz": context deadline exceeded

@@ -1,0 +1,10 @@
+Вытеснен: shop-batch-7d45758578-dzvj7
+Инициатор: shop-api-8764999c8-9xxvw
+Компонент: api
+Событие: Preempted by pod a5f63309-13de-4606-baf4-f0c5ebdcd2da on node labs-control-plane
+
+Вытеснен: shop-batch-7d45758578-j4j6g
+Инициатор: shop-api-8764999c8-7jttq
+Компонент: api
+Событие: Preempted by pod 0238a17d-a1d8-40a2-bf47-1c4bc4af9169 on node labs-worker
+

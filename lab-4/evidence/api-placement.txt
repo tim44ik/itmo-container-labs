@@ -1,0 +1,4 @@
+NAME                        READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+shop-api-7b57446f68-npf4g   1/1     Running   0          83s   10.244.0.37   labs-control-plane   <none>           <none>
+shop-api-7b57446f68-rngdv   1/1     Running   0          94s   10.244.1.52   labs-worker          <none>           <none>
+shop-api-7b57446f68-zf894   1/1     Running   0          72s   10.244.1.53   labs-worker          <none>           <none>

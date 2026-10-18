@@ -1,0 +1,57 @@
+Name:                 shop-preemption-probe
+Namespace:            shop
+Priority:             10000
+Priority Class Name:  shop-shop-critical
+Service Account:      default
+Node:                 labs-control-plane/172.18.0.3
+Start Time:           Tue, 13 Oct 2026 21:42:35 +0300
+Labels:               app=shop-preemption-probe
+                      app.kubernetes.io/component=preemption-probe
+                      app.kubernetes.io/name=shop
+Annotations:          <none>
+Status:               Running
+SeccompProfile:       RuntimeDefault
+IP:                   10.244.0.54
+IPs:
+  IP:  10.244.0.54
+Containers:
+  probe:
+    Container ID:   containerd://5cf6c7738d93a1d1137965ed623cf7c1c4147a8a63fc55eecb9c46aa223f4f11
+    Image:          docker.io/library/shop-batch:v1
+    Image ID:       docker.io/library/import-2026-10-12@sha256:2923506aa8d244408584d7bb99e8bdcfaa28886da5871e991fb7bb2b709a22a7
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 21:42:35 +0300
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     2
+      memory:  64Mi
+    Requests:
+      cpu:     2
+      memory:  32Mi
+    Environment:
+      CPU_WORKERS:  0
+      MEMORY_MIB:   16
+    Mounts:         <none>
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:                      <none>
+QoS Class:                    Burstable
+Node-Selectors:               <none>
+Tolerations:                  node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  16s   default-scheduler  0/2 nodes are available: 2 Insufficient cpu. preemption: found a potential placement for pod on node labs-control-plane, preempting 1 victims
+  Normal   Scheduled         15s   default-scheduler  Successfully assigned shop/shop-preemption-probe to labs-control-plane
+  Normal   Pulled            15s   kubelet            spec.containers{probe}: Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+  Normal   Created           15s   kubelet            spec.containers{probe}: Container created
+  Normal   Started           15s   kubelet            spec.containers{probe}: Container started

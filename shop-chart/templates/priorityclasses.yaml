@@ -1,0 +1,20 @@
+{{- $priority := .Values.priority | default dict }}
+{{- if $priority.enabled }}
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: {{ printf "%s-%s-critical" .Release.Namespace .Release.Name }}
+value: {{ $priority.highValue }}
+globalDefault: false
+preemptionPolicy: PreemptLowerPriority
+description: "High priority for shop API and PostgreSQL"
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: {{ printf "%s-%s-batch" .Release.Namespace .Release.Name }}
+value: {{ $priority.lowValue }}
+globalDefault: false
+preemptionPolicy: Never
+description: "Low priority for expendable batch workload"
+{{- end }}

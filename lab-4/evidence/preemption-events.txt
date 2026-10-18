@@ -1,0 +1,203 @@
+LAST SEEN   TYPE      REASON              OBJECT                             MESSAGE
+6m45s       Normal    Scheduled           pod/shop-batch-6576b47885-27jvp    Successfully assigned shop/shop-batch-6576b47885-27jvp to labs-control-plane
+6m42s       Normal    Pulled              pod/shop-batch-6576b47885-27jvp    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+6m42s       Normal    Created             pod/shop-batch-6576b47885-27jvp    Container created
+6m41s       Normal    Started             pod/shop-batch-6576b47885-27jvp    Container started
+6m38s       Normal    Killing             pod/shop-batch-6576b47885-27jvp    Stopping container batch
+6m37s       Normal    Killing             pod/shop-batch-6576b47885-8xss5    Stopping container batch
+6m45s       Normal    Scheduled           pod/shop-batch-6576b47885-l2n4h    Successfully assigned shop/shop-batch-6576b47885-l2n4h to labs-control-plane
+6m42s       Normal    Pulled              pod/shop-batch-6576b47885-l2n4h    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+6m42s       Normal    Created             pod/shop-batch-6576b47885-l2n4h    Container created
+6m41s       Normal    Started             pod/shop-batch-6576b47885-l2n4h    Container started
+6m41s       Normal    Killing             pod/shop-batch-6576b47885-l2n4h    Stopping container batch
+6m45s       Normal    Scheduled           pod/shop-batch-6576b47885-sqv56    Successfully assigned shop/shop-batch-6576b47885-sqv56 to labs-worker
+6m43s       Normal    Pulled              pod/shop-batch-6576b47885-sqv56    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+6m42s       Normal    Created             pod/shop-batch-6576b47885-sqv56    Container created
+6m41s       Normal    Started             pod/shop-batch-6576b47885-sqv56    Container started
+6m41s       Normal    Killing             pod/shop-batch-6576b47885-sqv56    Stopping container batch
+6m45s       Normal    Scheduled           pod/shop-batch-6576b47885-v7fcq    Successfully assigned shop/shop-batch-6576b47885-v7fcq to labs-worker
+6m42s       Normal    Pulled              pod/shop-batch-6576b47885-v7fcq    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+6m42s       Normal    Created             pod/shop-batch-6576b47885-v7fcq    Container created
+6m41s       Normal    Started             pod/shop-batch-6576b47885-v7fcq    Container started
+6m41s       Normal    Killing             pod/shop-batch-6576b47885-v7fcq    Stopping container batch
+6m45s       Normal    Scheduled           pod/shop-batch-6576b47885-ws7pf    Successfully assigned shop/shop-batch-6576b47885-ws7pf to labs-control-plane
+6m43s       Normal    Pulled              pod/shop-batch-6576b47885-ws7pf    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+6m43s       Normal    Created             pod/shop-batch-6576b47885-ws7pf    Container created
+6m42s       Normal    Started             pod/shop-batch-6576b47885-ws7pf    Container started
+6m38s       Normal    Killing             pod/shop-batch-6576b47885-ws7pf    Stopping container batch
+6m45s       Normal    Scheduled           pod/shop-batch-6576b47885-zs5mn    Successfully assigned shop/shop-batch-6576b47885-zs5mn to labs-worker
+6m43s       Normal    Pulled              pod/shop-batch-6576b47885-zs5mn    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+6m42s       Normal    Created             pod/shop-batch-6576b47885-zs5mn    Container created
+6m41s       Normal    Started             pod/shop-batch-6576b47885-zs5mn    Container started
+6m41s       Normal    Killing             pod/shop-batch-6576b47885-zs5mn    Stopping container batch
+6m45s       Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-l2n4h
+6m45s       Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-ws7pf
+6m45s       Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-zs5mn
+6m45s       Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-27jvp
+6m45s       Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-v7fcq
+6m45s       Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-sqv56
+6m44s       Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-zs5mn
+6m42s       Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-sqv56
+6m42s       Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-l2n4h
+6m42s       Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-v7fcq
+6m38s       Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-27jvp
+6m38s       Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-ws7pf
+6m37s       Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-8xss5
+6m42s       Normal    Scheduled           pod/shop-batch-7d45758578-6bg89    Successfully assigned shop/shop-batch-7d45758578-6bg89 to labs-control-plane
+6m41s       Normal    Pulled              pod/shop-batch-7d45758578-6bg89    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+6m41s       Normal    Created             pod/shop-batch-7d45758578-6bg89    Container created
+6m38s       Normal    Started             pod/shop-batch-7d45758578-6bg89    Container started
+6m42s       Normal    Scheduled           pod/shop-batch-7d45758578-8fztf    Successfully assigned shop/shop-batch-7d45758578-8fztf to labs-worker
+6m41s       Normal    Pulled              pod/shop-batch-7d45758578-8fztf    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+6m40s       Normal    Created             pod/shop-batch-7d45758578-8fztf    Container created
+6m38s       Normal    Started             pod/shop-batch-7d45758578-8fztf    Container started
+6m41s       Normal    Scheduled           pod/shop-batch-7d45758578-f9kjn    Successfully assigned shop/shop-batch-7d45758578-f9kjn to labs-control-plane
+6m39s       Normal    Pulled              pod/shop-batch-7d45758578-f9kjn    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+6m39s       Normal    Created             pod/shop-batch-7d45758578-f9kjn    Container created
+6m37s       Normal    Started             pod/shop-batch-7d45758578-f9kjn    Container started
+69s         Warning   FailedScheduling    pod/shop-batch-7d45758578-hm8bw    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+6m45s       Normal    Scheduled           pod/shop-batch-7d45758578-nmmtt    Successfully assigned shop/shop-batch-7d45758578-nmmtt to labs-worker
+6m43s       Normal    Pulled              pod/shop-batch-7d45758578-nmmtt    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+6m43s       Normal    Created             pod/shop-batch-7d45758578-nmmtt    Container created
+6m42s       Normal    Started             pod/shop-batch-7d45758578-nmmtt    Container started
+6m44s       Normal    Scheduled           pod/shop-batch-7d45758578-xlvl9    Successfully assigned shop/shop-batch-7d45758578-xlvl9 to labs-worker
+6m43s       Normal    Pulled              pod/shop-batch-7d45758578-xlvl9    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+6m43s       Normal    Created             pod/shop-batch-7d45758578-xlvl9    Container created
+6m42s       Normal    Started             pod/shop-batch-7d45758578-xlvl9    Container started
+6m45s       Normal    Scheduled           pod/shop-batch-7d45758578-xtw4r    Successfully assigned shop/shop-batch-7d45758578-xtw4r to labs-control-plane
+6m43s       Normal    Pulled              pod/shop-batch-7d45758578-xtw4r    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+6m43s       Normal    Created             pod/shop-batch-7d45758578-xtw4r    Container created
+6m42s       Normal    Started             pod/shop-batch-7d45758578-xtw4r    Container started
+6m45s       Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-nmmtt
+6m45s       Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-xtw4r
+6m44s       Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-xlvl9
+6m42s       Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-6bg89
+6m42s       Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-8fztf
+6m42s       Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-f9kjn
+6m38s       Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-hm8bw
+6m45s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-6576b47885 from 1 to 7
+6m45s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-7d45758578 from 0 to 2
+6m45s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled down replica set shop-batch-6576b47885 from 7 to 6
+6m44s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-7d45758578 from 2 to 3
+6m42s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled down replica set shop-batch-6576b47885 from 6 to 5
+6m42s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-7d45758578 from 3 to 4
+6m42s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled down replica set shop-batch-6576b47885 from 5 to 4
+6m42s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-7d45758578 from 4 to 5
+6m42s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled down replica set shop-batch-6576b47885 from 4 to 3
+6m37s       Normal    ScalingReplicaSet   deployment/shop-batch              (combined from similar events): Scaled down replica set shop-batch-6576b47885 from 1 to 0
+0s          Warning   FailedScheduling    pod/shop-preemption-probe          0/2 nodes are available: 2 Insufficient cpu. preemption: found a potential placement for pod on node labs-control-plane, preempting 1 victims
+0s          Normal    Preempted           pod/shop-batch-7d45758578-f9kjn    Preempted by pod c7254850-8537-4578-895a-8e89304e479e on node labs-control-plane
+0s          Normal    Killing             pod/shop-batch-7d45758578-f9kjn    Stopping container batch
+0s          Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-kg8t8
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-kg8t8    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-hm8bw    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-kg8t8    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Normal    Scheduled           pod/shop-preemption-probe          Successfully assigned shop/shop-preemption-probe to labs-control-plane
+0s          Normal    Pulled              pod/shop-preemption-probe          Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+0s          Normal    Created             pod/shop-preemption-probe          Container created
+0s          Normal    Started             pod/shop-preemption-probe          Container started
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-hm8bw    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-kg8t8    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-hm8bw    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-kg8t8    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-hm8bw    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-kg8t8    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-hm8bw    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-kg8t8    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-hm8bw    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-kg8t8    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-hm8bw    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-kg8t8    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-hm8bw    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-kg8t8    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-hm8bw    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-kg8t8    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-hm8bw    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-kg8t8    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-hm8bw    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+0s          Warning   FailedScheduling    pod/shop-batch-7d45758578-kg8t8    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+61m         Normal    Scheduled           pod/shop-batch-6576b47885-27jvp    Successfully assigned shop/shop-batch-6576b47885-27jvp to labs-control-plane
+60m         Normal    Pulled              pod/shop-batch-6576b47885-27jvp    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+60m         Normal    Created             pod/shop-batch-6576b47885-27jvp    Container created
+60m         Normal    Started             pod/shop-batch-6576b47885-27jvp    Container started
+60m         Normal    Killing             pod/shop-batch-6576b47885-27jvp    Stopping container batch
+60m         Normal    Killing             pod/shop-batch-6576b47885-8xss5    Stopping container batch
+61m         Normal    Scheduled           pod/shop-batch-6576b47885-l2n4h    Successfully assigned shop/shop-batch-6576b47885-l2n4h to labs-control-plane
+60m         Normal    Pulled              pod/shop-batch-6576b47885-l2n4h    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+60m         Normal    Created             pod/shop-batch-6576b47885-l2n4h    Container created
+60m         Normal    Started             pod/shop-batch-6576b47885-l2n4h    Container started
+60m         Normal    Killing             pod/shop-batch-6576b47885-l2n4h    Stopping container batch
+61m         Normal    Scheduled           pod/shop-batch-6576b47885-sqv56    Successfully assigned shop/shop-batch-6576b47885-sqv56 to labs-worker
+60m         Normal    Pulled              pod/shop-batch-6576b47885-sqv56    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+60m         Normal    Created             pod/shop-batch-6576b47885-sqv56    Container created
+60m         Normal    Started             pod/shop-batch-6576b47885-sqv56    Container started
+60m         Normal    Killing             pod/shop-batch-6576b47885-sqv56    Stopping container batch
+61m         Normal    Scheduled           pod/shop-batch-6576b47885-v7fcq    Successfully assigned shop/shop-batch-6576b47885-v7fcq to labs-worker
+60m         Normal    Pulled              pod/shop-batch-6576b47885-v7fcq    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+60m         Normal    Created             pod/shop-batch-6576b47885-v7fcq    Container created
+60m         Normal    Started             pod/shop-batch-6576b47885-v7fcq    Container started
+60m         Normal    Killing             pod/shop-batch-6576b47885-v7fcq    Stopping container batch
+61m         Normal    Scheduled           pod/shop-batch-6576b47885-ws7pf    Successfully assigned shop/shop-batch-6576b47885-ws7pf to labs-control-plane
+60m         Normal    Pulled              pod/shop-batch-6576b47885-ws7pf    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+60m         Normal    Created             pod/shop-batch-6576b47885-ws7pf    Container created
+60m         Normal    Started             pod/shop-batch-6576b47885-ws7pf    Container started
+60m         Normal    Killing             pod/shop-batch-6576b47885-ws7pf    Stopping container batch
+61m         Normal    Scheduled           pod/shop-batch-6576b47885-zs5mn    Successfully assigned shop/shop-batch-6576b47885-zs5mn to labs-worker
+60m         Normal    Pulled              pod/shop-batch-6576b47885-zs5mn    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+60m         Normal    Created             pod/shop-batch-6576b47885-zs5mn    Container created
+60m         Normal    Started             pod/shop-batch-6576b47885-zs5mn    Container started
+60m         Normal    Killing             pod/shop-batch-6576b47885-zs5mn    Stopping container batch
+61m         Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-l2n4h
+61m         Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-ws7pf
+61m         Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-zs5mn
+61m         Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-27jvp
+61m         Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-v7fcq
+61m         Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-sqv56
+60m         Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-zs5mn
+60m         Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-sqv56
+60m         Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-l2n4h
+60m         Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-v7fcq
+60m         Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-27jvp
+60m         Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-ws7pf
+60m         Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-8xss5
+60m         Normal    Scheduled           pod/shop-batch-7d45758578-6bg89    Successfully assigned shop/shop-batch-7d45758578-6bg89 to labs-control-plane
+60m         Normal    Pulled              pod/shop-batch-7d45758578-6bg89    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+60m         Normal    Created             pod/shop-batch-7d45758578-6bg89    Container created
+60m         Normal    Started             pod/shop-batch-7d45758578-6bg89    Container started
+60m         Normal    Scheduled           pod/shop-batch-7d45758578-8fztf    Successfully assigned shop/shop-batch-7d45758578-8fztf to labs-worker
+60m         Normal    Pulled              pod/shop-batch-7d45758578-8fztf    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+60m         Normal    Created             pod/shop-batch-7d45758578-8fztf    Container created
+60m         Normal    Started             pod/shop-batch-7d45758578-8fztf    Container started
+60m         Normal    Scheduled           pod/shop-batch-7d45758578-f9kjn    Successfully assigned shop/shop-batch-7d45758578-f9kjn to labs-control-plane
+60m         Normal    Pulled              pod/shop-batch-7d45758578-f9kjn    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+60m         Normal    Created             pod/shop-batch-7d45758578-f9kjn    Container created
+60m         Normal    Started             pod/shop-batch-7d45758578-f9kjn    Container started
+61m         Normal    Scheduled           pod/shop-batch-7d45758578-nmmtt    Successfully assigned shop/shop-batch-7d45758578-nmmtt to labs-worker
+60m         Normal    Pulled              pod/shop-batch-7d45758578-nmmtt    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+60m         Normal    Created             pod/shop-batch-7d45758578-nmmtt    Container created
+60m         Normal    Started             pod/shop-batch-7d45758578-nmmtt    Container started
+60m         Normal    Scheduled           pod/shop-batch-7d45758578-xlvl9    Successfully assigned shop/shop-batch-7d45758578-xlvl9 to labs-worker
+60m         Normal    Pulled              pod/shop-batch-7d45758578-xlvl9    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+60m         Normal    Created             pod/shop-batch-7d45758578-xlvl9    Container created
+60m         Normal    Started             pod/shop-batch-7d45758578-xlvl9    Container started
+61m         Normal    Scheduled           pod/shop-batch-7d45758578-xtw4r    Successfully assigned shop/shop-batch-7d45758578-xtw4r to labs-control-plane
+60m         Normal    Pulled              pod/shop-batch-7d45758578-xtw4r    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+60m         Normal    Created             pod/shop-batch-7d45758578-xtw4r    Container created
+60m         Normal    Started             pod/shop-batch-7d45758578-xtw4r    Container started
+61m         Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-nmmtt
+61m         Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-xtw4r
+60m         Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-xlvl9
+60m         Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-6bg89
+60m         Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-8fztf
+60m         Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-f9kjn
+60m         Normal    SuccessfulCreate    replicaset/shop-batch-7d45758578   Created pod: shop-batch-7d45758578-hm8bw
+61m         Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-6576b47885 from 1 to 7
+61m         Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-7d45758578 from 0 to 2
+61m         Normal    ScalingReplicaSet   deployment/shop-batch              Scaled down replica set shop-batch-6576b47885 from 7 to 6
+60m         Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-7d45758578 from 2 to 3
+60m         Normal    ScalingReplicaSet   deployment/shop-batch              Scaled down replica set shop-batch-6576b47885 from 6 to 5
+60m         Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-7d45758578 from 3 to 4
+60m         Normal    ScalingReplicaSet   deployment/shop-batch              Scaled down replica set shop-batch-6576b47885 from 5 to 4
+60m         Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-7d45758578 from 4 to 5
+60m         Normal    ScalingReplicaSet   deployment/shop-batch              Scaled down replica set shop-batch-6576b47885 from 4 to 3
+60m         Normal    ScalingReplicaSet   deployment/shop-batch              (combined from similar events): Scaled down replica set shop-batch-6576b47885 from 1 to 0

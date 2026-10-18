@@ -1,0 +1,17 @@
+[
+    {
+        "labelSelector": {
+            "matchLabels": {
+                "app.kubernetes.io/component": "api",
+                "app.kubernetes.io/instance": "shop",
+                "app.kubernetes.io/name": "shop"
+            }
+        },
+        "matchLabelKeys": [
+            "pod-template-hash"
+        ],
+        "maxSkew": 1,
+        "topologyKey": "kubernetes.io/hostname",
+        "whenUnsatisfiable": "DoNotSchedule"
+    }
+]

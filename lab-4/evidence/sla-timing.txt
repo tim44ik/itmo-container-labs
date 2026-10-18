@@ -1,0 +1,5 @@
+k6 start: 2026-10-15T20:27:47.94301114Z
+Probe created: 2026-10-15T20:28:49Z
+Probe UID: 8bb06be1-8d01-4d2e-8258-c1d9e4e9e055
+k6 end: 2026-10-15T20:42:49.219514712Z
+Exit code: 0

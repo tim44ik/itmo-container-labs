@@ -1,0 +1,71 @@
+LAST SEEN   TYPE      REASON              OBJECT                             MESSAGE
+11m         Warning   FailedScheduling    pod/shop-batch-7d45758578-cz9ck    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+11m         Warning   FailedScheduling    pod/shop-batch-7d45758578-qgzrf    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+11m         Warning   FailedScheduling    pod/shop-batch-7d45758578-5dtln    0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+9m19s       Normal    Scheduled           pod/shop-batch-6576b47885-s28nh    Successfully assigned shop/shop-batch-6576b47885-s28nh to labs-control-plane
+9m19s       Normal    SuccessfulDelete    replicaset/shop-batch-7d45758578   Deleted pod: shop-batch-7d45758578-tj4hd
+9m19s       Normal    Killing             pod/shop-batch-7d45758578-gxmf7    Stopping container batch
+9m19s       Normal    SuccessfulCreate    replicaset/shop-batch-6576b47885   Created pod: shop-batch-6576b47885-s28nh
+9m19s       Normal    Killing             pod/shop-batch-7d45758578-gzwk7    Stopping container batch
+9m19s       Normal    Killing             pod/shop-batch-7d45758578-tj4hd    Stopping container batch
+9m19s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled down replica set shop-batch-7d45758578 from 7 to 1
+9m19s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-6576b47885 from 0 to 1
+9m19s       Normal    SuccessfulDelete    replicaset/shop-batch-7d45758578   Deleted pod: shop-batch-7d45758578-gzwk7
+9m19s       Normal    SuccessfulCreate    replicaset/shop-api-7bd4bd66f6     Created pod: shop-api-7bd4bd66f6-m8q4j
+9m19s       Normal    ScalingReplicaSet   deployment/shop-api                Scaled up replica set shop-api-7bd4bd66f6 from 0 to 1
+9m19s       Normal    SuccessfulDelete    replicaset/shop-batch-7d45758578   Deleted pod: shop-batch-7d45758578-5dtln
+9m19s       Normal    SuccessfulDelete    replicaset/shop-batch-7d45758578   Deleted pod: shop-batch-7d45758578-gxmf7
+9m19s       Normal    SuccessfulDelete    replicaset/shop-batch-7d45758578   Deleted pod: shop-batch-7d45758578-cz9ck
+9m19s       Normal    SuccessfulDelete    replicaset/shop-batch-7d45758578   Deleted pod: shop-batch-7d45758578-qgzrf
+9m19s       Normal    Scheduled           pod/shop-api-7bd4bd66f6-m8q4j      Successfully assigned shop/shop-api-7bd4bd66f6-m8q4j to labs-control-plane
+9m17s       Normal    Pulled              pod/shop-batch-6576b47885-s28nh    Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+9m17s       Normal    Pulled              pod/shop-api-7bd4bd66f6-m8q4j      Container image "docker.io/library/shop-api:v2" already present on machine and can be accessed by the pod
+9m17s       Normal    Created             pod/shop-api-7bd4bd66f6-m8q4j      Container created
+9m17s       Normal    Created             pod/shop-batch-6576b47885-s28nh    Container created
+9m16s       Normal    Killing             pod/shop-batch-7d45758578-r5tbc    Stopping container batch
+9m16s       Normal    Started             pod/shop-batch-6576b47885-s28nh    Container started
+9m16s       Normal    SuccessfulDelete    replicaset/shop-batch-7d45758578   Deleted pod: shop-batch-7d45758578-r5tbc
+9m16s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled down replica set shop-batch-7d45758578 from 1 to 0
+9m15s       Normal    Started             pod/shop-api-7bd4bd66f6-m8q4j      Container started
+9m4s        Normal    Killing             pod/shop-api-8764999c8-7jttq       Stopping container api
+9m4s        Normal    ScalingReplicaSet   deployment/shop-api                Scaled up replica set shop-api-7bd4bd66f6 from 1 to 2
+9m4s        Normal    SuccessfulCreate    replicaset/shop-api-7bd4bd66f6     Created pod: shop-api-7bd4bd66f6-67q2g
+9m4s        Normal    ScalingReplicaSet   deployment/shop-api                Scaled down replica set shop-api-8764999c8 from 3 to 2
+9m4s        Normal    SuccessfulDelete    replicaset/shop-api-8764999c8      Deleted pod: shop-api-8764999c8-7jttq
+9m4s        Normal    Scheduled           pod/shop-api-7bd4bd66f6-67q2g      Successfully assigned shop/shop-api-7bd4bd66f6-67q2g to labs-worker
+9m2s        Normal    Created             pod/shop-api-7bd4bd66f6-67q2g      Container created
+9m2s        Normal    Pulled              pod/shop-api-7bd4bd66f6-67q2g      Container image "docker.io/library/shop-api:v2" already present on machine and can be accessed by the pod
+9m          Normal    Started             pod/shop-api-7bd4bd66f6-67q2g      Container started
+8m49s       Normal    Killing             pod/shop-api-8764999c8-vp4cn       Stopping container api
+8m49s       Normal    Scheduled           pod/shop-api-7bd4bd66f6-q9hlb      Successfully assigned shop/shop-api-7bd4bd66f6-q9hlb to labs-worker
+8m49s       Normal    ScalingReplicaSet   deployment/shop-api                Scaled down replica set shop-api-8764999c8 from 2 to 1
+8m49s       Normal    ScalingReplicaSet   deployment/shop-api                Scaled up replica set shop-api-7bd4bd66f6 from 2 to 3
+8m49s       Normal    SuccessfulDelete    replicaset/shop-api-8764999c8      Deleted pod: shop-api-8764999c8-vp4cn
+8m49s       Normal    SuccessfulCreate    replicaset/shop-api-7bd4bd66f6     Created pod: shop-api-7bd4bd66f6-q9hlb
+8m48s       Normal    Created             pod/shop-api-7bd4bd66f6-q9hlb      Container created
+8m48s       Normal    Pulled              pod/shop-api-7bd4bd66f6-q9hlb      Container image "docker.io/library/shop-api:v2" already present on machine and can be accessed by the pod
+8m46s       Normal    Started             pod/shop-api-7bd4bd66f6-q9hlb      Container started
+8m35s       Normal    ScalingReplicaSet   deployment/shop-api                Scaled down replica set shop-api-8764999c8 from 1 to 0
+8m35s       Normal    SuccessfulDelete    replicaset/shop-api-8764999c8      Deleted pod: shop-api-8764999c8-9xxvw
+8m35s       Normal    Killing             pod/shop-api-8764999c8-9xxvw       Stopping container api
+5m40s       Normal    SuccessfulCreate    replicaset/shop-batch-b58d49df4    Created pod: shop-batch-b58d49df4-5pvt2
+5m40s       Normal    SuccessfulDelete    replicaset/shop-batch-6576b47885   Deleted pod: shop-batch-6576b47885-s28nh
+5m40s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-b58d49df4 from 0 to 1
+5m40s       Normal    ScalingReplicaSet   deployment/shop-batch              Scaled down replica set shop-batch-6576b47885 from 1 to 0
+5m40s       Normal    Killing             pod/shop-batch-6576b47885-s28nh    Stopping container batch
+5m40s       Normal    Scheduled           pod/shop-batch-b58d49df4-5pvt2     Successfully assigned shop/shop-batch-b58d49df4-5pvt2 to labs-worker
+5m39s       Normal    Created             pod/shop-batch-b58d49df4-5pvt2     Container created
+5m39s       Normal    Pulled              pod/shop-batch-b58d49df4-5pvt2     Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+5m38s       Normal    Started             pod/shop-batch-b58d49df4-5pvt2     Container started
+89s         Warning   Evicted             pod/shop-batch-b58d49df4-5pvt2     The node was low on resource: memory. Threshold quantity: 5900Mi, available: 5801216Ki. Container batch was using 530488Ki, request is 32Mi, has larger consumption of memory.
+89s         Normal    Killing             pod/shop-batch-b58d49df4-5pvt2     Stopping container batch
+88s         Warning   FailedScheduling    pod/shop-batch-b58d49df4-z8dhg     0/2 nodes are available: 1 node(s) didn't match Pod's node affinity/selector, 1 node(s) had untolerated taint(s). preemption: not eligible due to preemptionPolicy=Never.
+88s         Normal    SuccessfulCreate    replicaset/shop-batch-b58d49df4    Created pod: shop-batch-b58d49df4-z8dhg
+48s         Normal    Created             pod/shop-batch-b58d49df4-z8dhg     Container created
+48s         Normal    Pulled              pod/shop-batch-b58d49df4-z8dhg     Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+48s         Normal    Scheduled           pod/shop-batch-b58d49df4-z8dhg     Successfully assigned shop/shop-batch-b58d49df4-z8dhg to labs-worker
+47s         Normal    Started             pod/shop-batch-b58d49df4-z8dhg     Container started
+5s          Normal    Killing             pod/shop-batch-b58d49df4-z8dhg     Stopping container batch
+5s          Warning   Evicted             pod/shop-batch-b58d49df4-z8dhg     The node was low on resource: memory. Threshold quantity: 5900Mi, available: 5789716Ki. Container batch was using 530124Ki, request is 32Mi, has larger consumption of memory.
+4s          Normal    SuccessfulCreate    replicaset/shop-batch-b58d49df4    Created pod: shop-batch-b58d49df4-j9zwz
+4s          Warning   FailedScheduling    pod/shop-batch-b58d49df4-j9zwz     0/2 nodes are available: 1 node(s) didn't match Pod's node affinity/selector, 1 node(s) had untolerated taint(s). preemption: not eligible due to preemptionPolicy=Never.
