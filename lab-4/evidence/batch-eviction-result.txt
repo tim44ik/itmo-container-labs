@@ -1,0 +1,6 @@
+Pod: shop-batch-eviction
+Priority: -1000
+QoS: Burstable
+Phase: Failed
+Reason: Evicted
+Message: The node was low on resource: memory. Threshold quantity: 5850Mi, available: 5718100Ki. Container batch was using 530244Ki, request is 32Mi, has larger consumption of memory. 

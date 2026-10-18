@@ -1,0 +1,63 @@
+{{- if .Values.batch.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-batch
+  labels:
+    app: shop-batch
+    app.kubernetes.io/name: shop
+    app.kubernetes.io/component: batch
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+spec:
+  replicas: {{ .Values.batch.replicas }}
+  revisionHistoryLimit: 3
+  {{- with .Values.batch.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: shop
+      app.kubernetes.io/component: batch
+      app.kubernetes.io/instance: {{ .Release.Name | quote }}
+  template:
+    metadata:
+      labels:
+        app: shop-batch
+        app.kubernetes.io/name: shop
+        app.kubernetes.io/component: batch
+        app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    spec:
+      {{- if (.Values.priority | default dict).enabled }}
+      priorityClassName: {{ printf "%s-%s-batch" .Release.Namespace .Release.Name | quote }}
+      {{- end }}
+      {{- with .Values.batch.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: batch
+          image: {{ printf "%s:%s" .Values.batch.image.repository .Values.batch.image.tag | quote }}
+          imagePullPolicy: {{ .Values.batch.image.pullPolicy }}
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          env:
+            - name: CPU_WORKERS
+              value: {{ .Values.batch.cpuWorkers | quote }}
+            - name: MEMORY_MIB
+              value: {{ .Values.batch.memoryMiB | quote }}
+          resources:
+            {{- toYaml .Values.batch.resources | nindent 12 }}
+{{- end }}

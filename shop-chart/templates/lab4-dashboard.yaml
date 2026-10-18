@@ -1,0 +1,15 @@
+{{- $dashboard := .Values.lab4Dashboard | default dict }}
+{{- if $dashboard.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-lab4-dashboard
+  namespace: {{ .Release.Namespace }}
+  labels:
+    grafana_dashboard: "1"
+    app.kubernetes.io/name: shop
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+data:
+  shop-lab4.json: |
+{{ .Files.Get "dashboards/shop-lab4.json" | indent 4 }}
+{{- end }}

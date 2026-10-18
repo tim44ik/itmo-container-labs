@@ -1,0 +1,175 @@
+Name:               labs-control-plane
+Roles:              control-plane
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=labs-control-plane
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Thu, 08 Oct 2026 22:41:21 +0300
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  labs-control-plane
+  AcquireTime:     <unset>
+  RenewTime:       Tue, 13 Oct 2026 18:53:35 +0300
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Tue, 13 Oct 2026 18:49:16 +0300   Thu, 08 Oct 2026 22:41:20 +0300   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Tue, 13 Oct 2026 18:49:16 +0300   Thu, 08 Oct 2026 22:41:20 +0300   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Tue, 13 Oct 2026 18:49:16 +0300   Thu, 08 Oct 2026 22:41:20 +0300   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Tue, 13 Oct 2026 18:49:16 +0300   Thu, 08 Oct 2026 22:41:43 +0300   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:  172.18.0.3
+  Hostname:    labs-control-plane
+Capacity:
+  cpu:                12
+  ephemeral-storage:  1081101176832
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             7797968Ki
+  pods:               110
+Allocatable:
+  cpu:                12
+  ephemeral-storage:  1081101176832
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             7797968Ki
+  pods:               110
+System Info:
+  Machine ID:                 557b30e9a25746898998d88046025545
+  System UUID:                557b30e9a25746898998d88046025545
+  Boot ID:                    81b124e1-0efe-46f2-bd98-39f7ad7afae0
+  Kernel Version:             6.6.87.2-microsoft-standard-WSL2
+  OS Image:                   Debian GNU/Linux 13 (trixie)
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://2.3.4
+  Kubelet Version:            v1.37.0
+PodCIDR:                      10.244.0.0/24
+PodCIDRs:                     10.244.0.0/24
+ProviderID:                   kind://docker/labs/labs-control-plane
+Non-terminated Pods:          (19 in total)
+  Namespace                   Name                                                    CPU Requests  CPU Limits   Memory Requests  Memory Limits  Age
+  ---------                   ----                                                    ------------  ----------   ---------------  -------------  ---
+  kube-system                 etcd-labs-control-plane                                 100m (0%)     0 (0%)       100Mi (1%)       0 (0%)         4d20h
+  kube-system                 kindnet-l7hm9                                           100m (0%)     500m (4%)    50Mi (0%)        256Mi (3%)     2d19h
+  kube-system                 kube-apiserver-labs-control-plane                       250m (2%)     0 (0%)       0 (0%)           0 (0%)         4d20h
+  kube-system                 kube-controller-manager-labs-control-plane              200m (1%)     0 (0%)       0 (0%)           0 (0%)         4d20h
+  kube-system                 kube-proxy-dljjd                                        50m (0%)      500m (4%)    64Mi (0%)        256Mi (3%)     2d19h
+  kube-system                 kube-scheduler-labs-control-plane                       100m (0%)     0 (0%)       0 (0%)           0 (0%)         4d20h
+  kyverno                     kyverno-background-controller-69444bdf4f-f2jdx          100m (0%)     500m (4%)    64Mi (0%)        128Mi (1%)     2d19h
+  kyverno                     kyverno-cleanup-controller-5c8fd489d5-pkqvt             100m (0%)     500m (4%)    64Mi (0%)        128Mi (1%)     2d19h
+  monitoring                  alloy-jr5fn                                             60m (0%)      700m (5%)    178Mi (2%)       384Mi (5%)     2d19h
+  monitoring                  kube-prometheus-kube-prome-operator-78459d876d-26745    100m (0%)     500m (4%)    128Mi (1%)       512Mi (6%)     2d19h
+  monitoring                  kube-prometheus-kube-state-metrics-5b6d5c7b5-nrr86      50m (0%)      300m (2%)    64Mi (0%)        256Mi (3%)     2d19h
+  monitoring                  kube-prometheus-prometheus-node-exporter-2gkm9          50m (0%)      200m (1%)    32Mi (0%)        128Mi (1%)     2d19h
+  monitoring                  loki-gateway-7c68759b77-swlbg                           75m (0%)      500m (4%)    96Mi (1%)        384Mi (5%)     2d19h
+  monitoring                  prometheus-kube-prometheus-kube-prome-prometheus-0      225m (1%)     1200m (10%)  544Mi (7%)       1664Mi (21%)   2d19h
+  shop                        shop-api-7bd4bd66f6-f6hfz                               100m (0%)     100m (0%)    100Mi (1%)       100Mi (1%)     12m
+  shop                        shop-postgres-1                                         1 (8%)        1 (8%)       256Mi (3%)       256Mi (3%)     3m30s
+  shop                        shop-worker-55564fcdfc-22427                            10m (0%)      250m (2%)    100Mi (1%)       100Mi (1%)     85m
+  shop                        shop-worker-55564fcdfc-89cgr                            10m (0%)      250m (2%)    100Mi (1%)       100Mi (1%)     85m
+  shop                        shop-worker-55564fcdfc-9tzdh                            10m (0%)      250m (2%)    100Mi (1%)       100Mi (1%)     84m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests      Limits
+  --------           --------      ------
+  cpu                2690m (22%)   7250m (60%)
+  memory             2040Mi (26%)  4752Mi (62%)
+  ephemeral-storage  0 (0%)        0 (0%)
+  hugepages-1Gi      0 (0%)        0 (0%)
+  hugepages-2Mi      0 (0%)        0 (0%)
+
+
+Name:               labs-worker
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=labs-worker
+                    kubernetes.io/os=linux
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Thu, 08 Oct 2026 22:41:34 +0300
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  labs-worker
+  AcquireTime:     <unset>
+  RenewTime:       Tue, 13 Oct 2026 18:53:39 +0300
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Tue, 13 Oct 2026 18:51:53 +0300   Thu, 08 Oct 2026 22:41:34 +0300   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Tue, 13 Oct 2026 18:51:53 +0300   Thu, 08 Oct 2026 22:41:34 +0300   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Tue, 13 Oct 2026 18:51:53 +0300   Thu, 08 Oct 2026 22:41:34 +0300   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Tue, 13 Oct 2026 18:51:53 +0300   Thu, 08 Oct 2026 22:41:47 +0300   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:  172.18.0.2
+  Hostname:    labs-worker
+Capacity:
+  cpu:                12
+  ephemeral-storage:  1081101176832
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             7797968Ki
+  pods:               110
+Allocatable:
+  cpu:                12
+  ephemeral-storage:  1081101176832
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             7797968Ki
+  pods:               110
+System Info:
+  Machine ID:                 3d35b5d5ebc54267a0764938c160c01a
+  System UUID:                3d35b5d5ebc54267a0764938c160c01a
+  Boot ID:                    81b124e1-0efe-46f2-bd98-39f7ad7afae0
+  Kernel Version:             6.6.87.2-microsoft-standard-WSL2
+  OS Image:                   Debian GNU/Linux 13 (trixie)
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://2.3.4
+  Kubelet Version:            v1.37.0
+PodCIDR:                      10.244.1.0/24
+PodCIDRs:                     10.244.1.0/24
+ProviderID:                   kind://docker/labs/labs-worker
+Non-terminated Pods:          (22 in total)
+  Namespace                   Name                                                      CPU Requests  CPU Limits   Memory Requests  Memory Limits  Age
+  ---------                   ----                                                      ------------  ----------   ---------------  -------------  ---
+  cnpg-system                 cnpg-776959dd78-m6jzn                                     100m (0%)     500m (4%)    128Mi (1%)       512Mi (6%)     26h
+  default                     api-deployment-6d7775d978-x8psr                           50m (0%)      100m (0%)    64Mi (0%)        128Mi (1%)     2d19h
+  kube-system                 coredns-646558986c-rkgq5                                  100m (0%)     1 (8%)       70Mi (0%)        170Mi (2%)     2d19h
+  kube-system                 coredns-646558986c-v9xnt                                  100m (0%)     1 (8%)       70Mi (0%)        170Mi (2%)     2d19h
+  kube-system                 kindnet-qvtt8                                             100m (0%)     500m (4%)    50Mi (0%)        256Mi (3%)     2d19h
+  kube-system                 kube-proxy-5n2nt                                          50m (0%)      500m (4%)    64Mi (0%)        256Mi (3%)     2d19h
+  kyverno                     kyverno-admission-controller-64797677d-xhp5b              100m (0%)     1 (8%)       128Mi (1%)       384Mi (5%)     2d19h
+  kyverno                     kyverno-reports-controller-747bf75f-b485q                 100m (0%)     500m (4%)    64Mi (0%)        128Mi (1%)     2d19h
+  local-path-storage          local-path-provisioner-7f69ddb59d-96tp9                   25m (0%)      300m (2%)    64Mi (0%)        256Mi (3%)     26h
+  monitoring                  alertmanager-kube-prometheus-kube-prome-alertmanager-0    75m (0%)      500m (4%)    232Mi (3%)       640Mi (8%)     2d19h
+  monitoring                  alloy-94mfx                                               60m (0%)      700m (5%)    178Mi (2%)       384Mi (5%)     2d19h
+  monitoring                  jaeger-6c6cb87794-5phbn                                   100m (0%)     500m (4%)    128Mi (1%)       512Mi (6%)     2d19h
+  monitoring                  karma-74bc9c8d54-ldr8z                                    50m (0%)      300m (2%)    64Mi (0%)        256Mi (3%)     2d19h
+  monitoring                  kube-prometheus-grafana-dc7b5947b-xzw5k                   150m (1%)     900m (7%)    256Mi (3%)       1Gi (13%)      2d19h
+  monitoring                  kube-prometheus-prometheus-node-exporter-ccphm            50m (0%)      200m (1%)    32Mi (0%)        128Mi (1%)     2d19h
+  monitoring                  loki-0                                                    125m (1%)     1200m (10%)  320Mi (4%)       1280Mi (16%)   2d19h
+  shop                        shop-api-7bd4bd66f6-bmd2q                                 100m (0%)     100m (0%)    100Mi (1%)       100Mi (1%)     13m
+  shop                        shop-api-7bd4bd66f6-lcxb8                                 100m (0%)     100m (0%)    100Mi (1%)       100Mi (1%)     12m
+  shop                        shop-batch-6576b47885-8xss5                               50m (0%)      250m (2%)    96Mi (1%)        128Mi (1%)     13m
+  shop                        shop-worker-55564fcdfc-8lmfv                              10m (0%)      250m (2%)    100Mi (1%)       100Mi (1%)     85m
+  shop                        shop-worker-55564fcdfc-gml7n                              10m (0%)      250m (2%)    100Mi (1%)       100Mi (1%)     85m
+  shop                        shop-worker-55564fcdfc-tkwbm                              10m (0%)      250m (2%)    100Mi (1%)       100Mi (1%)     85m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests      Limits
+  --------           --------      ------
+  cpu                1615m (13%)   10900m (90%)
+  memory             2508Mi (32%)  7112Mi (93%)
+  ephemeral-storage  0 (0%)        0 (0%)
+  hugepages-1Gi      0 (0%)        0 (0%)
+  hugepages-2Mi      0 (0%)        0 (0%)

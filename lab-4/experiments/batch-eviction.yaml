@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shop-batch-eviction
+  namespace: shop
+  labels:
+    app: shop-batch-eviction
+    app.kubernetes.io/name: shop
+    app.kubernetes.io/component: eviction-test
+spec:
+  restartPolicy: Never
+  activeDeadlineSeconds: 900
+  priorityClassName: shop-shop-batch
+  nodeSelector:
+    kubernetes.io/hostname: labs-worker
+  automountServiceAccountToken: false
+  terminationGracePeriodSeconds: 5
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65532
+    runAsGroup: 65532
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: batch
+      image: docker.io/library/shop-batch:v1
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        privileged: false
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop: ["ALL"]
+      env:
+        - name: CPU_WORKERS
+          value: "0"
+        - name: MEMORY_MIB
+          value: "512"
+      resources:
+        requests:
+          cpu: 50m
+          memory: 32Mi
+        limits:
+          cpu: 250m
+          memory: 768Mi

@@ -1,0 +1,15 @@
+Pod: shop-batch-b58d49df4-5pvt2
+Phase: Failed
+Reason: Evicted
+Message: The node was low on resource: memory. Threshold quantity: 5900Mi, available: 5801216Ki. Container batch was using 530488Ki, request is 32Mi, has larger consumption of memory. 
+
+Pod: shop-batch-b58d49df4-j9zwz
+Phase: Pending
+Reason: None
+Message: None
+
+Pod: shop-batch-b58d49df4-z8dhg
+Phase: Succeeded
+Reason: None
+Message: None
+

@@ -1,0 +1,3 @@
+NAME                 VALUE   GLOBAL-DEFAULT   AGE   PREEMPTIONPOLICY
+shop-shop-critical   10000   false            51s   PreemptLowerPriority
+shop-shop-batch      -1000   false            51s   Never

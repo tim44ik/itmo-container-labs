@@ -1,0 +1,4 @@
+Pod: shop-batch-7d45758578-hm8bw
+PodScheduled: False
+Reason: Unschedulable
+Message: 0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.

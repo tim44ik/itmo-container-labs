@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shop-preemption-probe
+  namespace: shop
+  labels:
+    app: shop-preemption-probe
+    app.kubernetes.io/name: shop
+    app.kubernetes.io/component: preemption-probe
+spec:
+  priorityClassName: shop-shop-critical
+  automountServiceAccountToken: false
+  terminationGracePeriodSeconds: 5
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65532
+    runAsGroup: 65532
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: probe
+      image: docker.io/library/shop-batch:v1
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        privileged: false
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop: ["ALL"]
+      env:
+        - name: CPU_WORKERS
+          value: "0"
+        - name: MEMORY_MIB
+          value: "16"
+      resources:
+        requests:
+          cpu: "2"
+          memory: 32Mi
+        limits:
+          cpu: "2"
+          memory: 64Mi

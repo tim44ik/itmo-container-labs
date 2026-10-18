@@ -1,0 +1,2 @@
+LAST SEEN   TYPE     REASON      OBJECT                            MESSAGE
+109s        Normal   Preempted   pod/shop-batch-7d45758578-f9kjn   Preempted by pod c7254850-8537-4578-895a-8e89304e479e on node labs-control-plane

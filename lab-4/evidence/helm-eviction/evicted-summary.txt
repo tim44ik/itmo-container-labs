@@ -1,0 +1,2 @@
+89s         Warning   Evicted             pod/shop-batch-b58d49df4-5pvt2     The node was low on resource: memory. Threshold quantity: 5900Mi, available: 5801216Ki. Container batch was using 530488Ki, request is 32Mi, has larger consumption of memory.
+5s          Warning   Evicted             pod/shop-batch-b58d49df4-z8dhg     The node was low on resource: memory. Threshold quantity: 5900Mi, available: 5789716Ki. Container batch was using 530124Ki, request is 32Mi, has larger consumption of memory.

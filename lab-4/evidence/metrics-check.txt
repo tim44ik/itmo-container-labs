@@ -1,0 +1,16 @@
+
+CPU, ядра
+shop-worker-6cf7dd6444-xn47l worker 0.002730661424269462
+shop-worker-6cf7dd6444-bv7j9 worker 0.002798912851146984
+shop-postgres-1 postgres 0.016509223622148014
+shop-api-7b57446f68-rngdv api 0.00103374198106139
+shop-api-7b57446f68-npf4g api 0.000885050908491376
+shop-api-7b57446f68-zf894 api 0.0011038816979672959
+
+Память working set, MiB
+shop-worker-6cf7dd6444-xn47l worker 14.5625
+shop-worker-6cf7dd6444-bv7j9 worker 18.69921875
+shop-postgres-1 postgres 72.78515625
+shop-api-7b57446f68-rngdv api 9.9765625
+shop-api-7b57446f68-npf4g api 9.02734375
+shop-api-7b57446f68-zf894 api 11.796875

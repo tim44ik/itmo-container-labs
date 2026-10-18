@@ -1,0 +1,59 @@
+Name:                 shop-batch-oom
+Namespace:            shop
+Priority:             -1000
+Priority Class Name:  shop-shop-batch
+Service Account:      default
+Node:                 labs-worker/172.18.0.2
+Start Time:           Thu, 15 Oct 2026 22:15:10 +0300
+Labels:               app=shop-batch-oom
+                      app.kubernetes.io/component=oom-test
+                      app.kubernetes.io/name=shop
+Annotations:          <none>
+Status:               Failed
+SeccompProfile:       RuntimeDefault
+IP:                   10.244.1.71
+IPs:
+  IP:  10.244.1.71
+Containers:
+  batch:
+    Container ID:   containerd://a07af065837131c5901cdc9f6510bac72d7b378a0fa266afb8b07ff353162c4f
+    Image:          docker.io/library/shop-batch:v1
+    Image ID:       docker.io/library/import-2026-10-12@sha256:2923506aa8d244408584d7bb99e8bdcfaa28886da5871e991fb7bb2b709a22a7
+    Port:           <none>
+    Host Port:      <none>
+    State:          Terminated
+      Reason:       OOMKilled
+      Exit Code:    137
+      Started:      Thu, 15 Oct 2026 22:15:11 +0300
+      Finished:     Thu, 15 Oct 2026 22:15:13 +0300
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     250m
+      memory:  128Mi
+    Requests:
+      cpu:     50m
+      memory:  64Mi
+    Environment:
+      CPU_WORKERS:  0
+      MEMORY_MIB:   256
+    Mounts:         <none>
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   False 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:                      <none>
+QoS Class:                    Burstable
+Node-Selectors:               <none>
+Tolerations:                  node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  25s   default-scheduler  Successfully assigned shop/shop-batch-oom to labs-worker
+  Normal  Pulled     24s   kubelet            spec.containers{batch}: Container image "docker.io/library/shop-batch:v1" already present on machine and can be accessed by the pod
+  Normal  Created    24s   kubelet            spec.containers{batch}: Container created
+  Normal  Started    24s   kubelet            spec.containers{batch}: Container started

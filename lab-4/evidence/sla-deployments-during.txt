@@ -1,0 +1,4 @@
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+shop-api      3/3     3            3           3d7h
+shop-batch    5/7     7            5           2d21h
+shop-worker   6/6     6            6           3d7h

@@ -1,0 +1,8 @@
+NAME                          READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+shop-batch-7d45758578-cz9ck   0/1     Pending   0          41s   <none>        <none>               <none>           <none>
+shop-batch-7d45758578-dzvj7   1/1     Running   0          42s   10.244.0.73   labs-control-plane   <none>           <none>
+shop-batch-7d45758578-gxmf7   1/1     Running   0          45s   10.244.1.84   labs-worker          <none>           <none>
+shop-batch-7d45758578-gzwk7   1/1     Running   0          43s   10.244.0.72   labs-control-plane   <none>           <none>
+shop-batch-7d45758578-j4j6g   1/1     Running   0          43s   10.244.1.85   labs-worker          <none>           <none>
+shop-batch-7d45758578-r5tbc   1/1     Running   0          45s   10.244.0.68   labs-control-plane   <none>           <none>
+shop-batch-7d45758578-tj4hd   1/1     Running   0          45s   10.244.1.82   labs-worker          <none>           <none>

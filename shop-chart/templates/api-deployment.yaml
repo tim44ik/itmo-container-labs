@@ -31,6 +31,37 @@ spec:
         app.kubernetes.io/component: api
         app.kubernetes.io/instance: {{ .Release.Name | quote }}
     spec:
+      {{- $placement := .Values.api.placement | default "none" }}
+      {{- if eq $placement "topologySpreadConstraints" }}
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          matchLabelKeys:
+            - pod-template-hash
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: shop
+              app.kubernetes.io/component: api
+              app.kubernetes.io/instance: {{ .Release.Name | quote }}
+      {{- else if eq $placement "podAntiAffinity" }}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: shop
+                    app.kubernetes.io/component: api
+                    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+      {{- else if ne $placement "none" }}
+      {{- fail "api.placement must be none, topologySpreadConstraints or podAntiAffinity" }}
+      {{- end }}
+      {{- if (.Values.priority | default dict).enabled }}
+      priorityClassName: {{ printf "%s-%s-critical" .Release.Namespace .Release.Name | quote }}
+      {{- end }}
       automountServiceAccountToken: false
       terminationGracePeriodSeconds: 30
       securityContext:

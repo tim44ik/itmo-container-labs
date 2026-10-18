@@ -1,0 +1,13 @@
+NAME                           READY   CLASS                PRIORITY   QOS
+shop-api-7bd4bd66f6-bmd2q      true    shop-shop-critical   10000      Guaranteed
+shop-api-7bd4bd66f6-f6hfz      true    shop-shop-critical   10000      Guaranteed
+shop-api-7bd4bd66f6-lcxb8      true    shop-shop-critical   10000      Guaranteed
+shop-batch-6576b47885-8xss5    true    shop-shop-batch      -1000      Burstable
+shop-migrate-v1-9msr5          false   <none>               0          Burstable
+shop-postgres-1                true    shop-shop-critical   10000      Guaranteed
+shop-worker-55564fcdfc-22427   true    <none>               0          Burstable
+shop-worker-55564fcdfc-89cgr   true    <none>               0          Burstable
+shop-worker-55564fcdfc-8lmfv   true    <none>               0          Burstable
+shop-worker-55564fcdfc-9tzdh   true    <none>               0          Burstable
+shop-worker-55564fcdfc-gml7n   true    <none>               0          Burstable
+shop-worker-55564fcdfc-tkwbm   true    <none>               0          Burstable

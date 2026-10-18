@@ -1,0 +1,3 @@
+ShopTargetDown state=inactive health=ok error=
+ShopApiHighErrorRatio state=inactive health=ok error=
+ShopWorkerErrors state=inactive health=ok error=

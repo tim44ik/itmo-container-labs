@@ -1,0 +1,8 @@
+Release "shop" has been upgraded. Happy Helming!
+NAME: shop
+LAST DEPLOYED: Tue Oct 13 18:40:38 2026
+NAMESPACE: shop
+STATUS: deployed
+REVISION: 18
+DESCRIPTION: Upgrade complete
+TEST SUITE: None

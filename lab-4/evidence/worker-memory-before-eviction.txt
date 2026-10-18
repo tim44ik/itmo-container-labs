@@ -1,0 +1,5 @@
+Node: labs-worker
+Timestamp: 2026-10-15T19:22:00Z
+availableBytes: 6072.59 MiB
+workingSetBytes: 1542.61 MiB
+usageBytes: 1712.19 MiB

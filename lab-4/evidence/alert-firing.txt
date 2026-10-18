@@ -1,0 +1,5 @@
+Rule: ShopApiHighErrorRatio
+State: firing
+Health: ok
+Error: 
+Alert: {"labels": {"alertname": "ShopApiHighErrorRatio", "namespace": "shop", "service": "shop-api", "severity": "critical"}, "annotations": {"description": "Доля 5xx превышает 5% в течение минуты при трафике более 0.1 запроса/с.", "summary": "Высокая доля HTTP 5xx у shop-api"}, "state": "firing", "activeAt": "2026-10-15T20:52:51.163628423Z", "value": "1e+00"}
