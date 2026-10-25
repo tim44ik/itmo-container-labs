@@ -1,6 +1,6 @@
 apiVersion: v2
 name: shop
-description: Shop API, worker, and CloudNativePG PostgreSQL cluster
+description: Shop API, worker, and PostgreSQL cluster
 type: application
 version: 0.1.0
 appVersion: "v1"

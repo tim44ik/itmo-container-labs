@@ -3,7 +3,7 @@
 ## Zero-trust сеть для приложения shop
 
 **Среда:** Ubuntu, Docker, kind `lab5`, Kubernetes v1.32.2, Cilium v1.17.4.  
-**Дата выполнения:** 25 октября 2026 г.  
+**Дата выполнения:** 24 октября 2026 г.  
 **Цель:** развернуть приложение в Kubernetes, исследовать работу Service, ограничить
 связность с помощью NetworkPolicy, обнаружить неисправность по сетевым потокам и
 проверить метрики в Prometheus.
@@ -328,10 +328,6 @@ curl -fsS 'http://127.0.0.1:9090/api/v1/rules?type=alert' |
   jq -r '.data.groups[].rules[]
     | select(.name | startswith("Shop"))
     | [.name, .state, (.alerts | length)] | @tsv'
-
-# Примеры использованных PromQL выражений:
-# sum(rate(http_requests_total{namespace="shop",service="shop-api"}[2m]))
-# sum(increase(coredns_dns_responses_total{job="coredns"}[5m]))
 ```
 
 </details>
