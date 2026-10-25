@@ -28,7 +28,7 @@ The Prometheus Operator CRDs must exist before installing the release. The
 dashboard JSON is imported into Grafana separately.
 
 Lab5 cluster bootstrap, command sequence, fault injection and report evidence
-checklist are documented in [`lab-5/README.md`](../lab-5/README.md).
+are documented in the [lab-5 report](../lab-5/report.md).
 
 Validate and render from the repository root:
 

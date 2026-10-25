@@ -425,7 +425,6 @@ kubectl --context kind-lab5 -n monitoring port-forward \
 
 ## Артефакты
 
-- Пошаговая инструкция: [`README.md`](README.md).
 - Live-нагрузка: [`evidence/load-test-live.csv`](evidence/load-test-live.csv),
   [`evidence/load-test-live.svg`](evidence/load-test-live.svg).
 - Предыдущая нагрузка: [`evidence/load-test.csv`](evidence/load-test.csv),
