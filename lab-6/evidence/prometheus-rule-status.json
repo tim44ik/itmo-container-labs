@@ -1,0 +1,24 @@
+{
+  "prometheus_api_status": "success",
+  "lab6_rules": [
+    {
+      "name": "ShopCanaryHighErrorRate",
+      "state": "inactive",
+      "health": "ok",
+      "lastError": ""
+    },
+    {
+      "name": "ShopCanaryHighLatencyP95",
+      "state": "inactive",
+      "health": "ok",
+      "lastError": ""
+    },
+    {
+      "name": "ShopLinkerdProxyNotReady",
+      "state": "inactive",
+      "health": "ok",
+      "lastError": ""
+    }
+  ],
+  "active_alert_series": []
+}

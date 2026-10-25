@@ -1,0 +1,145 @@
+{{- if .Values.canary.enabled }}
+{{- range $version, $config := .Values.canary.versions }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-api-%s" $.Release.Name $version }}
+  labels:
+    app.kubernetes.io/name: shop
+    app.kubernetes.io/instance: {{ $.Release.Name | quote }}
+    app.kubernetes.io/component: api
+    app.kubernetes.io/version: {{ $version | quote }}
+spec:
+  replicas: {{ $config.replicas }}
+  revisionHistoryLimit: 5
+  minReadySeconds: 2
+  progressDeadlineSeconds: 180
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: shop
+      app.kubernetes.io/instance: {{ $.Release.Name | quote }}
+      app.kubernetes.io/component: api
+      app.kubernetes.io/version: {{ $version | quote }}
+  template:
+    metadata:
+      labels:
+        app: shop-api
+        app.kubernetes.io/name: shop
+        app.kubernetes.io/instance: {{ $.Release.Name | quote }}
+        app.kubernetes.io/component: api
+        app.kubernetes.io/version: {{ $version | quote }}
+      {{- if $.Values.mesh.enabled }}
+      annotations:
+        linkerd.io/inject: enabled
+      {{- end }}
+    spec:
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: api
+          image: {{ printf "%s:%s" $.Values.api.image.repository $config.tag | quote }}
+          imagePullPolicy: {{ $.Values.api.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          env:
+            - name: API_VERSION
+              value: {{ $version | quote }}
+            - name: FAIL
+              value: {{ $config.fail | quote }}
+            - name: FLAKY
+              value: {{ $config.flaky | quote }}
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (printf "%s-postgres-app" $.Release.Name) $.Values.database.existingSecret | quote }}
+                  key: {{ $.Values.database.secretKey | quote }}
+            - name: LISTEN_ADDR
+              value: ":8080"
+            - name: OTEL_SERVICE_NAME
+              value: {{ printf "shop-api-%s" $version | quote }}
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: {{ $.Values.telemetry.otlpEndpoint | quote }}
+          lifecycle:
+            preStop:
+              sleep:
+                seconds: 5
+          resources:
+            {{- toYaml $.Values.api.resources | nindent 12 }}
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            {{- toYaml $.Values.probes.readiness | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            {{- toYaml $.Values.probes.liveness | nindent 12 }}
+---
+{{- end }}
+{{- end }}
+{{- if .Values.loadGenerator.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-lab6-client
+  labels:
+    app.kubernetes.io/name: shop
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/component: lab6-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: shop
+      app.kubernetes.io/instance: {{ .Release.Name | quote }}
+      app.kubernetes.io/component: lab6-client
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: shop
+        app.kubernetes.io/instance: {{ .Release.Name | quote }}
+        app.kubernetes.io/component: lab6-client
+      {{- if .Values.mesh.enabled }}
+      annotations:
+        linkerd.io/inject: enabled
+      {{- end }}
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: client
+          image: {{ .Values.loadGenerator.image | quote }}
+          imagePullPolicy: IfNotPresent
+          command: ["sleep", "3600"]
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+{{- end }}

@@ -1,0 +1,125 @@
+apiVersion: v1
+items:
+- apiVersion: gateway.networking.k8s.io/v1
+  kind: HTTPRoute
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: shop
+      meta.helm.sh/release-namespace: lab6
+    creationTimestamp: "2026-10-25T10:07:05Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/instance: shop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: shop
+    name: shop-api
+    namespace: lab6
+    resourceVersion: "163450"
+    uid: 6483e97a-2b15-4029-b36b-57c1cdcafa17
+  spec:
+    parentRefs:
+    - group: ""
+      kind: Service
+      name: shop-api
+      port: 8080
+    rules:
+    - backendRefs:
+      - group: ""
+        kind: Service
+        name: shop-api-v1
+        port: 8080
+        weight: 90
+      - group: ""
+        kind: Service
+        name: shop-api-v2
+        port: 8080
+        weight: 10
+      matches:
+      - path:
+          type: PathPrefix
+          value: /
+  status:
+    parents:
+    - conditions:
+      - lastTransitionTime: "2026-10-25T10:07:05Z"
+        message: ""
+        reason: Accepted
+        status: "True"
+        type: Accepted
+      - lastTransitionTime: "2026-10-25T10:07:05Z"
+        message: ""
+        reason: ResolvedRefs
+        status: "True"
+        type: ResolvedRefs
+      controllerName: linkerd.io/policy-controller
+      parentRef:
+        group: core
+        kind: Service
+        name: shop-api
+        namespace: lab6
+        port: 8080
+- apiVersion: gateway.networking.k8s.io/v1
+  kind: HTTPRoute
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: shop
+      meta.helm.sh/release-namespace: lab6
+      retry.linkerd.io/http: 5xx
+      retry.linkerd.io/limit: "3"
+      retry.linkerd.io/timeout: 1s
+    creationTimestamp: "2026-10-25T10:07:05Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/instance: shop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: shop
+    name: shop-api-retries
+    namespace: lab6
+    resourceVersion: "163442"
+    uid: 8a504c6f-c147-4c69-a204-c27f5fec93f1
+  spec:
+    parentRefs:
+    - group: ""
+      kind: Service
+      name: shop-api
+      port: 8080
+    rules:
+    - backendRefs:
+      - group: ""
+        kind: Service
+        name: shop-api-v1
+        port: 8080
+        weight: 90
+      - group: ""
+        kind: Service
+        name: shop-api-v2
+        port: 8080
+        weight: 10
+      matches:
+      - method: GET
+        path:
+          type: PathPrefix
+          value: /orders
+  status:
+    parents:
+    - conditions:
+      - lastTransitionTime: "2026-10-25T10:07:05Z"
+        message: ""
+        reason: Accepted
+        status: "True"
+        type: Accepted
+      - lastTransitionTime: "2026-10-25T10:07:05Z"
+        message: ""
+        reason: ResolvedRefs
+        status: "True"
+        type: ResolvedRefs
+      controllerName: linkerd.io/policy-controller
+      parentRef:
+        group: core
+        kind: Service
+        name: shop-api
+        namespace: lab6
+        port: 8080
+kind: List
+metadata:
+  resourceVersion: ""

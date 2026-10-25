@@ -1,0 +1,13 @@
+{
+  "query": "count(up{namespace=\"lab6\",service=~\"shop.*\"})",
+  "status": "success",
+  "result": [
+    {
+      "metric": {},
+      "value": [
+        1792924085.615,
+        "8"
+      ]
+    }
+  ]
+}

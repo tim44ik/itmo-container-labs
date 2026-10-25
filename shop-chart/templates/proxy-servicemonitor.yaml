@@ -1,0 +1,27 @@
+{{- if and .Values.canary.enabled .Values.mesh.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ .Release.Name }}-linkerd-proxies
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: kube-prometheus
+    app.kubernetes.io/name: shop
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+spec:
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace | quote }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: shop
+      app.kubernetes.io/instance: {{ .Release.Name | quote }}
+      app.kubernetes.io/component: api
+  endpoints:
+    - port: proxy-metrics
+      path: /metrics
+      interval: 15s
+      scrapeTimeout: 10s
+  targetLabels:
+    - version
+{{- end }}

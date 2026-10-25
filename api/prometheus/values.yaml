@@ -20,6 +20,8 @@ prometheus:
             target_label: __address__
 
 prometheusOperator:
+  tls:
+    enabled: false
   admissionWebhooks:
     enabled: false
 

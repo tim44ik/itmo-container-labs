@@ -1,0 +1,25 @@
+kubeProxyReplacement: false
+
+hubble:
+  enabled: true
+  relay:
+    enabled: true
+  ui:
+    enabled: true
+  metrics:
+    enabled:
+      - dns:labelsContext=source_namespace,source_workload
+      - drop:labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload
+      - tcp:labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload
+      - flow:labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction
+    serviceMonitor:
+      enabled: true
+      labels:
+        release: kube-prometheus
+
+prometheus:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    labels:
+      release: kube-prometheus

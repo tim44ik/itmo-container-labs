@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="380" viewBox="0 0 900 380">
+<rect width="100%" height="100%" fill="#fff"/>
+<style>text{font-family:Arial,sans-serif;fill:#273449}.title{font-size:22px;font-weight:bold}.label{font-size:15px}.small{font-size:12px}</style>
+<text x="55" y="38" class="title">Canary traffic split — configured vs observed sample</text>
+<text x="55" y="133" class="label">Configured</text>
+<rect x="180.0" y="105" width="558.0" height="58" fill="#4285f4"/>
+<text x="459.0" y="140" text-anchor="middle" fill="#fff" class="label">v1: 90.0%</text>
+<rect x="738.0" y="105" width="62.0" height="58" fill="#f9ab00"/>
+<text x="769.0" y="140" text-anchor="middle" fill="#fff" class="label">v2: 10.0%</text>
+<text x="55" y="248" class="label">Observed (n=40)</text>
+<rect x="180.0" y="220" width="480.5" height="58" fill="#4285f4"/>
+<text x="420.2" y="255" text-anchor="middle" fill="#fff" class="label">v1: 77.5%</text>
+<rect x="660.5" y="220" width="139.5" height="58" fill="#f9ab00"/>
+<text x="730.2" y="255" text-anchor="middle" fill="#fff" class="label">v2: 22.5%</text>
+<rect x="55" y="340" width="14" height="14" fill="#4285f4"/><text x="77" y="352" class="small">v1</text><rect x="120" y="340" width="14" height="14" fill="#f9ab00"/><text x="142" y="352" class="small">v2</text>
+<text x="240" y="352" class="small">Observed responses: v1=31, v2=9. Small sample; not a precision estimate.</text>
+</svg>

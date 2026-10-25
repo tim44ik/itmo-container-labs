@@ -1,0 +1,44 @@
+api:
+  replicas: 1
+  image:
+    repository: docker.io/library/shop-api
+    tag: v1
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 8080
+    nodePort: null
+
+canary:
+  enabled: true
+  versions:
+    v1:
+      tag: v1
+      replicas: 2
+      flaky: false
+      fail: false
+    v2:
+      tag: v2
+      replicas: 1
+      flaky: false
+      fail: false
+  traffic:
+    v1: 90
+    v2: 10
+  retries:
+    enabled: true
+    limit: 3
+    timeout: 1s
+
+mesh:
+  enabled: true
+
+loadGenerator:
+  enabled: true
+  image: curlimages/curl:8.12.1
+
+postgres:
+  enabled: true
+  instances: 1
+  storage:
+    size: 1Gi

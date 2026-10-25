@@ -1,4 +1,4 @@
-# Part 2: these values are starting points, not measured recommendations for lab 4.
+# Resource requests and limits for the shop workloads.
 api:
   replicas: 3
   image:
@@ -16,6 +16,35 @@ api:
   service:
     type: ClusterIP
     port: 8080
+    nodePort: null
+
+canary:
+  enabled: false
+  versions:
+    v1:
+      tag: v1
+      replicas: 2
+      flaky: false
+      fail: false
+    v2:
+      tag: v2
+      replicas: 1
+      flaky: false
+      fail: false
+  traffic:
+    v1: 90
+    v2: 10
+  retries:
+    enabled: false
+    limit: 3
+    timeout: 1s
+
+mesh:
+  enabled: false
+
+loadGenerator:
+  enabled: false
+  image: curlimages/curl:8.12.1
 
 worker:
   replicas: 2
@@ -88,3 +117,7 @@ batch:
     limits:
       cpu: 250m
       memory: 128Mi
+
+networkPolicy:
+  enabled: false
+  defaultDeny: true

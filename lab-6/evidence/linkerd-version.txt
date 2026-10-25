@@ -1,0 +1,3 @@
+linkerd-destination-8658fc55d8-qlljj	destination=cr.l5d.io/linkerd/controller:edge-26.10.1 sp-validator=cr.l5d.io/linkerd/controller:edge-26.10.1 policy=cr.l5d.io/linkerd/controller:edge-26.10.1 
+linkerd-identity-6df4fdb955-47qqd	identity=cr.l5d.io/linkerd/controller:edge-26.10.1 linkerd-proxy=cr.l5d.io/linkerd/proxy:edge-26.10.1 
+linkerd-proxy-injector-7fd88669d-9wm4g	proxy-injector=cr.l5d.io/linkerd/controller:edge-26.10.1 

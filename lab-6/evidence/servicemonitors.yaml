@@ -1,0 +1,76 @@
+apiVersion: v1
+items:
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: shop
+      meta.helm.sh/release-namespace: lab6
+    creationTimestamp: "2026-10-25T10:07:06Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/instance: shop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: shop
+      release: kube-prometheus
+    name: shop
+    namespace: lab6
+    resourceVersion: "163456"
+    uid: 08c87701-475c-4d05-8876-29c24192a553
+  spec:
+    endpoints:
+    - interval: 15s
+      path: /metrics
+      port: http
+      scrapeTimeout: 10s
+    namespaceSelector:
+      matchNames:
+      - lab6
+    selector:
+      matchExpressions:
+      - key: app.kubernetes.io/component
+        operator: In
+        values:
+        - api
+        - worker
+      matchLabels:
+        app.kubernetes.io/instance: shop
+        app.kubernetes.io/name: shop
+    targetLabels:
+    - version
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: shop
+      meta.helm.sh/release-namespace: lab6
+    creationTimestamp: "2026-10-25T10:07:06Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/instance: shop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: shop
+      release: kube-prometheus
+    name: shop-linkerd-proxies
+    namespace: lab6
+    resourceVersion: "163457"
+    uid: 122ea9a2-0ba8-42e0-804e-8d246243e193
+  spec:
+    endpoints:
+    - interval: 15s
+      path: /metrics
+      port: proxy-metrics
+      scrapeTimeout: 10s
+    namespaceSelector:
+      matchNames:
+      - lab6
+    selector:
+      matchLabels:
+        app.kubernetes.io/component: api
+        app.kubernetes.io/instance: shop
+        app.kubernetes.io/name: shop
+    targetLabels:
+    - version
+kind: List
+metadata:
+  resourceVersion: ""

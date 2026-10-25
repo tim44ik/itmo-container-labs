@@ -1,0 +1,58 @@
+{{- if and .Values.canary.enabled .Values.mesh.enabled }}
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: {{ .Release.Name }}-api
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: shop
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+spec:
+  parentRefs:
+    - group: ""
+      kind: Service
+      name: {{ .Release.Name }}-api
+      port: {{ .Values.api.service.port }}
+  rules:
+    - backendRefs:
+        - name: {{ .Release.Name }}-api-v1
+          port: {{ .Values.api.service.port }}
+          weight: {{ .Values.canary.traffic.v1 }}
+        - name: {{ .Release.Name }}-api-v2
+          port: {{ .Values.api.service.port }}
+          weight: {{ .Values.canary.traffic.v2 }}
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: {{ .Release.Name }}-api-retries
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: shop
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+  {{- if .Values.canary.retries.enabled }}
+  annotations:
+    retry.linkerd.io/http: "5xx"
+    retry.linkerd.io/limit: {{ .Values.canary.retries.limit | quote }}
+    retry.linkerd.io/timeout: {{ .Values.canary.retries.timeout | quote }}
+  {{- end }}
+spec:
+  parentRefs:
+    - group: ""
+      kind: Service
+      name: {{ .Release.Name }}-api
+      port: {{ .Values.api.service.port }}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /orders
+          method: GET
+      backendRefs:
+        - name: {{ .Release.Name }}-api-v1
+          port: {{ .Values.api.service.port }}
+          weight: {{ .Values.canary.traffic.v1 }}
+        - name: {{ .Release.Name }}-api-v2
+          port: {{ .Values.api.service.port }}
+          weight: {{ .Values.canary.traffic.v2 }}
+{{- end }}

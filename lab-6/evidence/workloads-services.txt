@@ -1,0 +1,14 @@
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/shop-api-v1        2/2     2            2           10m
+deployment.apps/shop-api-v2        1/1     1            1           10m
+deployment.apps/shop-lab6-client   1/1     1            1           10m
+deployment.apps/shop-worker        2/2     2            2           10m
+
+NAME                       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+service/shop-api           ClusterIP   10.96.215.164   <none>        8080/TCP            10m
+service/shop-api-v1        ClusterIP   10.96.214.136   <none>        8080/TCP,4191/TCP   10m
+service/shop-api-v2        ClusterIP   10.96.155.26    <none>        8080/TCP,4191/TCP   10m
+service/shop-postgres-r    ClusterIP   10.96.202.51    <none>        5432/TCP            10m
+service/shop-postgres-ro   ClusterIP   10.96.29.38     <none>        5432/TCP            10m
+service/shop-postgres-rw   ClusterIP   10.96.96.4      <none>        5432/TCP            10m
+service/shop-worker        ClusterIP   10.96.102.220   <none>        8080/TCP            10m

@@ -1,0 +1,15 @@
+{
+  "sample_requests": 40,
+  "versions": {
+    "v1": 31,
+    "v2": 9
+  },
+  "shares_percent": {
+    "v1": 77.5,
+    "v2": 22.5
+  },
+  "configured_weights_percent": {
+    "v1": 90,
+    "v2": 10
+  }
+}
