@@ -1,0 +1,55 @@
+api:
+  service:
+    type: NodePort
+    port: 8080
+    nodePort: 30080
+
+networkPolicy:
+  enabled: true
+  labels:
+    nameKey: app.kubernetes.io/name
+    nameValue: shop
+    instanceKey: app.kubernetes.io/instance
+    componentKey: app.kubernetes.io/component
+    apiComponent: api
+    workerComponent: worker
+    clientComponent: client
+  ports:
+    api: 8080
+    apiServer: 6443
+    worker: 8080
+    postgres: 5432
+    postgresInstanceManager: 8000
+    postgresMetrics: 9187
+    dns: 53
+    otlp: 4318
+  dns:
+    enabled: true
+    namespace: kube-system
+    podSelector:
+      k8s-app: kube-dns
+  client:
+    enabled: true
+  externalApi:
+    enabled: true
+  monitoring:
+    enabled: true
+    namespace: monitoring
+    podSelector:
+      app.kubernetes.io/name: prometheus
+  cnpg:
+    namespace: cnpg-system
+    podSelector:
+      app: cnpg-operator
+    apiServerAccess: true
+  telemetry:
+    enabled: true
+    namespace: monitoring
+    podSelector:
+      app.kubernetes.io/name: jaeger
+  postgres:
+    selectorLabel: cnpg.io/cluster
+    selectorValue: ""
+    enabled: true
+  apiIngress:
+    enabled: true

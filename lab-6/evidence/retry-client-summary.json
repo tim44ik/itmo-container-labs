@@ -1,0 +1,10 @@
+{
+  "path": "GET /orders",
+  "sample_requests": 100,
+  "client_status_counts": {
+    "200": 95,
+    "500": 5
+  },
+  "retry_effect_confirmed": false,
+  "note": "Client-side HTTP 500 responses remained; this run does not prove successful retry masking."
+}

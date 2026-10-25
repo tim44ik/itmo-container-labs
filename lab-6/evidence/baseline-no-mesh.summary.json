@@ -1,0 +1,14 @@
+{
+  "url": "http://127.0.0.1:18086",
+  "path": "/orders",
+  "method": "GET",
+  "requests": 500,
+  "test_duration_seconds": 5.338885305998701,
+  "total_request_latency_seconds": 5.231763321025937,
+  "status_counts": {
+    "200": 500
+  },
+  "p50_ms": 6.3244990014936775,
+  "p95_ms": 29.13851999983308,
+  "mean_ms": 10.463526642051875
+}

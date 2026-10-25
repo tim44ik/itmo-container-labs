@@ -1,0 +1,2 @@
+docker.io/library/shop-api:v2
+api

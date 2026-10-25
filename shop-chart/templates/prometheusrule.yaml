@@ -27,18 +27,44 @@ spec:
             (
               sum(rate(http_requests_total{namespace="{{ .Release.Namespace }}",service="{{ .Release.Name }}-api",status=~"5.."}[2m]))
               /
-              sum(rate(http_requests_total{namespace="{{ .Release.Namespace }}",service="{{ .Release.Name }}-api"}[2m]))
+              clamp_min(sum(rate(http_requests_total{namespace="{{ .Release.Namespace }}",service="{{ .Release.Name }}-api"}[2m])), 0.000001)
             ) > 0.05
-            and
-            sum(rate(http_requests_total{namespace="{{ .Release.Namespace }}",service="{{ .Release.Name }}-api"}[2m])) > 0.1
           for: 1m
           labels:
-            severity: critical
+            severity: warning
             namespace: {{ .Release.Namespace | quote }}
             service: {{ .Release.Name }}-api
           annotations:
             summary: "Высокая доля HTTP 5xx у shop-api"
-            description: "Доля 5xx превышает 5% в течение минуты при трафике более 0.1 запроса/с."
+            description: "Доля HTTP 5xx превышает 5% в течение минуты."
+
+        - alert: ShopNetworkPolicyDrops
+          expr: |
+            (
+              sum(increase(hubble_flows_processed_total{verdict="DROPPED",source_namespace="{{ .Release.Namespace }}"}[5m]))
+              +
+              sum(increase(hubble_flows_processed_total{verdict="DROPPED",destination_namespace="{{ .Release.Namespace }}"}[5m]))
+            ) > 0
+          for: 1m
+          labels:
+            severity: critical
+            namespace: {{ .Release.Namespace | quote }}
+            service: {{ .Release.Name }}
+          annotations:
+            summary: "Cilium заблокировал сетевой трафик в namespace shop"
+            description: "Hubble зарегистрировал отброшенные потоки к подам shop за последние 5 минут."
+
+        - alert: ShopDNSFailures
+          expr: |
+            sum(increase(coredns_dns_responses_total{job="coredns",rcode="SERVFAIL"}[5m])) > 0
+          for: 1m
+          labels:
+            severity: warning
+            namespace: {{ .Release.Namespace | quote }}
+            service: {{ .Release.Name }}
+          annotations:
+            summary: "CoreDNS возвращает SERVFAIL"
+            description: "CoreDNS зарегистрировал SERVFAIL за последние 5 минут."
 
         - alert: ShopWorkerErrors
           expr: |

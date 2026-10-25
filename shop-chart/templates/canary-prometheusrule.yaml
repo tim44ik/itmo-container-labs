@@ -1,0 +1,60 @@
+{{- if .Values.canary.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ .Release.Name }}-canary-alerts
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: kube-prometheus
+    app.kubernetes.io/name: shop
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+spec:
+  groups:
+    - name: {{ .Release.Name }}.canary
+      interval: 15s
+      rules:
+        - alert: ShopCanaryHighErrorRate
+          expr: |
+            (
+              sum(increase(http_requests_total{namespace="{{ .Release.Namespace }}",service="{{ .Release.Name }}-api-v2",status=~"5.."}[2m]))
+              /
+              clamp_min(sum(increase(http_requests_total{namespace="{{ .Release.Namespace }}",service="{{ .Release.Name }}-api-v2"}[2m])), 1)
+            ) > 0.05
+            and
+            sum(increase(http_requests_total{namespace="{{ .Release.Namespace }}",service="{{ .Release.Name }}-api-v2"}[2m])) >= 20
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Высокая доля ошибок у canary v2"
+            description: "Доля HTTP 5xx v2 выше 5% при выборке не менее 20 запросов за 2 минуты."
+
+        - alert: ShopCanaryHighLatencyP95
+          expr: |
+            histogram_quantile(
+              0.95,
+              sum by (le) (
+                rate(http_request_duration_seconds_bucket{namespace="{{ .Release.Namespace }}",service="{{ .Release.Name }}-api-v2"}[5m])
+              )
+            ) > 0.2
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Высокая p95 latency у canary v2"
+            description: "p95 времени ответа v2 превышает 200 мс в течение 5 минут."
+
+        - alert: ShopLinkerdProxyNotReady
+          expr: |
+            kube_pod_container_status_ready{
+              namespace="{{ .Release.Namespace }}",
+              container="linkerd-proxy",
+              pod=~"{{ .Release.Name }}-api-v[12]-.*"
+            } == 0
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Linkerd proxy API not ready"
+            description: "Sidecar Linkerd не готов; гарантии data plane и сбор proxy metrics не подтверждены."
+{{- end }}

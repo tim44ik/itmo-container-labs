@@ -1,0 +1,66 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  annotations:
+    meta.helm.sh/release-name: shop
+    meta.helm.sh/release-namespace: lab6
+  creationTimestamp: "2026-10-25T10:07:05Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: shop
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: shop
+    release: kube-prometheus
+  name: shop-canary-alerts
+  namespace: lab6
+  resourceVersion: "163448"
+  uid: 4f2116e9-ff9e-484c-a16a-a7a666ae91c2
+spec:
+  groups:
+  - interval: 15s
+    name: shop.canary
+    rules:
+    - alert: ShopCanaryHighErrorRate
+      annotations:
+        description: Доля HTTP 5xx v2 выше 5% при выборке не менее 20 запросов за
+          2 минуты.
+        summary: Высокая доля ошибок у canary v2
+      expr: |
+        (
+          sum(increase(http_requests_total{namespace="lab6",service="shop-api-v2",status=~"5.."}[2m]))
+          /
+          clamp_min(sum(increase(http_requests_total{namespace="lab6",service="shop-api-v2"}[2m])), 1)
+        ) > 0.05
+        and
+        sum(increase(http_requests_total{namespace="lab6",service="shop-api-v2"}[2m])) >= 20
+      for: 1m
+      labels:
+        severity: critical
+    - alert: ShopCanaryHighLatencyP95
+      annotations:
+        description: p95 времени ответа v2 превышает 200 мс в течение 5 минут.
+        summary: Высокая p95 latency у canary v2
+      expr: |
+        histogram_quantile(
+          0.95,
+          sum by (le) (
+            rate(http_request_duration_seconds_bucket{namespace="lab6",service="shop-api-v2"}[5m])
+          )
+        ) > 0.2
+      for: 5m
+      labels:
+        severity: warning
+    - alert: ShopLinkerdProxyNotReady
+      annotations:
+        description: Sidecar Linkerd не готов; гарантии data plane и сбор proxy metrics
+          не подтверждены.
+        summary: Linkerd proxy API not ready
+      expr: |
+        kube_pod_container_status_ready{
+          namespace="lab6",
+          container="linkerd-proxy",
+          pod=~"shop-api-v[12]-.*"
+        } == 0
+      for: 1m
+      labels:
+        severity: critical

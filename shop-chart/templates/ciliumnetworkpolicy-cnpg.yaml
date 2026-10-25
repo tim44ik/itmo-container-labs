@@ -1,0 +1,19 @@
+{{- $np := .Values.networkPolicy }}
+{{- if and $np.enabled $np.postgres.enabled $np.cnpg.apiServerAccess }}
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-postgres-apiserver
+  namespace: {{ .Release.Namespace }}
+spec:
+  endpointSelector:
+    matchLabels:
+      {{- dict $np.postgres.selectorLabel (default (printf "%s-postgres" .Release.Name) $np.postgres.selectorValue) | toYaml | nindent 6 }}
+  egress:
+    - toEntities:
+        - kube-apiserver
+      toPorts:
+        - ports:
+            - port: {{ $np.ports.apiServer | quote }}
+              protocol: TCP
+{{- end }}

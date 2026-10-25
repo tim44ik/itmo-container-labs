@@ -1,3 +1,4 @@
+{{- if not .Values.canary.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -84,6 +85,12 @@ spec:
             capabilities:
               drop: ["ALL"]
           env:
+            - name: API_VERSION
+              value: {{ .Values.api.image.tag | quote }}
+            - name: FAIL
+              value: "false"
+            - name: FLAKY
+              value: "false"
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
@@ -113,3 +120,4 @@ spec:
               path: /health
               port: http
             {{- toYaml .Values.probes.liveness | nindent 12 }}
+{{- end }}

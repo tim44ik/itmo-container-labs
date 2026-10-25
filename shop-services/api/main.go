@@ -11,6 +11,7 @@ import (
 	"simpleapi/internal/orders"
 	"simpleapi/internal/store"
 	"simpleapi/telemetry"
+	"strconv"
 	"syscall"
 	"time"
 
@@ -54,6 +55,14 @@ func main() {
 	mux.HandleFunc("/fail", handlers.FailHandler)
 	mux.HandleFunc("/slow", handlers.SlowHandler)
 	mux.HandleFunc("/load", handlers.LoadHandler)
+	version := os.Getenv("API_VERSION")
+	if version == "" {
+		version = "v1"
+	}
+	if version != "v1" && version != "v2" {
+		log.Fatalf("API_VERSION must be v1 or v2")
+	}
+	mux.Handle("/version", versionHandler(version))
 	shop := orders.API{DB: db}
 	mux.HandleFunc("/order", shop.Create)
 	mux.HandleFunc("/orders", shop.List)
@@ -71,9 +80,17 @@ func main() {
 	if addr == "" {
 		addr = ":8080"
 	}
+	fail, err := envBool("FAIL")
+	if err != nil {
+		log.Fatal(err)
+	}
+	flaky, err := envBool("FLAKY")
+	if err != nil {
+		log.Fatal(err)
+	}
 	server := &http.Server{
 		Addr:              addr,
-		Handler:           mux,
+		Handler:           releaseBehavior(mux, version, fail, flaky),
 		ReadHeaderTimeout: 5 * time.Second,
 	}
 
@@ -103,4 +120,16 @@ func main() {
 	}
 
 	log.Println("Server successfully and safely completed work.")
+}
+
+func envBool(name string) (bool, error) {
+	value := os.Getenv(name)
+	if value == "" {
+		return false, nil
+	}
+	enabled, err := strconv.ParseBool(value)
+	if err != nil {
+		return false, errors.New(name + " must be a boolean")
+	}
+	return enabled, nil
 }

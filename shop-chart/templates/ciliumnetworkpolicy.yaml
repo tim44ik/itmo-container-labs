@@ -1,0 +1,19 @@
+{{- $np := .Values.networkPolicy }}
+{{- if and $np.enabled $np.apiIngress.enabled $np.externalApi.enabled }}
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-api-external
+  namespace: {{ .Release.Namespace }}
+spec:
+  endpointSelector:
+    matchLabels:
+      {{- dict $np.labels.nameKey $np.labels.nameValue $np.labels.instanceKey .Release.Name $np.labels.componentKey $np.labels.apiComponent | toYaml | nindent 6 }}
+  ingress:
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: {{ $np.ports.api | quote }}
+              protocol: TCP
+{{- end }}

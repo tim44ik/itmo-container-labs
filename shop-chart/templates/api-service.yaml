@@ -5,7 +5,7 @@ metadata:
   labels:
     app: shop-api
     app.kubernetes.io/name: shop
-    app.kubernetes.io/component: api
+    app.kubernetes.io/component: {{ if .Values.canary.enabled }}api-entrypoint{{ else }}api{{ end }}
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
 spec:
   type: {{ .Values.api.service.type }}
@@ -17,4 +17,7 @@ spec:
     - name: http
       port: {{ .Values.api.service.port }}
       targetPort: http
+      {{- with .Values.api.service.nodePort }}
+      nodePort: {{ . }}
+      {{- end }}
       protocol: TCP

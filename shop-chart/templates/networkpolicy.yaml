@@ -1,0 +1,270 @@
+{{- if .Values.networkPolicy.enabled }}
+{{- $np := .Values.networkPolicy }}
+{{- $labels := $np.labels }}
+{{- $apiSelector := dict $labels.nameKey $labels.nameValue $labels.instanceKey .Release.Name $labels.componentKey $labels.apiComponent }}
+{{- $workerSelector := dict $labels.nameKey $labels.nameValue $labels.instanceKey .Release.Name $labels.componentKey $labels.workerComponent }}
+{{- $clientSelector := dict $labels.nameKey $labels.nameValue $labels.instanceKey .Release.Name $labels.componentKey $labels.clientComponent }}
+{{- $postgresSelector := dict $np.postgres.selectorLabel (default (printf "%s-postgres" .Release.Name) $np.postgres.selectorValue) }}
+{{- if .Values.networkPolicy.defaultDeny }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-default-deny
+  namespace: {{ .Release.Namespace }}
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+---
+{{- end }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-api
+  namespace: {{ .Release.Namespace }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- toYaml $apiSelector | nindent 6 }}
+  policyTypes:
+    - Ingress
+    - Egress
+  {{- if $np.apiIngress.enabled }}
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              {{- toYaml $clientSelector | nindent 14 }}
+        {{- if $np.monitoring.enabled }}
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ $np.monitoring.namespace | quote }}
+          podSelector:
+            matchLabels:
+              {{- toYaml $np.monitoring.podSelector | nindent 14 }}
+        {{- end }}
+      ports:
+        - protocol: TCP
+          port: {{ $np.ports.api }}
+  {{- end }}
+  egress:
+    {{- if and $np.postgres.enabled .Values.postgres.enabled }}
+    - to:
+        - podSelector:
+            matchLabels:
+              {{- toYaml $postgresSelector | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ $np.ports.postgres }}
+    {{- end }}
+    {{- if $np.dns.enabled }}
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ $np.dns.namespace | quote }}
+          podSelector:
+            matchLabels:
+              {{- toYaml $np.dns.podSelector | nindent 14 }}
+      ports:
+        - protocol: UDP
+          port: {{ $np.ports.dns }}
+        - protocol: TCP
+          port: {{ $np.ports.dns }}
+    {{- end }}
+    {{- if $np.telemetry.enabled }}
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ $np.telemetry.namespace | quote }}
+          podSelector:
+            matchLabels:
+              {{- toYaml $np.telemetry.podSelector | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ $np.ports.otlp }}
+    {{- end }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-worker
+  namespace: {{ .Release.Namespace }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- toYaml $workerSelector | nindent 6 }}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    {{- if $np.monitoring.enabled }}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ $np.monitoring.namespace | quote }}
+          podSelector:
+            matchLabels:
+              {{- toYaml $np.monitoring.podSelector | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ $np.ports.worker }}
+    {{- end }}
+  egress:
+    {{- if and $np.postgres.enabled .Values.postgres.enabled }}
+    - to:
+        - podSelector:
+            matchLabels:
+              {{- toYaml $postgresSelector | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ $np.ports.postgres }}
+    {{- end }}
+    {{- if $np.dns.enabled }}
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ $np.dns.namespace | quote }}
+          podSelector:
+            matchLabels:
+              {{- toYaml $np.dns.podSelector | nindent 14 }}
+      ports:
+        - protocol: UDP
+          port: {{ $np.ports.dns }}
+        - protocol: TCP
+          port: {{ $np.ports.dns }}
+    {{- end }}
+    {{- if $np.telemetry.enabled }}
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ $np.telemetry.namespace | quote }}
+          podSelector:
+            matchLabels:
+              {{- toYaml $np.telemetry.podSelector | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ $np.ports.otlp }}
+    {{- end }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-postgres
+  namespace: {{ .Release.Namespace }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- toYaml $postgresSelector | nindent 6 }}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    {{- if and $np.postgres.enabled .Values.postgres.enabled }}
+    - from:
+        - podSelector:
+            matchLabels:
+              {{- toYaml $apiSelector | nindent 14 }}
+        - podSelector:
+            matchLabels:
+              {{- toYaml $workerSelector | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ $np.ports.postgres }}
+    - from:
+        - podSelector:
+            matchLabels:
+              {{- toYaml $postgresSelector | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ $np.ports.postgres }}
+        - protocol: TCP
+          port: {{ $np.ports.postgresInstanceManager }}
+    {{- end }}
+    {{- if $np.monitoring.enabled }}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ $np.monitoring.namespace | quote }}
+          podSelector:
+            matchLabels:
+              {{- toYaml $np.monitoring.podSelector | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ $np.ports.postgresMetrics }}
+    {{- end }}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ $np.cnpg.namespace | quote }}
+          podSelector:
+            matchLabels:
+              {{- toYaml $np.cnpg.podSelector | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ $np.ports.postgres }}
+        - protocol: TCP
+          port: {{ $np.ports.postgresInstanceManager }}
+  egress:
+    {{- if $np.postgres.enabled }}
+    - to:
+        - podSelector:
+            matchLabels:
+              {{- toYaml $postgresSelector | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ $np.ports.postgres }}
+        - protocol: TCP
+          port: {{ $np.ports.postgresInstanceManager }}
+    {{- end }}
+    {{- if $np.dns.enabled }}
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ $np.dns.namespace | quote }}
+          podSelector:
+            matchLabels:
+              {{- toYaml $np.dns.podSelector | nindent 14 }}
+      ports:
+        - protocol: UDP
+          port: {{ $np.ports.dns }}
+        - protocol: TCP
+          port: {{ $np.ports.dns }}
+    {{- end }}
+---
+{{- if $np.client.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-client
+  namespace: {{ .Release.Namespace }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- toYaml $clientSelector | nindent 6 }}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              {{- toYaml $apiSelector | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ $np.ports.api }}
+    {{- if $np.dns.enabled }}
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ $np.dns.namespace | quote }}
+          podSelector:
+            matchLabels:
+              {{- toYaml $np.dns.podSelector | nindent 14 }}
+      ports:
+        - protocol: UDP
+          port: {{ $np.ports.dns }}
+        - protocol: TCP
+          port: {{ $np.ports.dns }}
+    {{- end }}
+{{- end }}
+{{- end }}
